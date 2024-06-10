@@ -1,9 +1,13 @@
+"use client";
+import StoreProvider from "./StoreProvider";
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
+import { addTodo } from "@/lib/features/todo";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Home
-    </main>
+    <StoreProvider>
+      <div>Home</div>
+    </StoreProvider>
   );
 }
