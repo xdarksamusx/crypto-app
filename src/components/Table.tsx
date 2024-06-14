@@ -1,6 +1,7 @@
 import React from "react";
 
 function Table() {
+  console.log("Table being rendered");
   return (
     <>
       <table>
