@@ -1,15 +1,15 @@
 "use client";
-import React from "react";
 
-import StoreProvider from "./StoreProvider";
-import { useAppSelector, useAppDispatch } from "@/lib/hooks";
-import { addTodo } from "@/lib/features/todo";
-import Image from "next/image";
+import Table from "@/components/Table";
+import React, { useEffect } from "react";
+const Home: React.FC = () => {
+  console.log("Rendering Home Component");
 
-export default function Home() {
   return (
-    <StoreProvider>
-      <div>Home...</div>
-    </StoreProvider>
+    <div>
+      <Table />
+    </div>
   );
-}
+};
+
+export default Home;
