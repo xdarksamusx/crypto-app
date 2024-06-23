@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import StoreProvider from "@/redux/StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Link href="/home">Home</Link>
-
-        <Link href="/portfolio">Portfolio</Link>
-
-        {children}
+        <StoreProvider>
+          <nav>
+            <Link href="/home">Home</Link>
+            <Link href="/portfolio">Portfolio</Link>
+          </nav>
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );
