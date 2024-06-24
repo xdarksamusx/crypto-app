@@ -1,6 +1,6 @@
 // src/redux/store.ts
 import { configureStore } from "@reduxjs/toolkit";
-import coinSlice from "@/redux/features/marketSlice"; // Ensure the path is correct
+import coinSlice from "@/redux/features/marketSlice";
 
 const store = configureStore({
   reducer: {
