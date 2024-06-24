@@ -34,6 +34,7 @@ const coinSlice = createSlice({
       state.status = "failed";
       state.error = action.error.message || "failed to fetch coins";
     });
+    builder.addCase;
   },
 });
 
