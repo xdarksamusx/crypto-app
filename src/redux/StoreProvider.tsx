@@ -1,9 +1,8 @@
-// src/redux/StoreProvider.tsx
 "use client";
 
 import { ReactNode } from "react";
 import { Provider } from "react-redux";
-import store from "./store"; // Ensure this path is correct
+import store from "./store";
 
 interface StoreProviderProps {
   children: ReactNode;
