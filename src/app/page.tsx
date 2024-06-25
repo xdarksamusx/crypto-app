@@ -1,15 +1,26 @@
 "use client";
-import React from "react";
 
-import StoreProvider from "./StoreProvider";
-import { useAppSelector, useAppDispatch } from "@/lib/hooks";
-import { addTodo } from "@/lib/features/todo";
-import Image from "next/image";
+import Table from "@/components/Table";
+import React, { useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { fetchTop20Coins } from "@/redux/features/marketSlice";
+const Home: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const coins = useAppSelector((state) => state.coins.coins);
+  const status = useAppSelector((state) => state.coins.status);
+  const error = useAppSelector((state) => state.coins.error);
 
-export default function Home() {
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchTop20Coins());
+    }
+  }, [dispatch, status]);
+
   return (
-    <StoreProvider>
-      <div>Home...</div>
-    </StoreProvider>
+    <div>
+      <Table />
+    </div>
   );
-}
+};
+
+export default Home;

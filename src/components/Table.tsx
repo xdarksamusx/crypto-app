@@ -1,7 +1,8 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 
 function Table() {
-  console.log("Table being rendered");
   return (
     <>
       <table>
