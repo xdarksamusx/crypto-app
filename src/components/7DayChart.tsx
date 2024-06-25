@@ -23,7 +23,6 @@ const fetchData = async () => {
   );
 
   const { data } = response;
-  console.log(data);
 };
 
 function Chart() {
