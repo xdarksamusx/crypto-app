@@ -13,7 +13,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if (!fetchOnce.current) {
-      if (status === "idle") {
+      if (status === "idle" && coins.length === 0) {
         dispatch(fetchTop20Coins());
       }
       fetchOnce.current = true;
