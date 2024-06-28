@@ -4,6 +4,7 @@ import {
   fetchDataWithDelay,
   delay,
   storage,
+  getInitialCoinState,
 } from "@/app/utils/apiData";
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -31,7 +32,7 @@ export const fetchTop20Coins = createAsyncThunk(
 );
 
 const initialState: CoinState = {
-  coins: [],
+  coins: getInitialCoinState(),
   status: "idle",
   error: null,
 };

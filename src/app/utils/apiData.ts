@@ -1,9 +1,6 @@
 import axios from "axios";
 import { previousDate, currentDate } from "@/app/utils/dateFunctions";
 
-import axiosRetry from "axios-retry";
-import { it } from "node:test";
-
 export const fetchCoins = async () => {
   const response = await axios.get(
     `https://api.coingecko.com/api/v3/coins/markets`,
@@ -70,3 +67,21 @@ export const storage = async (storageData: any) => {
 
 export const delay = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
+
+export const getInitialCoinState = () => {
+  if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
+    const storedCoinData = localStorage.getItem("MarketData");
+
+    if (storedCoinData !== null) {
+      try {
+        const storedDataString = JSON.parse(storedCoinData);
+        return storedDataString.coinData;
+      } catch (error) {
+        console.error("Failed to parse error");
+        return [];
+      }
+    }
+  }
+
+  return [];
+};
