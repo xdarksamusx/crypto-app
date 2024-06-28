@@ -1,14 +1,32 @@
-import { fetchCoins } from "@/app/utils/apiData";
+import {
+  fetchCoins,
+  fetchHistoricalData,
+  fetchDataWithDelay,
+  delay,
+  storage,
+} from "@/app/utils/apiData";
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { CryptoCurrency, Status, CoinState } from "@/app/utils/interfaces";
+import axios from "axios";
 
 export const fetchTop20Coins = createAsyncThunk(
   "coins/fetchTop20",
 
   async () => {
-    const coinData = await fetchCoins();
-    return coinData;
+    try {
+      const coinData = await fetchCoins();
+      const delayMS = 12000;
+
+      const fetchedHistoricalData = await fetchDataWithDelay(coinData, delayMS);
+
+      storage(fetchedHistoricalData);
+
+      return fetchedHistoricalData;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 );
 
