@@ -1,7 +1,7 @@
 "use client";
 
 import Table from "@/components/Table";
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { fetchTop20Coins } from "@/redux/features/marketSlice";
 const Home: React.FC = () => {
@@ -9,13 +9,16 @@ const Home: React.FC = () => {
   const coins = useAppSelector((state) => state.coins.coins);
   const status = useAppSelector((state) => state.coins.status);
   const error = useAppSelector((state) => state.coins.error);
+  const fetchOnce = useRef(false);
 
   useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchTop20Coins());
+    if (!fetchOnce.current) {
+      if (status === "idle") {
+        dispatch(fetchTop20Coins());
+      }
+      fetchOnce.current = true;
     }
   }, [dispatch, status]);
-
   return (
     <div>
       <Table />
