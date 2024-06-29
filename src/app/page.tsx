@@ -1,6 +1,7 @@
 "use client";
 
 import Table from "@/components/Table";
+import Header from "@/components/Header";
 import React, { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { fetchTop20Coins } from "@/redux/features/marketSlice";
@@ -18,6 +19,7 @@ const Home: React.FC = () => {
 
   return (
     <div>
+      <Header />
       <Table />
     </div>
   );
