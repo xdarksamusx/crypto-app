@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import SearchBar from "./SearchBar";
+import Gear from "../icons/gear.svg";
 
 function Navigation() {
   return (
@@ -10,14 +12,17 @@ function Navigation() {
           <span className="text-xl font-bold">LOGO</span>
         </div>
         <div className="flex space-x-8">
-          <div>Coins</div>
-          <div>Exchanges</div>
-          <div>Market Cap</div>
-          <div>24h Vol</div>
-          <div>Dominance</div>
-          <div>Search</div>
-          <div>Profile</div>
-          <div>Account</div>
+          <SearchBar />
+
+          <div>
+            {" "}
+            <button>
+              <Gear />{" "}
+            </button>
+          </div>
+          <div>
+            <button>profile</button>
+          </div>
         </div>
       </div>
     </div>
