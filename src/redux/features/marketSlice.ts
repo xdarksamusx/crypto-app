@@ -1,6 +1,5 @@
 import {
   fetchCoins,
-  fetchHistoricalData,
   fetchDataWithDelay,
   delay,
   storage,
