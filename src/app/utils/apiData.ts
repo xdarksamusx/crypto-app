@@ -1,5 +1,5 @@
 import axios from "axios";
-import { previousDate, currentDate } from "@/app/utils/dateFunctions";
+import { previousDate, currentDate } from "./dateFunctions";
 
 export const fetchCoins = async () => {
   const response = await axios.get(
