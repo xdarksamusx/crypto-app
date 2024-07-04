@@ -26,9 +26,7 @@ const fetchData = async () => {
 };
 
 function Chart() {
-  fetchData();
-
-  return <>Chart</>;
+  return <></>;
 }
 
 export default Chart;
