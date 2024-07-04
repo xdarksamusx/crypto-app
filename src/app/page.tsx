@@ -1,9 +1,9 @@
 "use client";
 
-import Table from "@/components/Table";
 import React, { useEffect, useState, useRef } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { fetchTop20Coins } from "@/redux/features/marketSlice";
+import Table from "../components/Table";
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   const coins = useAppSelector((state) => state.coins.coins);
