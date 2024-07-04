@@ -47,6 +47,8 @@ export const fetchDataWithDelay = async (coinData: any[], delayMs: number) => {
     await delay(delayMs);
   }
 
+  console.log("coin", fetchedHistoricalData);
+
   return fetchedHistoricalData;
 };
 
