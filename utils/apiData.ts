@@ -1,6 +1,6 @@
 import axios from "axios";
 import { previousDate, currentDate } from "./dateFunctions";
-
+import { pricePoint } from "./interfaces";
 export const fetchCoins = async () => {
   const response = await axios.get(
     `https://api.coingecko.com/api/v3/coins/markets`,
@@ -101,7 +101,7 @@ export const calculateWeeklyPriceChange = (chartArray: any) => {
 export const calculateHourlyPriceChange = (chartArray: any) => {
   const { prices } = chartArray;
 
-  const pricePoint: number = prices[359];
+  const pricePoint = prices[359];
   const price = pricePoint[1];
   return price;
 };
