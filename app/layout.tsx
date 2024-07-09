@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <StoreProvider>
           <nav>
-            <Link href="/home">Home</Link>
+            <Link href="/">Home</Link>
             <Link href="/portfolio">Portfolio</Link>
           </nav>
           {children}
