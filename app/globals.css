@@ -16,12 +16,6 @@
   }
 }
 
-body::before {
-  content: "Tailwind CSS Loaded";
-  display: block;
-  color: red;
-}
-
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
