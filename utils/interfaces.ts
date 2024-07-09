@@ -10,7 +10,9 @@ export interface Status {
   elasped: number;
   credit_count: number;
 }
-
+export interface pricePoint {
+  pricePoint: number;
+}
 export interface CryptoCurrency {
   id: string;
   name: string;
