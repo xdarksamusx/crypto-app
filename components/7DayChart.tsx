@@ -54,7 +54,7 @@ function LineChart(coin: any) {
   };
 
   return (
-    <div className="flex  items-center  w-36  h-24">
+    <div className="flex  items-center  w-36  h-20">
       <Line
         data={data}
         options={{
