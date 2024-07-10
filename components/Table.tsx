@@ -59,14 +59,6 @@ function Table() {
         </thead>
         <tbody>
           {coinData.map((coin, index) => {
-            const weeklyPriceChange = calculateWeeklyPriceChange(
-              coin.chartData
-            );
-
-            const hourlyPercentPriceChange = calculateHourlyPriceChange(
-              coin.chartData
-            );
-
             const coinName = capitalizeFirstLetter(coin.id);
 
             return (
@@ -87,25 +79,13 @@ function Table() {
                   <span>(d){coin.current_price.toLocaleString()}</span>
                 </td>
                 <td className="px-0  border-b border-gray-200 text-sm">
-                  {(
-                    ((hourlyPercentPriceChange - coin.current_price) /
-                      coin.current_price) *
-                    100
-                  ).toFixed(2)}
-                  %
+                  {coin.hourly_price_change}%
                 </td>
                 <td className="px-0    border-b border-gray-200 text-sm ">
                   {coin.price_change_percentage_24h.toFixed(2)}%
                 </td>
                 <td className="px-0  border-b border-gray-200 text-sm ">
-                  <span className="text-left ">
-                    {(
-                      ((weeklyPriceChange - coin.current_price) /
-                        coin.current_price) *
-                      100
-                    ).toFixed(2)}
-                    %
-                  </span>
+                  <span className="text-left ">{coin.weeklyPriceChange}%</span>
                 </td>
                 <td className="px-0 border-b border-gray-200 text-sm">
                   (d){coin.total_volume.toLocaleString()}
