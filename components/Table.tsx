@@ -10,6 +10,10 @@ import {
   calculateHourlyPriceChange,
   capitalizeFirstLetter,
 } from "../utils/apiData";
+
+import SortDownArrow from "../icons/SortDownArrow";
+import SortUpArrow from "../icons/SortUpArrow";
+
 function Table() {
   const { coins: coinData } = initialState;
   console.log(coinData);
@@ -28,8 +32,16 @@ function Table() {
     <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8 ">
       <table className="min-w-full bg-white border border-gray-200 border-collapse ">
         <thead>
-          <tr className="bg-gray-100 text-left">
-            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium"></th>
+          <tr className="bg-gray-100 ">
+            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+              <div className="flex items-center justify-center">
+                <span className="flex items-stretch ">
+                  {" "}
+                  <SortUpArrow />
+                </span>
+                <span className="text-right px-4"> #</span>
+              </div>
+            </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               Coin
             </th>
