@@ -34,12 +34,12 @@ function Table() {
         <thead>
           <tr className="bg-gray-100 ">
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
-              <div className="flex items-center justify-center">
-                <span className="flex items-stretch ">
+              <div className="flex items-center justify-end">
+                <span className="flex items-end ">
                   {" "}
                   <SortUpArrow />
+                  <span className="text-right px-4 "> #</span>
                 </span>
-                <span className="text-right px-4"> #</span>
               </div>
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
