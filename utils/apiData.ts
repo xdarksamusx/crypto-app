@@ -37,14 +37,61 @@ export const fetchHistoricalData = async (coinName: any) => {
   }
 };
 
+export const calculateWeeklyPriceChange = (
+  chartData: any,
+  currentPrice: number
+) => {
+  console.log("chart data in api file", chartData);
+  const { prices } = chartData;
+  let sum: number = 0;
+  for (let i = prices.length - 6; i < prices.length; i++) {
+    const pricePoint = prices[i];
+    const price = pricePoint[1];
+    sum += price;
+  }
+  const average: number = sum / 7;
+  const weeklyPriceChange = (
+    ((average - currentPrice) / currentPrice) *
+    100
+  ).toFixed(2);
+  return weeklyPriceChange;
+};
+
+export const calculateHourlyPriceChange = (
+  chartData: any,
+  currentPrice: number
+) => {
+  const { prices } = chartData;
+
+  const pricePoint = prices[prices.length - 1];
+  const price = pricePoint[1];
+  const hourlyPriceChange = (((price - currentPrice) / price) * 100).toFixed(2);
+  return hourlyPriceChange;
+};
+
 export const fetchDataWithDelay = async (coinData: any[], delayMs: number) => {
   const fetchedHistoricalData: any[] = [];
 
   for (const coin of coinData) {
     const chartData = await fetchHistoricalData(coin.id);
-    const newCoinObject = { ...coin, chartData };
+
+    const hourly_price_change = calculateHourlyPriceChange(
+      chartData,
+      coin.current_price
+    );
+    const weeklyPriceChange = calculateWeeklyPriceChange(
+      chartData,
+      coin.current_price
+    );
+
+    const newCoinObject = {
+      ...coin,
+      chartData,
+      hourly_price_change,
+      weeklyPriceChange,
+    };
     fetchedHistoricalData.push(newCoinObject);
-    await delay(delayMs);
+    await delay(20000);
   }
 
   return fetchedHistoricalData;
@@ -84,26 +131,6 @@ export const getInitialCoinState = () => {
   }
 
   return [];
-};
-
-export const calculateWeeklyPriceChange = (chartArray: any) => {
-  const { prices } = chartArray;
-  let sum: number = 0;
-  for (let i = 354; i < 360; i++) {
-    const pricePoint = prices[i];
-    const price = pricePoint[1];
-    sum += price;
-  }
-  const average: number = sum / 7;
-  return average;
-};
-
-export const calculateHourlyPriceChange = (chartArray: any) => {
-  const { prices } = chartArray;
-
-  const pricePoint = prices[359];
-  const price = pricePoint[1];
-  return price;
 };
 
 export const capitalizeFirstLetter = (name: string) => {
