@@ -18,7 +18,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@pages/*": ["./pages/*"],
+      "@components/*": ["./components/*"],
+      "@utils/*": ["./utils/*"],
+      "@app/*": ["./app/*"]
     }
   },
   "include": [
@@ -26,9 +29,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components",
-    "src/custom.d.ts"
+    "components/**/*",
+    "custom.d.ts"
   ],
-  "exclude": ["node_modules"],
-  "files": ["globals.d.ts"]
+  "exclude": ["node_modules"]
 }

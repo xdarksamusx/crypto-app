@@ -1,25 +1,43 @@
-import { fetchCoins } from "@/app/utils/apiData";
+import {
+  fetchCoins,
+  fetchDataWithDelay,
+  delay,
+  storage,
+  getInitialCoinState,
+} from "../../utils/apiData";
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CryptoCurrency, Status, CoinState } from "@/app/utils/interfaces";
+import { CryptoCurrency, Status, CoinState } from "../../utils/interfaces";
+import axios from "axios";
 
 export const fetchTop20Coins = createAsyncThunk(
   "coins/fetchTop20",
 
   async () => {
-    const coinData = await fetchCoins();
-    return coinData;
+    try {
+      const coinData = await fetchCoins();
+      const delayMS = 12000;
+
+      const fetchedHistoricalData = await fetchDataWithDelay(coinData, delayMS);
+
+      storage(fetchedHistoricalData);
+
+      return fetchedHistoricalData;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 );
 
 const initialState: CoinState = {
-  coins: [],
+  coins: getInitialCoinState(),
   status: "idle",
   error: null,
 };
 
 const coinSlice = createSlice({
-  name: "coins",
+  name: "coinData",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -39,3 +57,5 @@ const coinSlice = createSlice({
 });
 
 export default coinSlice.reducer;
+
+export { initialState };
