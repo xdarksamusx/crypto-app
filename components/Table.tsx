@@ -19,6 +19,7 @@ function Table() {
   console.log(coinData);
 
   const [isClient, setIsClient] = useState(false);
+  const [isIncreasing, setIsIncreasing] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -30,42 +31,75 @@ function Table() {
 
   return (
     <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8 ">
-      <table className="min-w-full bg-white border border-gray-200 border-collapse ">
-        <thead>
+      <table className="min-w-full bg-white border border-gray-200 border-collapse  ">
+        <thead className="text-xs">
           <tr className="bg-gray-100 ">
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
-              <div className="flex items-center justify-end">
-                <span className="flex items-end ">
+              <div className=" flex items-end justify-start">
+                <span className="flex items-end  ">
                   {" "}
-                  <SortUpArrow />
-                  <span className="text-right px-4 "> #</span>
+                  <SortUpArrow /> <span className="mx-1">#</span>
                 </span>
-              </div>
+              </div>{" "}
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
-              Coin
+              <div className=" flex items-end justify-start">
+                <span className="flex items-end">
+                  {" "}
+                  <SortDownArrow /> <span className="mx-1">Coin</span>
+                </span>
+              </div>{" "}
             </th>
 
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
-              Price
+              <div className=" flex items-end justify-start">
+                <SortDownArrow /> <span className="mx-1">Price </span>
+              </div>
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
-              1HR
+              <div className=" flex items-end justify-start">
+                <span className="flex items-end">
+                  {" "}
+                  <SortDownArrow /> <span className="mx-1"> 1 hr</span>
+                </span>
+              </div>{" "}
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
-              24h
+              <div className=" flex items-end justify-start">
+                <span className="flex items-end">
+                  {" "}
+                  <SortDownArrow /> <span className="mx-1"> 24 hr</span>
+                </span>
+              </div>{" "}
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
-              7D
+              <div className=" flex items-end justify-start">
+                <span className="flex items-end">
+                  {" "}
+                  <SortDownArrow /> <span className="mx-1"> 7D </span>
+                </span>
+              </div>{" "}
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
-              24H Volume
+              <div className=" flex items-end justify-start">
+                <span className="flex items-end">
+                  {" "}
+                  <SortDownArrow /> <span className="mx-1"> MarketCap </span>
+                </span>
+              </div>{" "}
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
-              MarketCap
+              <div className=" flex items-end justify-start">
+                <span className="flex items-end">
+                  {" "}
+                  <SortDownArrow /> <span className="mx-1"> Total Volume </span>
+                </span>
+              </div>{" "}
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
-              Chart
+              <div className=" flex items-end justify-start">
+                <span className="flex items-end"> Chart</span>
+              </div>{" "}
             </th>
           </tr>
         </thead>
@@ -88,13 +122,21 @@ function Table() {
                   </div>
                 </td>
                 <td className="px-0    border-b border-gray-200 text-sm">
-                  <span>(d){coin.current_price.toLocaleString()}</span>
+                  <span className="px-3">
+                    (d){coin.current_price.toLocaleString()}
+                  </span>
                 </td>
-                <td className="px-0  border-b border-gray-200 text-sm">
-                  {coin.hourly_price_change}%
+                <td className="px-0  border-b border-gray-200 text-sm ">
+                  <span className=" px-3 text-center">
+                    {" "}
+                    {coin.hourly_price_change}%
+                  </span>
                 </td>
                 <td className="px-0    border-b border-gray-200 text-sm ">
-                  {coin.price_change_percentage_24h.toFixed(2)}%
+                  <span className=" px-3 text-center">
+                    {" "}
+                    {coin.price_change_percentage_24h.toFixed(2)}%
+                  </span>
                 </td>
                 <td className="px-0  border-b border-gray-200 text-sm ">
                   <span className="text-left ">{coin.weeklyPriceChange}%</span>
