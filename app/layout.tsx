@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import React from "react";
+
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Link from "next/link";
-import StoreProvider from "@/redux/StoreProvider";
+import StoreProvider from "./StoreProvider";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <StoreProvider>
           <nav>
-            <Link href="/home">Home</Link>
+            <Link href="/">Home</Link>
             <Link href="/portfolio">Portfolio</Link>
           </nav>
           {children}
