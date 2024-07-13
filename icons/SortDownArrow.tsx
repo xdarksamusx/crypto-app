@@ -4,7 +4,7 @@ interface CustomSVGStyle extends React.CSSProperties {
   enableBackground?: string;
 }
 
-const DownArrow: React.FC = () => {
+const SortDownArrow: React.FC = () => {
   const style: CustomSVGStyle = {
     enableBackground: "new 0 0 841.9 595.3",
   };
@@ -49,5 +49,5 @@ const DownArrow: React.FC = () => {
     </>
   );
 };
-
-export default DownArrow;
+SortDownArrow.displayName = "SortDownArrow";
+export default SortDownArrow;

@@ -7,16 +7,27 @@ interface SortButtonProps {
 }
 
 const SortButton: React.FC<SortButtonProps> = ({ IconComponent }) => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+
+  console.log("is it visible", isVisible);
 
   return (
     <>
-      <button
-      // onMouseEnter={() => setIsVisible(true)}
-      // onMouseLeave={() => setIsVisible(false)}
-      >
-        <IconComponent />
-      </button>
+      {IconComponent.displayName === "SortUpArrow" ? (
+        <button>
+          {" "}
+          <IconComponent />
+        </button>
+      ) : (
+        <button
+          className=""
+          onMouseEnter={() => setIsVisible(!isVisible)}
+          onMouseLeave={() => setIsVisible(!isVisible)}
+          style={{ width: "7px", height: "20px" }}
+        >
+          {isVisible && <IconComponent />}
+        </button>
+      )}
     </>
   );
 };

@@ -19,7 +19,6 @@ function Table() {
   const { coins: coinData } = initialState;
 
   const [isClient, setIsClient] = useState(false);
-  const [isVisible, setisVisible] = useState(true);
 
   useEffect(() => {
     setIsClient(true);
@@ -28,8 +27,6 @@ function Table() {
   if (!isClient) {
     return null;
   }
-
-  console.log("hovering sort button", isVisible);
 
   return (
     <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8 ">
@@ -62,7 +59,7 @@ function Table() {
                 <span className="mx-1">Price </span>
               </div>
             </th>
-            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+            <th className="px-0 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               <div className=" flex items-end justify-start">
                 <span className="flex items-center">
                   <SortButton IconComponent={SortDownArrow} />
@@ -71,7 +68,7 @@ function Table() {
                 </span>
               </div>{" "}
             </th>
-            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+            <th className="px-0 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               <div className=" flex items-end justify-start">
                 <span className="flex items-center">
                   {" "}
