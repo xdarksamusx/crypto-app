@@ -13,7 +13,7 @@ const SortUpArrow: React.FC = () => {
     <>
       <svg
         className="h-2 w-2  my-4 relative  "
-        height="14"
+        height="10"
         width="7"
         viewBox="0 0 320 512"
         xmlns="http://www.w3.org/2000/svg"
@@ -23,5 +23,6 @@ const SortUpArrow: React.FC = () => {
     </>
   );
 };
+SortUpArrow.displayName = "SortUpArrow";
 
 export default SortUpArrow;
