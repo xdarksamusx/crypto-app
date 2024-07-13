@@ -12,7 +12,7 @@ const SortUpArrow: React.FC = () => {
   return (
     <>
       <svg
-        className="h-1 w-2  my-4 relative  "
+        className="h-2 w-2  my-4 relative  "
         height="14"
         width="7"
         viewBox="0 0 320 512"

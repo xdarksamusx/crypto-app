@@ -4,7 +4,6 @@ import React from "react";
 
 function Header() {
   const classes = "w-full bg-blue-700 text-white text-xs font-medium";
-  console.log("Header classes:", classes);
 
   return (
     <div className="w-full bg-blue-700 text-white text-xs font-medium">
