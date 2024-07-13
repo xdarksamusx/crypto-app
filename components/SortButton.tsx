@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SortUpArrow from "../icons/SortUpArrow";
-import SortDownArrow from "../icons/SortUpArrow";
+import SortDownArrow from "../icons/SortDownArrow";
 
 interface SortButtonProps {
   IconComponent: React.ComponentType<any>;
@@ -8,24 +8,46 @@ interface SortButtonProps {
 
 const SortButton: React.FC<SortButtonProps> = ({ IconComponent }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [isUp, setIsUp] = useState(true);
 
-  console.log("is it visible", isVisible);
+  const handleClick = () => {
+    setIsClicked(true);
+    setIsUp(!isUp);
+    setIsVisible(true);
+  };
+
+  const handleMouseEnter = () => {
+    if (!isClicked) {
+      setIsVisible(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!isClicked) {
+      setIsVisible(false);
+    }
+  };
+
+  console.log("is it clicked true or false", isClicked);
+  console.log("clicking is it up or down", isUp);
 
   return (
     <>
-      {IconComponent.displayName === "SortUpArrow" ? (
-        <button>
-          {" "}
-          <IconComponent />
-        </button>
-      ) : (
+      {!isClicked ? (
         <button
           className=""
-          onMouseEnter={() => setIsVisible(!isVisible)}
-          onMouseLeave={() => setIsVisible(!isVisible)}
+          onClick={handleClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           style={{ width: "7px", height: "20px" }}
         >
           {isVisible && <IconComponent />}
+        </button>
+      ) : (
+        <button onClick={handleClick} style={{ width: "7px", height: "20px" }}>
+          {" "}
+          {isUp ? <SortUpArrow /> : <SortDownArrow />}
         </button>
       )}
     </>
