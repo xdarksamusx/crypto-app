@@ -13,13 +13,13 @@ import {
 
 import SortDownArrow from "../icons/SortDownArrow";
 import SortUpArrow from "../icons/SortUpArrow";
+import SortButton from "./SortButton";
 
 function Table() {
   const { coins: coinData } = initialState;
-  console.log(coinData);
 
   const [isClient, setIsClient] = useState(false);
-  const [isIncreasing, setIsIncreasing] = useState(false);
+  const [isVisible, setisVisible] = useState(true);
 
   useEffect(() => {
     setIsClient(true);
@@ -28,6 +28,8 @@ function Table() {
   if (!isClient) {
     return null;
   }
+
+  console.log("hovering sort button", isVisible);
 
   return (
     <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8 ">
@@ -38,61 +40,70 @@ function Table() {
               <div className=" flex items-end justify-start">
                 <span className="flex items-end  ">
                   {" "}
-                  <SortUpArrow /> <span className="mx-1">#</span>
+                  <SortButton IconComponent={SortUpArrow} />
+                  <span className="mx-1">#</span>
                 </span>
               </div>{" "}
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               <div className=" flex items-end justify-start">
-                <span className="flex items-end">
+                <span className="flex items-center">
                   {" "}
-                  <SortDownArrow /> <span className="mx-1">Coin</span>
+                  <SortButton IconComponent={SortDownArrow} />
+                  <span className="mx-1">Coin</span>
                 </span>
               </div>{" "}
             </th>
 
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
-              <div className=" flex items-end justify-start">
-                <SortDownArrow /> <span className="mx-1">Price </span>
+              <div className=" flex items-center justify-start">
+                <SortButton IconComponent={SortDownArrow} />
+
+                <span className="mx-1">Price </span>
               </div>
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               <div className=" flex items-end justify-start">
-                <span className="flex items-end">
-                  {" "}
-                  <SortDownArrow /> <span className="mx-1"> 1 hr</span>
+                <span className="flex items-center">
+                  <SortButton IconComponent={SortDownArrow} />
+
+                  <span className="mx-1"> 1 hr</span>
                 </span>
               </div>{" "}
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               <div className=" flex items-end justify-start">
-                <span className="flex items-end">
+                <span className="flex items-center">
                   {" "}
-                  <SortDownArrow /> <span className="mx-1"> 24 hr</span>
+                  <SortButton IconComponent={SortDownArrow} />
+                  <span className="mx-1"> 24 hr</span>
                 </span>
               </div>{" "}
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               <div className=" flex items-end justify-start">
-                <span className="flex items-end">
+                <span className="flex items-center">
                   {" "}
-                  <SortDownArrow /> <span className="mx-1"> 7D </span>
+                  <SortButton IconComponent={SortDownArrow} />
+                  <span className="mx-1"> 7D </span>
                 </span>
               </div>{" "}
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               <div className=" flex items-end justify-start">
-                <span className="flex items-end">
+                <span className="flex items-center">
                   {" "}
-                  <SortDownArrow /> <span className="mx-1"> MarketCap </span>
+                  <SortButton IconComponent={SortDownArrow} />
+                  <span className="mx-1"> MarketCap </span>
                 </span>
               </div>{" "}
             </th>
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               <div className=" flex items-end justify-start">
-                <span className="flex items-end">
+                <span className="flex items-center">
                   {" "}
-                  <SortDownArrow /> <span className="mx-1"> Total Volume </span>
+                  <SortButton IconComponent={SortDownArrow} />
+                  <span className="mx-1"> Total Volume </span>
                 </span>
               </div>{" "}
             </th>
