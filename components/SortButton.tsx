@@ -4,9 +4,15 @@ import SortDownArrow from "../icons/SortDownArrow";
 
 interface SortButtonProps {
   IconComponent: React.ComponentType<any>;
+  handleSortByDescending: () => void;
+  handleSortByAscending: () => void;
 }
 
-const SortButton: React.FC<SortButtonProps> = ({ IconComponent }) => {
+const SortButton: React.FC<SortButtonProps> = ({
+  IconComponent,
+  handleSortByDescending,
+  handleSortByAscending,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isUp, setIsUp] = useState(true);
@@ -15,6 +21,11 @@ const SortButton: React.FC<SortButtonProps> = ({ IconComponent }) => {
     setIsClicked(true);
     setIsUp(!isUp);
     setIsVisible(true);
+    if (isUp) {
+      handleSortByAscending();
+    } else {
+      handleSortByDescending();
+    }
   };
 
   const handleMouseEnter = () => {
@@ -28,9 +39,6 @@ const SortButton: React.FC<SortButtonProps> = ({ IconComponent }) => {
       setIsVisible(false);
     }
   };
-
-  console.log("is it clicked true or false", isClicked);
-  console.log("clicking is it up or down", isUp);
 
   return (
     <>

@@ -11,14 +11,62 @@ import {
   capitalizeFirstLetter,
 } from "../utils/apiData";
 
+import {
+  sortMarketCapAscending,
+  sortMarketCapDescending,
+  sortCurrentPriceAscending,
+  sortHourlyPriceChangeDescending,
+  sortHourlyPriceChangeAscending,
+  sortCurrentPriceDescending,
+  sortCurrentWeeklyPriceChangeAscending,
+  sortCurrentWeeklyPriceChangeDescending,
+  sortRankAscending,
+  sortRankDescending,
+  sortNameAscending,
+  sortNameDescending,
+  sortDailyPriceChangeAscending,
+  sortDailyPriceChangeDescending,
+  sortTotalVolumeAscending,
+  sortTotalVolumeDescending,
+} from "../utils/sortFunctions";
+
 import SortDownArrow from "../icons/SortDownArrow";
 import SortUpArrow from "../icons/SortUpArrow";
 import SortButton from "./SortButton";
 
+type sortFunction = (a: CoinDataType, b: CoinDataType) => number;
+
+type CoinDataType = {
+  market_cap: number;
+  current_price: number;
+  hourly_price_change: number;
+  weeklyPriceChange: number;
+  price_change_percentage_24h: number;
+  total_volume: number;
+  name: string;
+};
+
 function Table() {
-  const { coins: coinData } = initialState;
+  const { coins: initialCoinData } = initialState;
+
+  const [coinData, setCoinData] = useState(initialCoinData as CoinDataType[]);
 
   const [isClient, setIsClient] = useState(false);
+
+  const handleSortByAscending = (sortFunction) => {
+    console.log("sort function", sortFunction);
+
+    const copyOfCoinData: any[] = [...coinData];
+    console.log("copy of coin data", copyOfCoinData);
+    const sortedData = copyOfCoinData.sort(sortFunction);
+    console.log("sorted data", sortedData);
+  };
+
+  const handleSortByDescending = (sortFunction) => {
+    const copyOfCoinData: any[] = [...coinData];
+    const sortedData = copyOfCoinData.sort(sortFunction);
+    console.log("sorted data", sortedData);
+  };
 
   useEffect(() => {
     setIsClient(true);
@@ -37,7 +85,15 @@ function Table() {
               <div className=" flex items-end justify-start">
                 <span className="flex items-end  ">
                   {" "}
-                  <SortButton IconComponent={SortUpArrow} />
+                  <SortButton
+                    IconComponent={SortUpArrow}
+                    handleSortByAscending={() =>
+                      handleSortByAscending(sortRankAscending)
+                    }
+                    handleSortByDescending={() =>
+                      handleSortByDescending(sortRankDescending)
+                    }
+                  />
                   <span className="mx-1">#</span>
                 </span>
               </div>{" "}
@@ -46,7 +102,15 @@ function Table() {
               <div className=" flex items-end justify-start">
                 <span className="flex items-center">
                   {" "}
-                  <SortButton IconComponent={SortDownArrow} />
+                  <SortButton
+                    IconComponent={SortDownArrow}
+                    handleSortByAscending={() =>
+                      handleSortByAscending(sortNameAscending)
+                    }
+                    handleSortByDescending={() =>
+                      handleSortByDescending(sortNameDescending)
+                    }
+                  />
                   <span className="mx-1">Coin</span>
                 </span>
               </div>{" "}
@@ -54,7 +118,15 @@ function Table() {
 
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               <div className=" flex items-center justify-start">
-                <SortButton IconComponent={SortDownArrow} />
+                <SortButton
+                  IconComponent={SortDownArrow}
+                  handleSortByAscending={() =>
+                    handleSortByDescending(sortCurrentPriceAscending)
+                  }
+                  handleSortByDescending={() =>
+                    handleSortByDescending(sortCurrentPriceDescending)
+                  }
+                />
 
                 <span className="mx-1">Price </span>
               </div>
@@ -62,7 +134,15 @@ function Table() {
             <th className="px-0 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               <div className=" flex items-end justify-start">
                 <span className="flex items-center">
-                  <SortButton IconComponent={SortDownArrow} />
+                  <SortButton
+                    IconComponent={SortDownArrow}
+                    handleSortByAscending={() =>
+                      handleSortByAscending(sortHourlyPriceChangeAscending)
+                    }
+                    handleSortByDescending={() =>
+                      handleSortByDescending(sortHourlyPriceChangeDescending)
+                    }
+                  />
 
                   <span className="mx-1"> 1 hr</span>
                 </span>
@@ -72,7 +152,11 @@ function Table() {
               <div className=" flex items-end justify-start">
                 <span className="flex items-center">
                   {" "}
-                  <SortButton IconComponent={SortDownArrow} />
+                  <SortButton
+                    IconComponent={SortDownArrow}
+                    sortByAscending={sortDailyPriceChangeAscending}
+                    sortByDescending={sortDailyPriceChangeDescending}
+                  />
                   <span className="mx-1"> 24 hr</span>
                 </span>
               </div>{" "}
@@ -81,7 +165,11 @@ function Table() {
               <div className=" flex items-end justify-start">
                 <span className="flex items-center">
                   {" "}
-                  <SortButton IconComponent={SortDownArrow} />
+                  <SortButton
+                    IconComponent={SortDownArrow}
+                    sortByAscending={sortCurrentWeeklyPriceChangeAscending}
+                    sortByDescending={sortCurrentWeeklyPriceChangeDescending}
+                  />
                   <span className="mx-1"> 7D </span>
                 </span>
               </div>{" "}
@@ -90,7 +178,11 @@ function Table() {
               <div className=" flex items-end justify-start">
                 <span className="flex items-center">
                   {" "}
-                  <SortButton IconComponent={SortDownArrow} />
+                  <SortButton
+                    IconComponent={SortDownArrow}
+                    sortByAscending={sortMarketCapAscending}
+                    sortByDescending={sortMarketCapDescending}
+                  />
                   <span className="mx-1"> MarketCap </span>
                 </span>
               </div>{" "}
@@ -99,7 +191,11 @@ function Table() {
               <div className=" flex items-end justify-start">
                 <span className="flex items-center">
                   {" "}
-                  <SortButton IconComponent={SortDownArrow} />
+                  <SortButton
+                    IconComponent={SortDownArrow}
+                    sortByAscending={sortTotalVolumeAscending}
+                    sortByDescending={sortTotalVolumeDescending}
+                  />
                   <span className="mx-1"> Total Volume </span>
                 </span>
               </div>{" "}
