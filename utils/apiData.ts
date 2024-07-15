@@ -71,9 +71,10 @@ export const calculateHourlyPriceChange = (
 
 export const fetchDataWithDelay = async (coinData: any[], delayMs: number) => {
   const fetchedHistoricalData: any[] = [];
-
+  let rank = 0;
   for (const coin of coinData) {
     const chartData = await fetchHistoricalData(coin.id);
+    rank = rank + 1;
 
     const hourly_price_change = calculateHourlyPriceChange(
       chartData,
@@ -86,6 +87,7 @@ export const fetchDataWithDelay = async (coinData: any[], delayMs: number) => {
 
     const newCoinObject = {
       ...coin,
+      rank,
       chartData,
       hourly_price_change,
       weeklyPriceChange,

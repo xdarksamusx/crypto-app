@@ -15,6 +15,7 @@ export interface pricePoint {
 }
 export interface CryptoCurrency {
   id: string;
+  rank: number;
   name: string;
   symbol: string;
   price: number;
@@ -36,6 +37,7 @@ export interface CryptoCurrency {
 
 export interface CoinData {
   id: string;
+  rank: number;
   name: string;
   symbol: string;
   price: number;
