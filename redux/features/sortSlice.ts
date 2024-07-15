@@ -30,10 +30,26 @@ const sortSlice = createSlice({
   initialState,
   reducers: {
     sortByIncreasing(state) {
-      state.coins.sort((a, b) => a[state.sortKey] - b[state.sortKey]);
+      state.coins.sort((a, b) => {
+        const aValue = a[state.sortKey];
+        const bValue = b[state.sortKey];
+        if (typeof aValue === "string" && typeof bValue === "string") {
+          return aValue.localeCompare(bValue);
+        } else {
+          return aValue - bValue;
+        }
+      });
     },
     sortByDecreasing(state) {
-      state.coins.sort((a, b) => b[state.sortKey] - a[state.sortKey]);
+      state.coins.sort((a, b) => {
+        const aValue = a[state.sortKey];
+        const bValue = b[state.sortKey];
+        if (typeof aValue === "string" && typeof bValue === "string") {
+          return bValue.localeCompare(aValue);
+        } else {
+          return bValue - aValue;
+        }
+      });
     },
     setSortKey(state, action) {
       state.sortKey = action.payload;

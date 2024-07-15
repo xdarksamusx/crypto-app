@@ -66,7 +66,7 @@ function Table() {
               <div className=" flex items-end justify-start">
                 <span className="flex items-end  ">
                   {" "}
-                  <SortButton IconComponent={SortUpArrow} sortKey="index" />
+                  <SortButton IconComponent={SortUpArrow} sortKey="rank" />
                   <span className="mx-1">#</span>
                 </span>
               </div>{" "}
@@ -166,7 +166,7 @@ function Table() {
                 <td className="px-6   border-b border-gray-200 text-sm">
                   <div className="  flex items-center justify-center  h-30 w-30">
                     <Star />
-                    <span className="mx-2"> {index + 1}</span>
+                    <span className="mx-2"> {coin.rank}</span>
                   </div>
                 </td>
                 <td className="px-0   border-b border-gray-200 text-sm">
