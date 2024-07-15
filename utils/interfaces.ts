@@ -46,10 +46,13 @@ export interface CoinData {
   current_price: number;
   price_change_1h: number;
   chartData: number[];
+  image: string;
   price_change_percentage_24h: number;
   market_cap_change_percentage_24h: number;
   price_change_7d: number;
   total_volume: number;
+  hourly_price_change: number;
+  weeklyPriceChange: number;
 }
 
 export interface CoinState {

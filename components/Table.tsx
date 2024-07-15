@@ -10,6 +10,7 @@ import {
   calculateHourlyPriceChange,
   capitalizeFirstLetter,
 } from "../utils/apiData";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 import {
   sortMarketCapAscending,
@@ -33,40 +34,20 @@ import {
 import SortDownArrow from "../icons/SortDownArrow";
 import SortUpArrow from "../icons/SortUpArrow";
 import SortButton from "./SortButton";
-
-type sortFunction = (a: CoinDataType, b: CoinDataType) => number;
-
-type CoinDataType = {
-  market_cap: number;
-  current_price: number;
-  hourly_price_change: number;
-  weeklyPriceChange: number;
-  price_change_percentage_24h: number;
-  total_volume: number;
-  name: string;
-};
+import {
+  setSortKey,
+  sortByDecreasing,
+  sortByIncreasing,
+} from "../redux/features/sortSlice";
 
 function Table() {
-  const { coins: initialCoinData } = initialState;
+  const dispatch = useAppDispatch();
+  const coinData = useAppSelector((state) => state.sort.coins);
 
-  const [coinData, setCoinData] = useState(initialCoinData as CoinDataType[]);
-
+  console.log("coin data", coinData);
   const [isClient, setIsClient] = useState(false);
 
-  const handleSortByAscending = (sortFunction) => {
-    console.log("sort function", sortFunction);
-
-    const copyOfCoinData: any[] = [...coinData];
-    console.log("copy of coin data", copyOfCoinData);
-    const sortedData = copyOfCoinData.sort(sortFunction);
-    console.log("sorted data", sortedData);
-  };
-
-  const handleSortByDescending = (sortFunction) => {
-    const copyOfCoinData: any[] = [...coinData];
-    const sortedData = copyOfCoinData.sort(sortFunction);
-    console.log("sorted data", sortedData);
-  };
+  // };
 
   useEffect(() => {
     setIsClient(true);
@@ -85,15 +66,7 @@ function Table() {
               <div className=" flex items-end justify-start">
                 <span className="flex items-end  ">
                   {" "}
-                  <SortButton
-                    IconComponent={SortUpArrow}
-                    handleSortByAscending={() =>
-                      handleSortByAscending(sortRankAscending)
-                    }
-                    handleSortByDescending={() =>
-                      handleSortByDescending(sortRankDescending)
-                    }
-                  />
+                  <SortButton IconComponent={SortUpArrow} sortKey="index" />
                   <span className="mx-1">#</span>
                 </span>
               </div>{" "}
@@ -101,16 +74,7 @@ function Table() {
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               <div className=" flex items-end justify-start">
                 <span className="flex items-center">
-                  {" "}
-                  <SortButton
-                    IconComponent={SortDownArrow}
-                    handleSortByAscending={() =>
-                      handleSortByAscending(sortNameAscending)
-                    }
-                    handleSortByDescending={() =>
-                      handleSortByDescending(sortNameDescending)
-                    }
-                  />
+                  <SortButton IconComponent={SortDownArrow} sortKey="name" />
                   <span className="mx-1">Coin</span>
                 </span>
               </div>{" "}
@@ -120,12 +84,7 @@ function Table() {
               <div className=" flex items-center justify-start">
                 <SortButton
                   IconComponent={SortDownArrow}
-                  handleSortByAscending={() =>
-                    handleSortByDescending(sortCurrentPriceAscending)
-                  }
-                  handleSortByDescending={() =>
-                    handleSortByDescending(sortCurrentPriceDescending)
-                  }
+                  sortKey="current_price"
                 />
 
                 <span className="mx-1">Price </span>
@@ -136,12 +95,7 @@ function Table() {
                 <span className="flex items-center">
                   <SortButton
                     IconComponent={SortDownArrow}
-                    handleSortByAscending={() =>
-                      handleSortByAscending(sortHourlyPriceChangeAscending)
-                    }
-                    handleSortByDescending={() =>
-                      handleSortByDescending(sortHourlyPriceChangeDescending)
-                    }
+                    sortKey="hourly_price_change"
                   />
 
                   <span className="mx-1"> 1 hr</span>
@@ -154,8 +108,7 @@ function Table() {
                   {" "}
                   <SortButton
                     IconComponent={SortDownArrow}
-                    sortByAscending={sortDailyPriceChangeAscending}
-                    sortByDescending={sortDailyPriceChangeDescending}
+                    sortKey="price_change_percentage_24h"
                   />
                   <span className="mx-1"> 24 hr</span>
                 </span>
@@ -167,10 +120,9 @@ function Table() {
                   {" "}
                   <SortButton
                     IconComponent={SortDownArrow}
-                    sortByAscending={sortCurrentWeeklyPriceChangeAscending}
-                    sortByDescending={sortCurrentWeeklyPriceChangeDescending}
+                    sortKey="price_change_7d"
                   />
-                  <span className="mx-1"> 7D </span>
+                  <span className="mx-1"> 7d </span>
                 </span>
               </div>{" "}
             </th>
@@ -180,8 +132,7 @@ function Table() {
                   {" "}
                   <SortButton
                     IconComponent={SortDownArrow}
-                    sortByAscending={sortMarketCapAscending}
-                    sortByDescending={sortMarketCapDescending}
+                    sortKey="market_cap"
                   />
                   <span className="mx-1"> MarketCap </span>
                 </span>
@@ -193,8 +144,7 @@ function Table() {
                   {" "}
                   <SortButton
                     IconComponent={SortDownArrow}
-                    sortByAscending={sortTotalVolumeAscending}
-                    sortByDescending={sortTotalVolumeDescending}
+                    sortKey="total_volume"
                   />
                   <span className="mx-1"> Total Volume </span>
                 </span>

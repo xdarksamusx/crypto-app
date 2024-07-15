@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import SortUpArrow from "../icons/SortUpArrow";
 import SortDownArrow from "../icons/SortDownArrow";
-
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import {
+  sortByIncreasing,
+  sortByDecreasing,
+  setSortKey,
+  setCoins,
+} from "../redux/features/sortSlice";
 interface SortButtonProps {
   IconComponent: React.ComponentType<any>;
-  handleSortByDescending: () => void;
-  handleSortByAscending: () => void;
+
+  sortKey: string;
 }
 
-const SortButton: React.FC<SortButtonProps> = ({
-  IconComponent,
-  handleSortByDescending,
-  handleSortByAscending,
-}) => {
+const SortButton: React.FC<SortButtonProps> = ({ sortKey, IconComponent }) => {
+  const dispatch = useAppDispatch();
+  const currentSortKey = useAppSelector((state) => state.sort.sortKey);
   const [isVisible, setIsVisible] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isUp, setIsUp] = useState(true);
@@ -21,10 +25,12 @@ const SortButton: React.FC<SortButtonProps> = ({
     setIsClicked(true);
     setIsUp(!isUp);
     setIsVisible(true);
+    dispatch(setSortKey(sortKey));
+
     if (isUp) {
-      handleSortByAscending();
+      dispatch(sortByIncreasing());
     } else {
-      handleSortByDescending();
+      dispatch(sortByDecreasing());
     }
   };
 
