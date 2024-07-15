@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import coinSlice from "./features/marketSlice";
-
+import sortSlice from "./features/sortSlice";
 const store = configureStore({
   reducer: {
     coins: coinSlice,
+    sort: sortSlice,
   },
 });
 
