@@ -12,33 +12,9 @@ import {
 } from "../utils/apiData";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
-import {
-  sortMarketCapAscending,
-  sortMarketCapDescending,
-  sortCurrentPriceAscending,
-  sortHourlyPriceChangeDescending,
-  sortHourlyPriceChangeAscending,
-  sortCurrentPriceDescending,
-  sortCurrentWeeklyPriceChangeAscending,
-  sortCurrentWeeklyPriceChangeDescending,
-  sortRankAscending,
-  sortRankDescending,
-  sortNameAscending,
-  sortNameDescending,
-  sortDailyPriceChangeAscending,
-  sortDailyPriceChangeDescending,
-  sortTotalVolumeAscending,
-  sortTotalVolumeDescending,
-} from "../utils/sortFunctions";
-
 import SortDownArrow from "../icons/SortDownArrow";
 import SortUpArrow from "../icons/SortUpArrow";
 import SortButton from "./SortButton";
-import {
-  setSortKey,
-  sortByDecreasing,
-  sortByIncreasing,
-} from "../redux/features/sortSlice";
 
 function Table() {
   const dispatch = useAppDispatch();
