@@ -11,7 +11,7 @@ import {
   capitalizeFirstLetter,
 } from "../utils/apiData";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-
+import { updateColors } from "../redux/features/sortSlice";
 import SortDownArrow from "../icons/SortDownArrow";
 import SortUpArrow from "../icons/SortUpArrow";
 import SortButton from "./SortButton";
@@ -19,6 +19,7 @@ import SortButton from "./SortButton";
 function Table() {
   const dispatch = useAppDispatch();
   const coinData = useAppSelector((state) => state.sort.coins);
+  console.log(coinData);
 
   console.log("coin data", coinData);
   const [isClient, setIsClient] = useState(false);
@@ -26,6 +27,7 @@ function Table() {
   // };
 
   useEffect(() => {
+    dispatch(updateColors());
     setIsClient(true);
   }, []);
 
@@ -156,19 +158,28 @@ function Table() {
                     (d){coin.current_price.toLocaleString()}
                   </span>
                 </td>
-                <td className="px-0  border-b border-gray-200 text-sm ">
+                <td
+                  style={{ color: coin.hourlyColor }}
+                  className="px-0  border-b border-gray-200 text-sm "
+                >
                   <span className=" px-3 text-center">
                     {" "}
                     {coin.hourly_price_change}%
                   </span>
                 </td>
-                <td className="px-0    border-b border-gray-200 text-sm ">
+                <td
+                  style={{ color: coin.dailyColor }}
+                  className="px-0    border-b border-gray-200 text-sm "
+                >
                   <span className=" px-3 text-center">
                     {" "}
-                    {coin.price_change_percentage_24h.toFixed(2)}%
+                    {coin.market_cap_change_percentage_24h.toFixed(2)}%
                   </span>
                 </td>
-                <td className="px-0  border-b border-gray-200 text-sm ">
+                <td
+                  style={{ color: coin.weeklyColor }}
+                  className="px-0  border-b border-gray-200 text-sm "
+                >
                   <span className="text-left ">{coin.weeklyPriceChange}%</span>
                 </td>
                 <td className="px-0 border-b border-gray-200 text-sm">
