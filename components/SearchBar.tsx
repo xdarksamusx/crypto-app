@@ -5,10 +5,11 @@ import React from "react";
 function SearchBar() {
   return (
     <>
-      <div className="flex justify-center border-1 border-black-500/100   hover:border-blue-500/100  focus:border-blue-500/100 ">
-        <div className=" border-2 border-gray-500/100 flex w-full px-0.5 items-center hover:border-blue-500/100  focus:border-blue-500/100  ">
+      <div className="  h-4 bg-gray-400  flex justify-center border-1 border-black-500/100   hover:border-blue-500/100  focus:border-blue-500/100 ">
+        <div className="  border-2 flex w-full px-0.5 items-center hover:border-blue-500/100  focus:border-blue-500/100  ">
           <svg
-            className="w-4 h-4"
+            fill="gray"
+            className="w-4 h-4 bg-slate-400"
             version="1.1"
             id="Layer_1"
             xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +25,7 @@ function SearchBar() {
             </g>
           </svg>
           <input
-            className="  h-4   focus: outline-none px-0.5 "
+            className="  h-4 bg-slate-400   focus: outline-none px-0.5 "
             type="text"
             placeholder="search for coin"
           />

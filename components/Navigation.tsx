@@ -4,12 +4,13 @@ import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import Gear from "../icons/gear.svg";
 import ProfileIcon from "../icons/profile.svg";
-
-function Navigation() {
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { toogleTheme } from "../redux/features/themesSlice";
+function Navigation({ onClick, themeColor }) {
   const [settingsDropdownVisible, setSettingsDropdownVisible] = useState(false);
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
   return (
-    <div className="w-full border-b border-gray-200 bg-white shadow-sm">
+    <div className="w-full border-b  shadow-sm">
       <div className="  max-w-7xl mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8 ">
         <div className="flex items-center">
           <span className="text-xl font-bold">LOGO</span>
@@ -17,35 +18,87 @@ function Navigation() {
         <div className="flex h-5  space-x-8">
           <SearchBar />
 
-          <div className="static  w-28">
+          <div className="static  w-28 focus:outline-none  ">
             {" "}
             <button
-              className="  transform transition-transform duration-300 ease-in-out flex  justify-center items-start  h-10 w-10 hover:scale-125 "
+              className=" border-2 border-gray-300  transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
               onMouseEnter={() => setSettingsDropdownVisible(true)}
               onMouseLeave={() => setSettingsDropdownVisible(false)}
             >
-              <Gear style={{ height: "15px", width: "31px" }} />
+              <div className="flex justify-start pr-3	">
+                <Gear style={{ height: "15px", width: "31px", fill: "gray" }} />
+              </div>
               {settingsDropdownVisible && (
-                <div className="absolute top-6 right-3 bg-white  shadow-md p-2 w-56 text-left      border-2 border-black-600 ">
-                  <p>hi</p>
-                  <p>its</p>
-                  <p>me</p>
+                <div className="absolute top-6 right-3 bg-gray-500  shadow-md p-2 w-56 text-left      border-2 border-black-600 ">
+                  <div className="flex  text-xs items-center  justify-between text-align">
+                    {" "}
+                    <div className="px-0 py-0 mx-0 my-0 ">Language</div>{" "}
+                    <div className="px-0 py-0 mx-0 my-0 text-left ">
+                      {" "}
+                      Selected Language
+                    </div>{" "}
+                  </div>
+                  <div className="flex justify-between  text-xs items-center  ">
+                    {" "}
+                    <div className="px-0 py-0 mx-0 my-0 ">Currency</div>{" "}
+                    <div className="px-0 py-0 mx-0 my-0 text-left ">
+                      {" "}
+                      Selected Currency
+                    </div>{" "}
+                  </div>
+                  <div className="flex  text-xs  justify-between   items-center ">
+                    {" "}
+                    <div className="px-0 py-0 mx-0 my-0 "> Dark Mode</div>{" "}
+                    <div
+                      className="px-0 py-0 mx-0 my-0 text-left "
+                      onClick={onClick}
+                    >
+                      {" "}
+                      Selected Mode
+                    </div>{" "}
+                  </div>
                 </div>
               )}
             </button>
           </div>
           <div>
             <button
-              className="  transform transition-transform duration-300 ease-in-out flex  justify-center items-start  h-10 w-10 hover:scale-125   "
+              className=" border-2 border-gray-300  transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
               onMouseEnter={() => setAccountDropdownVisible(true)}
               onMouseLeave={() => setAccountDropdownVisible(false)}
             >
-              <ProfileIcon style={{ height: "15px", width: "31px" }} />
+              <ProfileIcon
+                style={{ height: "15px", width: "31px", fill: "gray" }}
+              />
               {accountDropdownVisible && (
-                <div className="absolute top-6 right-3 bg-white  shadow-md p-2 w-56 text-left  border-2 border-black-600  ">
-                  <p>hi</p>
-                  <p>its</p>
-                  <p>me</p>
+                <div className="absolute top-6 right-3 bg-gray-500  shadow-md p-2 w-56 text-left      border-2 border-black-600 ">
+                  <div className="flex  text-xs items-center  justify-between text-align">
+                    {" "}
+                    <div className="px-0 py-0 mx-0 my-0 ">Language</div>{" "}
+                    <div className="px-0 py-0 mx-0 my-0 text-left ">
+                      {" "}
+                      Selected Language
+                    </div>{" "}
+                  </div>
+                  <div className="flex justify-between  text-xs items-center  ">
+                    {" "}
+                    <div className="px-0 py-0 mx-0 my-0 ">Currency</div>{" "}
+                    <div className="px-0 py-0 mx-0 my-0 text-left ">
+                      {" "}
+                      Selected Currency
+                    </div>{" "}
+                  </div>
+                  <div className="flex  text-xs  justify-between   items-center ">
+                    {" "}
+                    <div className="px-0 py-0 mx-0 my-0 "> Dark Mode</div>{" "}
+                    <div
+                      className="px-0 py-0 mx-0 my-0 text-left "
+                      onClick={onClick}
+                    >
+                      {" "}
+                      Selected Mode
+                    </div>{" "}
+                  </div>
                 </div>
               )}
             </button>
