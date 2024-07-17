@@ -1,5 +1,4 @@
 "use client";
-import "./globals.css";
 
 import React, { useEffect, useState, useRef } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
@@ -9,12 +8,23 @@ import Table from "../components/Table";
 import Header from "../components/Header";
 
 import Navigation from "../components/Navigation";
+import { toogleTheme } from "../redux/features/themesSlice";
+import "./globals.css";
+
 const Home = () => {
   const dispatch = useAppDispatch();
   const coins = useAppSelector((state) => state.coins.coins);
   const status = useAppSelector((state) => state.coins.status);
   const error = useAppSelector((state) => state.coins.error);
   const fetchOnce = useRef(false);
+
+  const dispatchTheme = useAppDispatch();
+  const themeColor = useAppSelector((state) => state.theme.dark);
+
+  const handdleThemeChange = () => {
+    console.log("click !!! and", themeColor);
+    dispatchTheme(toogleTheme());
+  };
 
   useEffect(() => {
     if (!fetchOnce.current) {
@@ -27,7 +37,10 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <Navigation />
+      <Navigation
+        themeColor={themeColor}
+        onClick={() => handdleThemeChange()}
+      />
       <Table />
     </div>
   );

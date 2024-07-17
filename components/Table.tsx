@@ -16,7 +16,6 @@ import SortUpArrow from "../icons/SortUpArrow";
 
 function Table() {
   const { coins: coinData } = initialState;
-  console.log(coinData);
 
   const [isClient, setIsClient] = useState(false);
 
@@ -30,10 +29,10 @@ function Table() {
 
   return (
     <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8 ">
-      <table className="min-w-full bg-white border border-gray-200 border-collapse ">
+      <table className="min-w-full border border-gray-200 border-collapse ">
         <thead>
-          <tr className="bg-gray-100 ">
-            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+          <tr className=" ">
+            <th className="px-6 py-1 border-b border-gray-200 text-left text-sm uppercase font-medium">
               <div className="flex items-center justify-end">
                 <span className="flex items-end ">
                   {" "}
@@ -42,29 +41,29 @@ function Table() {
                 </span>
               </div>
             </th>
-            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
               Coin
             </th>
 
-            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
               Price
             </th>
-            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
               1HR
             </th>
-            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+            <th className="px-6 py-1 border-b border-gray-200   text-left text-sm uppercase font-medium">
               24h
             </th>
-            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
               7D
             </th>
-            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
               24H Volume
             </th>
-            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
               MarketCap
             </th>
-            <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
               Chart
             </th>
           </tr>
