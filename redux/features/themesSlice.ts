@@ -35,6 +35,16 @@ export const themeSlice = createSlice({
           "--dropdown-text-color",
           "#fff"
         );
+
+        document.documentElement.style.setProperty(
+          "--input-text-color",
+          "#9dafc7"
+        );
+
+        document.documentElement.style.setProperty(
+          "--input-bg-color",
+          "#202d3b"
+        );
       } else {
         document.documentElement.style.setProperty(
           "--foreground-color",
@@ -53,6 +63,15 @@ export const themeSlice = createSlice({
         document.documentElement.style.setProperty(
           "--dropdown-text-color",
           "#000"
+        );
+        document.documentElement.style.setProperty(
+          "--input-text-color",
+          "#64748b"
+        );
+
+        document.documentElement.style.setProperty(
+          "--input-bg-color",
+          "#f1f5f9"
         );
       }
     },

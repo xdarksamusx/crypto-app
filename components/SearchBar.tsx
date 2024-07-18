@@ -6,7 +6,13 @@ function SearchBar() {
   return (
     <>
       <div className=" flex bg-gray-400 items-center ">
-        <div className=" flex  bg-gray-400 items-center pl-1 ">
+        <div
+          style={{
+            backgroundColor: "var(--input-bg-color)",
+            color: "var(--input-text-color)",
+          }}
+          className=" border-2 flex  bg-gray-400 items-center pl-1 "
+        >
           <svg
             fill="gray"
             className="w-4 h-4   "
@@ -25,6 +31,10 @@ function SearchBar() {
             </g>
           </svg>
           <input
+            style={{
+              backgroundColor: "var(--input-bg-color)",
+              color: "var(--input-text-color)",
+            }}
             className="  h-4 bg-gray-400   focus: outline-none px-0.5 "
             type="text"
             placeholder="search for coin"

@@ -10,8 +10,8 @@ function Navigation({ onClick, themeColor }) {
   const [settingsDropdownVisible, setSettingsDropdownVisible] = useState(false);
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
   return (
-    <div className="w-full border-b  shadow-sm">
-      <div className="  max-w-7xl mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8 ">
+    <div className="w-full border-b  shadow-sm  border-t">
+      <div className="   max-w-7xl mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8 ">
         <div className="flex items-center">
           <span className="text-xl font-bold">LOGO</span>
         </div>
@@ -77,7 +77,13 @@ function Navigation({ onClick, themeColor }) {
                 style={{ height: "15px", width: "31px", fill: "gray" }}
               />
               {accountDropdownVisible && (
-                <div className="absolute top-6 right-3   shadow-md p-2 w-56 text-left      border-2 border-black-600 ">
+                <div
+                  style={{
+                    backgroundColor: "var(--dropdown-bg-color)",
+                    color: "var(--dropdown-text-color)",
+                  }}
+                  className="absolute top-6 right-3   shadow-md p-2 w-56 text-left      border-2 border-black-600 "
+                >
                   <div className="flex  text-xs items-center  justify-between text-align">
                     {" "}
                     <div className="px-0 py-0 mx-0 my-0 ">Language</div>{" "}

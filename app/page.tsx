@@ -27,6 +27,10 @@ const Home = () => {
   };
 
   useEffect(() => {
+    dispatchTheme(toogleTheme());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (!fetchOnce.current) {
       if (status === "idle" && coins.length === 0) {
         dispatch(fetchTop20Coins());
