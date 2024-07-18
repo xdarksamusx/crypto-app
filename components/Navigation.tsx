@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import SearchBar from "./SearchBar";
-import Gear from "../icons/gear.svg";
-import ProfileIcon from "../icons/profile.svg";
+import Gear from "../icons/Gear";
+import ProfileIcon from "../icons/Profile";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { toogleTheme } from "../redux/features/themesSlice";
 function Navigation({ onClick, themeColor }) {
@@ -26,7 +26,7 @@ function Navigation({ onClick, themeColor }) {
               onMouseLeave={() => setSettingsDropdownVisible(false)}
             >
               <div className="flex justify-start pr-3	">
-                <Gear style={{ height: "15px", width: "31px", fill: "gray" }} />
+                <Gear />
               </div>
               {settingsDropdownVisible && (
                 <div
@@ -73,9 +73,7 @@ function Navigation({ onClick, themeColor }) {
               onMouseEnter={() => setAccountDropdownVisible(true)}
               onMouseLeave={() => setAccountDropdownVisible(false)}
             >
-              <ProfileIcon
-                style={{ height: "15px", width: "31px", fill: "gray" }}
-              />
+              <ProfileIcon />
               {accountDropdownVisible && (
                 <div
                   style={{
