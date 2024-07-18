@@ -1,19 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialColor = {
+const initialState = {
   dark: false,
+};
+
+const updateTheme = (dark: boolean) => {
+  document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
 };
 
 export const themeSlice = createSlice({
   name: "theme",
-  initialState: initialColor,
+  initialState,
 
   reducers: {
     toogleTheme: (state) => {
       state.dark = !state.dark;
 
       if (state.dark) {
-        document.documentElement.setAttribute("data-theme", "dark");
         document.documentElement.style.setProperty(
           "--foreground-color",
           "#fff"
@@ -23,8 +26,16 @@ export const themeSlice = createSlice({
           "#000"
         );
         document.documentElement.style.setProperty("--svg-color", "#fff");
+
+        document.documentElement.style.setProperty(
+          "--dropdown-bg-color",
+          "#2d2d2d"
+        );
+        document.documentElement.style.setProperty(
+          "--dropdown-text-color",
+          "#fff"
+        );
       } else {
-        document.documentElement.setAttribute("data-theme", "light");
         document.documentElement.style.setProperty(
           "--foreground-color",
           "#000"
@@ -34,6 +45,15 @@ export const themeSlice = createSlice({
           "#fff"
         );
         document.documentElement.style.setProperty("--svg-color", "#000");
+
+        document.documentElement.style.setProperty(
+          "--dropdown-bg-color",
+          "#ffffff"
+        );
+        document.documentElement.style.setProperty(
+          "--dropdown-text-color",
+          "#000"
+        );
       }
     },
   },
