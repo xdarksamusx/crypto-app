@@ -21,7 +21,7 @@ function Navigation({ onClick, themeColor }) {
           <div className="static  w-28 focus:outline-none  ">
             {" "}
             <button
-              className=" border-2 border-gray-300  transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
+              className=" border-2   transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
               onMouseEnter={() => setSettingsDropdownVisible(true)}
               onMouseLeave={() => setSettingsDropdownVisible(false)}
             >
@@ -29,7 +29,13 @@ function Navigation({ onClick, themeColor }) {
                 <Gear style={{ height: "15px", width: "31px", fill: "gray" }} />
               </div>
               {settingsDropdownVisible && (
-                <div className="absolute top-6 right-3 bg-gray-500  shadow-md p-2 w-56 text-left      border-2 border-black-600 ">
+                <div
+                  style={{
+                    backgroundColor: "var(--dropdown-bg-color)",
+                    color: "var(--dropdown-text-color)",
+                  }}
+                  className="absolute top-6 right-3   shadow-md p-2 w-56 text-left      border-2 border-black-600 "
+                >
                   <div className="flex  text-xs items-center  justify-between text-align">
                     {" "}
                     <div className="px-0 py-0 mx-0 my-0 ">Language</div>{" "}
@@ -63,7 +69,7 @@ function Navigation({ onClick, themeColor }) {
           </div>
           <div>
             <button
-              className=" border-2 border-gray-300  transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
+              className=" border-2   transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
               onMouseEnter={() => setAccountDropdownVisible(true)}
               onMouseLeave={() => setAccountDropdownVisible(false)}
             >
@@ -71,7 +77,7 @@ function Navigation({ onClick, themeColor }) {
                 style={{ height: "15px", width: "31px", fill: "gray" }}
               />
               {accountDropdownVisible && (
-                <div className="absolute top-6 right-3 bg-gray-500  shadow-md p-2 w-56 text-left      border-2 border-black-600 ">
+                <div className="absolute top-6 right-3   shadow-md p-2 w-56 text-left      border-2 border-black-600 ">
                   <div className="flex  text-xs items-center  justify-between text-align">
                     {" "}
                     <div className="px-0 py-0 mx-0 my-0 ">Language</div>{" "}
