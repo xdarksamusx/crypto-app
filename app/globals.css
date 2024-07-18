@@ -11,6 +11,10 @@
   --dropdown-bg-color-dark: #2d2d2d;
   --dropdown-text-color-light: #000000;
   --dropdown-text-color-dark: #ffffff;
+  --input-bg-color-light: #f1f5f9;
+  --input-bg-color-dark: #202d3b;
+  --input-text-color-light: #9dafc7;
+  --input-text-color-dark: #64748b;
 }
 
 [data-theme="light"] {
