@@ -1,6 +1,7 @@
 import axios from "axios";
 import { previousDate, currentDate } from "./dateFunctions";
 import { pricePoint } from "./interfaces";
+import { CoinData } from "./interfaces";
 export const fetchCoins = async () => {
   const response = await axios.get(
     `https://api.coingecko.com/api/v3/coins/markets`,
@@ -71,9 +72,10 @@ export const calculateHourlyPriceChange = (
 
 export const fetchDataWithDelay = async (coinData: any[], delayMs: number) => {
   const fetchedHistoricalData: any[] = [];
-
+  let rank = 0;
   for (const coin of coinData) {
     const chartData = await fetchHistoricalData(coin.id);
+    rank = rank + 1;
 
     const hourly_price_change = calculateHourlyPriceChange(
       chartData,
@@ -86,6 +88,7 @@ export const fetchDataWithDelay = async (coinData: any[], delayMs: number) => {
 
     const newCoinObject = {
       ...coin,
+      rank,
       chartData,
       hourly_price_change,
       weeklyPriceChange,
@@ -115,7 +118,7 @@ export const storage = async (storageData: any) => {
 export const delay = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
-export const getInitialCoinState = () => {
+export const getInitialCoinState = (): CoinData[] => {
   if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     const storedCoinData = localStorage.getItem("MarketData");
 
