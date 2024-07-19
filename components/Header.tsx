@@ -6,7 +6,7 @@ function Header() {
   const classes = "w-full bg-blue-700 text-white text-xs font-medium";
 
   return (
-    <div className="w-full bg-blue-700 text-white text-xs font-medium">
+    <div className="w-full  text-xs font-medium">
       <div className="max-w-7xl mx-auto flex justify-between py-4 px-4 sm:px-6 lg:px-8 space-x-4">
         <h5 className="flex items-center space-x-4">
           <span>Coins: placeholder</span>

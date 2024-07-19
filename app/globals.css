@@ -3,27 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --svg-color-light: #000;
+  --svg-color-dark: #2d2d2d;
+  --foreground-color: #000;
+  --background-color: #fff;
+  --dropdown-bg-color-light: #ffffff;
+  --dropdown-bg-color-dark: #2d2d2d;
+  --dropdown-text-color-light: #000000;
+  --dropdown-text-color-dark: #ffffff;
+  --input-bg-color-light: #f1f5f9;
+  --input-bg-color-dark: #202d3b;
+  --input-text-color-light: #9dafc7;
+  --input-text-color-dark: #64748b;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+[data-theme="light"] {
+  --foreground-color: #000;
+  --background-color: #fff;
+  --svg-color: var(--svg-color-light);
+  --dropdown-bg-color: var(--dropdown-bg-color-light);
+  --dropdown-text-color: var(--dropdown-text-color-light);
+}
+
+[data-theme="dark"] {
+  --foreground-color: #fff;
+  --background-color: #000;
+  --svg-color: var(--svg-color-dark);
+  --dropdown-bg-color: var(--dropdown-bg-color-dark);
+  --dropdown-text-color: var(--dropdown-text-color-dark);
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--foreground-color);
+  background-color: var(--background-color);
 }
 
 @layer utilities {

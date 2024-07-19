@@ -19,7 +19,7 @@ import SortButton from "./SortButton";
 function Table() {
   const dispatch = useAppDispatch();
   const coinData = useAppSelector((state) => state.sort.coins);
-  console.log(coinData);
+ =======
 
   console.log("coin data", coinData);
   const [isClient, setIsClient] = useState(false);
@@ -43,6 +43,12 @@ function Table() {
             <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
               <div className=" flex items-end justify-start">
                 <span className="flex items-end  ">
+      <table className="min-w-full border border-gray-200 border-collapse ">
+        <thead>
+          <tr className=" ">
+            <th className="px-6 py-1 border-b border-gray-200 text-left text-sm uppercase font-medium">
+              <div className="flex items-center justify-end">
+                <span className="flex items-end ">
                   {" "}
                   <SortButton IconComponent={SortUpArrow} sortKey="rank" />
                   <span className="mx-1">#</span>
@@ -132,7 +138,31 @@ function Table() {
               <div className=" flex items-end justify-start">
                 <span className="flex items-end"> Chart</span>
               </div>{" "}
+             <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
+              Coin
             </th>
+
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
+              Price
+            </th>
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
+              1HR
+            </th>
+            <th className="px-6 py-1 border-b border-gray-200   text-left text-sm uppercase font-medium">
+              24h
+            </th>
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
+              7D
+            </th>
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
+              24H Volume
+            </th>
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
+              MarketCap
+            </th>
+            <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
+              Chart
+             </th>
           </tr>
         </thead>
         <tbody>

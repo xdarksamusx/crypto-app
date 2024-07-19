@@ -1,11 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import coinSlice from "./features/marketSlice";
-import sortSlice from "./features/sortSlice";
+import themesSlice from "./features/themesSlice";
+
+ import sortSlice from "./features/sortSlice";
+ 
 const store = configureStore({
   reducer: {
     coins: coinSlice,
-    sort: sortSlice,
-  },
+    theme: themesSlice,
+        sort: sortSlice,
+
+   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
