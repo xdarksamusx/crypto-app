@@ -1,5 +1,5 @@
 export interface FetchDataResponse {
-  data: CryptoCurrency[];
+  data: CoinData[];
   status: Status;
 }
 
@@ -13,8 +13,10 @@ export interface Status {
 export interface pricePoint {
   pricePoint: number;
 }
-export interface CryptoCurrency {
+
+export interface CoinData {
   id: string;
+  rank: number;
   name: string;
   symbol: string;
   price: number;
@@ -32,28 +34,16 @@ export interface CryptoCurrency {
   total_volume: number;
   hourly_price_change: number;
   weeklyPriceChange: number;
-}
-
-export interface CoinData {
-  id: string;
-  name: string;
-  symbol: string;
-  price: number;
-  max_supply: number;
-  market_cap: number;
-  total_supply: number;
-  volume_24h: number;
-  current_price: number;
-  price_change_1h: number;
-  chartData: number[];
-  price_change_percentage_24h: number;
-  market_cap_change_percentage_24h: number;
-  price_change_7d: number;
-  total_volume: number;
+  sortKey?: string;
+  hourlyColor?: string;
+  dailyColor?: string;
+  weeklyColor?: string;
 }
 
 export interface CoinState {
-  coins: CryptoCurrency[];
+  coins: CoinData[];
+  sortKey: keyof CoinData;
+
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }

@@ -46,8 +46,8 @@ function LineChart(coin: any) {
     datasets: [
       {
         label: "data",
-        backgroundColor: "rgb(255, 99, 132)",
-        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: `${coinData.weeklyColor}`,
+        borderColor: `${coinData.weeklyColor}`,
         data: weeklyPriceArray,
       },
     ],
