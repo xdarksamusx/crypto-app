@@ -12,6 +12,7 @@ const SortUpArrow: React.FC = () => {
   return (
     <>
       <svg
+        style={{ fill: "var(--svg-color)" }}
         className="h-2 w-2  my-4 relative  "
         height="10"
         width="7"

@@ -6,7 +6,12 @@ import Gear from "../icons/Gear";
 import ProfileIcon from "../icons/Profile";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { toogleTheme } from "../redux/features/themesSlice";
-function Navigation({ onClick, themeColor }) {
+
+interface NavigationProps {
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+}
+
+function Navigation({ onClick }: NavigationProps) {
   const [settingsDropdownVisible, setSettingsDropdownVisible] = useState(false);
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
   return (

@@ -41,12 +41,12 @@ function Table() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8 ">
+    <div className=" mt-8 max-w-7xl mx-auto    sm:px-6 lg:px-8 ">
       <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-        <table className="min-w-full bg-white border border-gray-200 border-collapse  ">
-          <thead className="text-xs">
-            <tr className="bg-gray-100 ">
-              <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+        <table className="min-w-full  border-gray-200 border-collapse  ">
+          <thead className=" border-t-2 border-b-2  text-xs">
+            <tr className=" ">
+              <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
                 <div className=" flex items-end justify-start">
                   <span className="flex items-end  ">
                     {" "}
@@ -56,7 +56,7 @@ function Table() {
                 </div>{" "}
               </th>
 
-              <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+              <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
                 <div className=" flex items-end justify-start">
                   <span className="flex items-center">
                     <SortButton IconComponent={SortDownArrow} sortKey="name" />
@@ -65,7 +65,7 @@ function Table() {
                 </div>{" "}
               </th>
 
-              <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+              <th className="px-6 py-1 border-b border-gray-200 t text-left text-sm uppercase font-medium">
                 <div className=" flex items-center justify-start">
                   <SortButton
                     IconComponent={SortDownArrow}
@@ -75,7 +75,7 @@ function Table() {
                   <span className="mx-1">Price </span>
                 </div>
               </th>
-              <th className="px-0 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+              <th className="px-0 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
                 <div className=" flex items-end justify-start">
                   <span className="flex items-center">
                     <SortButton
@@ -87,7 +87,7 @@ function Table() {
                   </span>
                 </div>{" "}
               </th>
-              <th className="px-0 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+              <th className="px-0 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
                 <div className=" flex items-end justify-start">
                   <span className="flex items-center">
                     {" "}
@@ -99,7 +99,7 @@ function Table() {
                   </span>
                 </div>{" "}
               </th>
-              <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+              <th className="px-6 py-1 border-b border-gray-200  text-left text-sm uppercase font-medium">
                 <div className=" flex items-end justify-start">
                   <span className="flex items-center">
                     {" "}
@@ -111,7 +111,7 @@ function Table() {
                   </span>
                 </div>{" "}
               </th>
-              <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+              <th className="px-6 py-1 border-b border-gray-200 text-left text-sm uppercase font-medium">
                 <div className=" flex items-end justify-start">
                   <span className="flex items-center">
                     {" "}
@@ -123,7 +123,7 @@ function Table() {
                   </span>
                 </div>{" "}
               </th>
-              <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+              <th className="px-6 py-1 border-b border-gray-200text-left text-sm uppercase font-medium">
                 <div className=" flex items-end justify-start">
                   <span className="flex items-center">
                     {" "}
@@ -135,7 +135,7 @@ function Table() {
                   </span>
                 </div>{" "}
               </th>
-              <th className="px-6 py-1 border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-medium">
+              <th className="px-6 py-1 border-b border-gray-200 text-left text-sm uppercase font-medium">
                 <div className=" flex items-end justify-start">
                   <span className="flex items-end"> Chart</span>
                 </div>{" "}
