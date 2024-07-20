@@ -41,7 +41,7 @@ function Table() {
   }
 
   return (
-    <div className=" mt-2 max-w-7xl mx-auto    sm:px-6 lg:px-8 ">
+    <div className=" mt-8 max-w-7xl mx-auto    sm:px-6 lg:px-8 ">
       <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
         <table className="min-w-full  border-gray-200 border-collapse  ">
           <thead className=" border-t-2 border-b-2  text-xs">
