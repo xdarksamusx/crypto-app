@@ -1,17 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getInitialCoinState } from "../../utils/apiData";
 import { CoinState, CoinData } from "../../utils/interfaces";
 
-const initialState = {
+const initialState: CoinState = {
   coins: getInitialCoinState().map((coin) => ({
     ...coin,
-    price_change_percentage_24h:
-      coin.market_cap_change_percentage_24h > 0 ? "green" : "red",
+    price_change_percentage_24h: coin.market_cap_change_percentage_24h,
     weeklyColor: coin.weeklyPriceChange > 0 ? "green" : "red",
     hourlyColor: coin.hourly_price_change > 0 ? "green" : "red",
   })),
   sortKey: "market_cap",
+  status: "idle",
+  error: null,
 };
 
 const sortSlice = createSlice({
@@ -20,24 +20,23 @@ const sortSlice = createSlice({
   reducers: {
     sortByIncreasing(state) {
       state.coins.sort((a, b) => {
-        console.log("type of sort key", state.sortKey);
-        const aValue = a[state.sortKey as string];
-        const bValue = b[state.sortKey as string];
+        const aValue = a[state.sortKey];
+        const bValue = b[state.sortKey];
         if (typeof aValue === "string" && typeof bValue === "string") {
           return aValue.localeCompare(bValue);
         } else {
-          return aValue - bValue;
+          return (aValue as number) - (bValue as number);
         }
       });
     },
     sortByDecreasing(state) {
       state.coins.sort((a, b) => {
-        const aValue = a[state.sortKey as string];
-        const bValue = b[state.sortKey as string];
+        const aValue = a[state.sortKey as keyof CoinData];
+        const bValue = b[state.sortKey as keyof CoinData];
         if (typeof aValue === "string" && typeof bValue === "string") {
           return bValue.localeCompare(aValue);
         } else {
-          return bValue - aValue;
+          return (bValue as number) - (aValue as number);
         }
       });
     },
@@ -47,7 +46,6 @@ const sortSlice = createSlice({
     setCoins(state, action) {
       state.coins = action.payload;
     },
-
     updateColors(state) {
       state.coins.forEach((coin) => {
         coin.hourlyColor =
@@ -67,4 +65,5 @@ export const {
   setCoins,
   updateColors,
 } = sortSlice.actions;
+
 export default sortSlice.reducer;
