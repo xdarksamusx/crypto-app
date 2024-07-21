@@ -4,9 +4,9 @@ export const currentDate = (): number => {
   return unixTime;
 };
 
-export const previousDate = (): number => {
+export const previousDate = (days: number): number => {
   const currentDate = new Date();
-  currentDate.setDate(currentDate.getDate() - 360);
+  currentDate.setDate(currentDate.getDate() - days);
   const unixTime = Math.floor(currentDate.getTime() / 1000);
   return unixTime;
 };

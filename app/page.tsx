@@ -14,6 +14,7 @@ import "./globals.css";
 const Home = () => {
   const dispatch = useAppDispatch();
   const coins = useAppSelector((state) => state.coins.coins);
+
   const status = useAppSelector((state) => state.coins.status);
   const error = useAppSelector((state) => state.coins.error);
   const fetchOnce = useRef(false);
@@ -22,7 +23,6 @@ const Home = () => {
   const themeColor = useAppSelector((state) => state.theme.dark);
 
   const handdleThemeChange = () => {
-    console.log("click !!! and", themeColor);
     dispatchTheme(toogleTheme());
   };
 
@@ -41,10 +41,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <Navigation
-        themeColor={themeColor}
-        onClick={() => handdleThemeChange()}
-      />
+      <Navigation onClick={() => handdleThemeChange()} />
       <Table />
     </div>
   );

@@ -15,7 +15,6 @@ import {
   sortByIncreasing,
   sortByDecreasing,
   setSortKey,
-  setCoins,
   updateColors,
 } from "../redux/features/sortSlice";
 import SortDownArrow from "../icons/SortDownArrow";
@@ -25,7 +24,6 @@ import SortButton from "./SortButton";
 function Table() {
   const dispatch = useAppDispatch();
   const coinData = useAppSelector((state) => state.sort.coins);
-  console.log(coinData);
 
   const [isClient, setIsClient] = useState(false);
 

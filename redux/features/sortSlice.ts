@@ -43,9 +43,7 @@ const sortSlice = createSlice({
     setSortKey(state, action) {
       state.sortKey = action.payload;
     },
-    setCoins(state, action) {
-      state.coins = action.payload;
-    },
+
     updateColors(state) {
       state.coins.forEach((coin) => {
         coin.hourlyColor =
@@ -58,12 +56,7 @@ const sortSlice = createSlice({
   },
 });
 
-export const {
-  sortByIncreasing,
-  sortByDecreasing,
-  setSortKey,
-  setCoins,
-  updateColors,
-} = sortSlice.actions;
+export const { sortByIncreasing, sortByDecreasing, setSortKey, updateColors } =
+  sortSlice.actions;
 
 export default sortSlice.reducer;

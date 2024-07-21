@@ -6,7 +6,6 @@ import {
   sortByIncreasing,
   sortByDecreasing,
   setSortKey,
-  setCoins,
 } from "../redux/features/sortSlice";
 interface SortButtonProps {
   IconComponent: React.ComponentType<any>;
