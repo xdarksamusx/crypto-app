@@ -19,14 +19,14 @@ export const fetchCoins = async () => {
   return response.data;
 };
 
-export const fetchHistoricalData = async (coinName: any) => {
+export const fetchHistoricalData = async (coinName: any, days: number) => {
   try {
     const response = await axios.get(
       `https://api.coingecko.com/api/v3/coins/${coinName}/market_chart/range`,
       {
         params: {
           vs_currency: "usd",
-          from: previousDate(),
+          from: previousDate(days),
           to: currentDate(),
         },
       }
@@ -42,7 +42,6 @@ export const calculateWeeklyPriceChange = (
   chartData: any,
   currentPrice: number
 ) => {
-  console.log("chart data in api file", chartData);
   const { prices } = chartData;
   let sum: number = 0;
   for (let i = prices.length - 6; i < prices.length; i++) {
@@ -70,31 +69,88 @@ export const calculateHourlyPriceChange = (
   return hourlyPriceChange;
 };
 
+export const createDailyChartArray = (chartData: any) => {
+  const { prices, total_volumes } = chartData;
+
+  const dailyVolumesAndDates = total_volumes.slice(-1);
+  const dailyVolumesArray = dailyVolumesAndDates.map(
+    (volume: any) => volume[1]
+  );
+
+  const dailyPricesAndDates = prices.slice(-1);
+  const dailyPricesArray = dailyPricesAndDates.map((price: any) => price[1]);
+
+  return { dailyVolumesArray, dailyPricesArray };
+};
+
+export const createNinetyDayChartArray = (chartData: any) => {
+  const { prices, total_volumes } = chartData;
+
+  const ninetyDayVolumesAndDates = total_volumes.slice(-90);
+  const ninetyDayVolumesArray = ninetyDayVolumesAndDates.map(
+    (volume: any) => volume[1]
+  );
+
+  const ninetyDayPricesAndDates = prices.slice(-90);
+  const ninetyDayPricesArray = ninetyDayPricesAndDates.map(
+    (price: any) => price[1]
+  );
+
+  return { ninetyDayVolumesArray, ninetyDayPricesArray };
+};
+
+export const createYearlyChartArray = (chartData: any) => {
+  const { prices, total_volumes } = chartData;
+
+  const yearlyDayVolumesAndDates = total_volumes.slice(-364);
+  const yearlyVolumesArray = yearlyDayVolumesAndDates.map(
+    (volume: any) => volume[1]
+  );
+
+  const yearlyPricesAndDates = prices.slice(-364);
+  const yearlyPricesArray = yearlyPricesAndDates.map((price: any) => price[1]);
+
+  return { yearlyVolumesArray, yearlyPricesArray };
+};
+
 export const fetchDataWithDelay = async (coinData: any[], delayMs: number) => {
   const fetchedHistoricalData: any[] = [];
   let rank = 0;
   for (const coin of coinData) {
-    const chartData = await fetchHistoricalData(coin.id);
     rank = rank + 1;
 
+    const dailyChartData = await fetchHistoricalData(coin.id, 1);
+    const yearlyChartData = await fetchHistoricalData(coin.id, 364);
+    const ninetyDayChartData = await fetchHistoricalData(coin.id, 90);
+
     const hourly_price_change = calculateHourlyPriceChange(
-      chartData,
+      dailyChartData,
       coin.current_price
     );
     const weeklyPriceChange = calculateWeeklyPriceChange(
-      chartData,
+      ninetyDayChartData,
       coin.current_price
     );
+
+    const dailyCharts = createDailyChartArray(dailyChartData);
+    const ninetyDayCharts = createNinetyDayChartArray(ninetyDayChartData);
+    const yearlyCharts = createYearlyChartArray(ninetyDayChartData);
 
     const newCoinObject = {
       ...coin,
       rank,
-      chartData,
       hourly_price_change,
       weeklyPriceChange,
+      dailyVolumes: dailyCharts.dailyVolumesArray,
+      dailyPrices: dailyCharts.dailyPricesArray,
+      ninetyDayVolumes: ninetyDayCharts.ninetyDayVolumesArray,
+      ninetyDayPrices: ninetyDayCharts.ninetyDayPricesArray,
+      yearlyVolumes: yearlyCharts.yearlyVolumesArray,
+      yearlyPrices: yearlyCharts.yearlyPricesArray,
     };
+
     fetchedHistoricalData.push(newCoinObject);
-    await delay(20000);
+    await delay(60000);
   }
 
   return fetchedHistoricalData;
