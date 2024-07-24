@@ -30,7 +30,7 @@ interface CustomArrowProps {
 const CustomLeftArrow: React.FC<CustomArrowProps> = ({ onClick }) => {
   return createPortal(
     <button
-      className="absolute top-[42%] left-[99px] translate-y-[-50%] bg-red-500 border-none text-2xl cursor-pointer rounded-full p-2 z-[9999]"
+      className=" flex justify-center items-center  absolute top-[42%] left-[99px] translate-y-[-50%]  border-2  text-2xl cursor-pointer rounded-full p-2 z-[9999] w-11 h-11  "
       onClick={onClick}
     >
       &lt;
@@ -42,7 +42,7 @@ const CustomLeftArrow: React.FC<CustomArrowProps> = ({ onClick }) => {
 const CustomRightArrow: React.FC<CustomArrowProps> = ({ onClick }) => {
   return createPortal(
     <button
-      className="absolute top-[42%] right-[99px] translate-y-[-50%] bg-green-500 border-none text-2xl cursor-pointer rounded-full p-2 z-[9999]"
+      className=" flex justify-center items-center    absolute top-[42%] right-[99px] translate-y-[-50%]  border-2 text-2xl cursor-pointer rounded-full p-2 z-[9999]  w-11 h-11    "
       onClick={onClick}
     >
       &gt;
@@ -70,11 +70,11 @@ export const Carousels: React.FC = () => {
         {coins.map((coin) => (
           <div
             key={coin.id}
-            className="flex border border-blue-200 px-3 justify-center items-center py-4"
+            className="flex border border-blue-100 px-3 justify-center items-center py-4  "
           >
             <p>
               <img
-                className="w-14 h-14"
+                className="w-11 h-11"
                 src={`${coin.image}`}
                 alt={coin.name}
               />
