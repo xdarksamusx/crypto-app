@@ -6,6 +6,7 @@ import {
   sortByIncreasing,
   sortByDecreasing,
   setSortKey,
+  updateColors,
 } from "../redux/features/sortSlice";
 interface SortButtonProps {
   IconComponent: React.ComponentType<any>;
@@ -27,9 +28,11 @@ const SortButton: React.FC<SortButtonProps> = ({ sortKey, IconComponent }) => {
     dispatch(setSortKey(sortKey));
 
     if (isUp) {
+      dispatch(updateColors());
       dispatch(sortByIncreasing());
     } else {
       dispatch(sortByDecreasing());
+      dispatch(updateColors());
     }
   };
 

@@ -16,7 +16,7 @@ function Navigation({ onClick }: NavigationProps) {
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
   return (
     <div className="w-full border-b  shadow-sm  border-t">
-      <div className="   max-w-7xl mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8 ">
+      <div className="   max-w-7xl mx-auto flex justify-between items-center py-4  ">
         <div className="flex items-center">
           <span className="text-xl font-bold">LOGO</span>
         </div>

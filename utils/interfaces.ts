@@ -26,8 +26,12 @@ export interface CoinData {
   volume_24h: number;
   current_price: number;
   price_change_1h: number;
-  chartData: number[];
+  dailyPrices: number[];
+  dailyVolunes: number[];
   image: string;
+  ninetyDayPrices: [];
+  ninnetyDayVolumes: [];
+
   price_change_percentage_24h: number;
   market_cap_change_percentage_24h: number;
   price_change_7d: number;
@@ -38,6 +42,8 @@ export interface CoinData {
   hourlyColor?: string;
   dailyColor?: string;
   weeklyColor?: string;
+  yearlyPrices: number[];
+  yearlyVolumes: number[];
 }
 
 export interface CoinState {
