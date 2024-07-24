@@ -34,6 +34,7 @@ const initialState: CoinState = {
   coins: getInitialCoinState(),
   status: "idle",
   error: null,
+  sortKey: "market_cap",
 };
 
 const coinSlice = createSlice({
