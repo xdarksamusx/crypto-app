@@ -15,7 +15,6 @@ import {
   sortByIncreasing,
   sortByDecreasing,
   setSortKey,
-  setCoins,
   updateColors,
 } from "../redux/features/sortSlice";
 import SortDownArrow from "../icons/SortDownArrow";
@@ -25,23 +24,11 @@ import SortButton from "./SortButton";
 function Table() {
   const dispatch = useAppDispatch();
   const coinData = useAppSelector((state) => state.sort.coins);
-  console.log(coinData);
-
-  const [isClient, setIsClient] = useState(false);
 
   // };
 
-  useEffect(() => {
-    dispatch(updateColors());
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) {
-    return null;
-  }
-
   return (
-    <div className=" mt-8 max-w-7xl mx-auto    sm:px-6 lg:px-8 ">
+    <div className="  max-w-7xl mx-auto  mt-12   ">
       <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
         <table className="min-w-full  border-gray-200 border-collapse  ">
           <thead className=" border-t-2 border-b-2  text-xs">
