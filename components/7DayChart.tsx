@@ -27,18 +27,13 @@ const labels = monthsArray;
 
 function LineChart(coin: any) {
   const { coin: coinData } = coin;
-  const { chartData } = coinData;
-  const { prices } = chartData;
+  const { ninetyDayPrices } = coinData;
+  const { prices } = ninetyDayPrices;
 
-  const weeklyPricePoints = 7;
-
-  const weeklyPriceArray: number[] = [];
-
-  for (let i = 0; i < weeklyPricePoints; i++) {
-    const pricePoint = prices[i];
-    const price = pricePoint[1];
-    weeklyPriceArray.push(price);
-  }
+  const weeklyPriceArray = ninetyDayPrices.slice(
+    ninetyDayPrices.length - 7,
+    ninetyDayPrices.length
+  );
 
   const data = {
     labels: labels,
