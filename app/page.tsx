@@ -5,7 +5,9 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { fetchTop20Coins } from "../redux/features/marketSlice";
 import Table from "../components/Table";
 import Carousels from "@components/Carousel";
-
+import PriceChart from "@components/PriceChart";
+import VolumeChart from "@components/VolumeChart";
+import ChartButtons from "@components/ChartButtons";
 import Header from "../components/Header";
 
 import Navigation from "../components/Navigation";
@@ -51,11 +53,20 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div className="relative">
       <Header />
-      <Navigation onClick={() => handdleThemeChange()} />
-      <div className="relative z-30 overflow-visible">
+      <div className="relative">
+        <Navigation onClick={() => handdleThemeChange()} />
+      </div>
+      <div className="relative  overflow-visible ">
         <Carousels />
+      </div>
+      <div className="flex max-w-7xl mx-auto justify-around ">
+        <VolumeChart />
+        <PriceChart />
+      </div>
+      <div className="relative mt-8">
+        <ChartButtons />
       </div>
       <Table />
     </div>
