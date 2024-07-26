@@ -150,7 +150,7 @@ export const fetchDataWithDelay = async (coinData: any[], delayMs: number) => {
     };
 
     fetchedHistoricalData.push(newCoinObject);
-    await delay(60000);
+    await delay(90000);
   }
 
   return fetchedHistoricalData;

@@ -12,6 +12,7 @@ const store = configureStore({
 });
 
 const currentState = store.getState();
+console.log("current state", currentState);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppStore = typeof store;
