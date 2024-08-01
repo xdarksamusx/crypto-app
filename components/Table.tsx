@@ -28,8 +28,6 @@ function Table() {
 
   // };
 
-  console.log("coin for chart", coinsForChart);
-  console.log("coin for data", coinData);
 
   return (
     <div className="  max-w-7xl mx-auto  mt-12   ">
