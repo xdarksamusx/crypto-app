@@ -26,9 +26,6 @@ function Table() {
   const coinData = useAppSelector((state) => state.sort.coins);
   const coinsForChart = useAppSelector((state) => state.coins.coins);
 
-  // };
-
-
   return (
     <div className="  max-w-7xl mx-auto  mt-12   ">
       <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
