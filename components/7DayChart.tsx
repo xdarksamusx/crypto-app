@@ -25,10 +25,10 @@ const monthsArray: string[] = [
 
 const labels = monthsArray;
 
-function LineChart(coin: any) {
-  const { coin: coinData } = coin;
-  const { ninetyDayPrices } = coinData;
-  const { prices } = ninetyDayPrices;
+function LineChart(chart: any) {
+  const { coin } = chart;
+
+  const { ninetyDayPrices } = coin;
 
   const weeklyPriceArray = ninetyDayPrices.slice(
     ninetyDayPrices.length - 7,
@@ -41,8 +41,8 @@ function LineChart(coin: any) {
     datasets: [
       {
         label: "data",
-        backgroundColor: `${coinData.weeklyColor}`,
-        borderColor: `${coinData.weeklyColor}`,
+        backgroundColor: `${coin.weeklyColor}`,
+        borderColor: `${coin.weeklyColor}`,
         data: weeklyPriceArray,
       },
     ],
