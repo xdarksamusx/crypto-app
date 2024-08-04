@@ -44,6 +44,7 @@ export interface CoinData {
   weeklyColor?: string;
   yearlyPrices: number[];
   yearlyVolumes: number[];
+  currentlySelectedCoin: string;
 }
 
 export interface CoinState {

@@ -53,19 +53,19 @@ const Home = () => {
   }
 
   return (
-    <div className="relative">
+    <div className="">
       <Header />
-      <div className="relative">
+      <div className="">
         <Navigation onClick={() => handdleThemeChange()} />
       </div>
-      <div className="relative  overflow-visible ">
+      <div className="max-w-full mx-auto ">
         <Carousels />
       </div>
-      <div className="flex max-w-7xl mx-auto justify-around ">
+      <div className=" mt-8 flex max-w-7xl mx-auto justify-around items-center ">
         <VolumeChart />
         <PriceChart />
       </div>
-      <div className="relative mt-8">
+      <div className=" mt-8">
         <ChartButtons />
       </div>
       <Table />
