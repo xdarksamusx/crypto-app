@@ -59,7 +59,7 @@ export const Carousels: React.FC = () => {
   };
 
   return (
-    <div className="relative max-w-7xl mx-auto mt-12 overflow-visible z-20">
+    <div className="relative max-w-7xl mx-auto mt-12 overflow-visible z-20    ">
       <Carousel
         transitionDuration={0}
         infinite={true}
@@ -70,7 +70,7 @@ export const Carousels: React.FC = () => {
         {coins.map((coin) => (
           <div
             key={coin.id}
-            className="flex border border-blue-100 px-3 justify-center items-center py-4  "
+            className="flex border border-blue-100 px-3 justify-center items-center py-4  hover:bg-slate-700  hover:text-white/80 "
           >
             <p>
               <img

@@ -24,8 +24,10 @@ import SortButton from "./SortButton";
 function Table() {
   const dispatch = useAppDispatch();
   const coinData = useAppSelector((state) => state.sort.coins);
+  const coinsForChart = useAppSelector((state) => state.coins.coins);
 
   // };
+
 
   return (
     <div className="  max-w-7xl mx-auto  mt-12   ">
