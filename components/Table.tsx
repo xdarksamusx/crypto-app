@@ -20,6 +20,7 @@ import {
 import SortDownArrow from "../icons/SortDownArrow";
 import SortUpArrow from "../icons/SortUpArrow";
 import SortButton from "./SortButton";
+import Link from "next/link";
 
 function Table() {
   const dispatch = useAppDispatch();
@@ -143,7 +144,13 @@ function Table() {
                   <td className="px-0   border-b border-gray-200 text-sm">
                     <div className="flex items-center ">
                       <img className="w-6 h-6" src={`${coin.image}`} />{" "}
-                      <span className="px-2">{coinName}</span>
+                      <span className="px-2">
+                        {" "}
+                        <Link href={`/coins/${coin.id.toLowerCase()}`}>
+                          {" "}
+                          {coinName}
+                        </Link>
+                      </span>
                     </div>
                   </td>
                   <td className="px-0    border-b border-gray-200 text-sm">
