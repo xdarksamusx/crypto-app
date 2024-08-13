@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import CoinInfo from "@components/CoinPage/CoinInfo";
 import axios from "axios";
@@ -63,6 +65,7 @@ const Page = ({ params }: { params: { coinId: string } }) => {
         const { data } = await axios.get(
           `https://api.coingecko.com/api/v3/coins/${coinId}`
         );
+        console.log(pageData);
         setPageData(data);
       } catch (error) {
         setError({ error: "Failed to fetch data" });
