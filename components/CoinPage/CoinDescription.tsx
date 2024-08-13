@@ -1,38 +1,28 @@
 import React, { useEffect } from "react";
 import CopyIcon from "./CopyIcon";
 import Link from "next/link";
-
-interface PageData {
+interface CoinDescriptionProps {
   pageData: {
-    description: {
+    description?: {
       en: string;
+    };
+    links?: {
+      homepage?: string[];
+      blockchain_site?: string[];
     };
   };
 }
 
-const CoinDescription: React.FC<PageData> = ({ pageData }) => {
+const CoinDescription: React.FC<CoinDescriptionProps> = ({ pageData }) => {
   return (
-    <>
+    <div>
+      <div>{pageData.description?.en || "Description not available"}</div>
       <div>
-        <div className="text-sm">{pageData.description.en}</div>
-        <div className="flex mt-8  gap-x-10">
-          {" "}
-          <span className="flex items-center justify-center">
-            {" "}
-            url
-            <CopyIcon />
-          </span>
-          <span className="flex items-center justify-center">
-            url <CopyIcon />
-          </span>
-          <span className="flex items-center justify-center">
-            {" "}
-            url
-            <CopyIcon />
-          </span>
-        </div>
+        {pageData.links?.blockchain_site?.map((url) => (
+          <div key={url}>{url}</div>
+        )) || <div>No blockchain site available</div>}
       </div>
-    </>
+    </div>
   );
 };
 
