@@ -76,9 +76,7 @@ const fetchData = async (coinId: string) => {
       `https://api.coingecko.com/api/v3/coins/${coinId}`
     );
     return data;
-  } catch (error) {
-    console.log("error", error);
-  }
+  } catch (error) {}
 };
 
 type CoinInfoProps = CoinId & CardProps & CoinDescriptionProps;
@@ -105,7 +103,6 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
   let marketCapEN: string | undefined;
 
   if (market_data) {
-    console.log("market data", market_data);
     const {
       total_volume,
       fully_diluted_valuation,
