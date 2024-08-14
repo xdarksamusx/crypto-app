@@ -11,7 +11,7 @@ import ChartButtons from "@components/ChartButtons";
 import Header from "../components/Header";
 
 import Navigation from "../components/Navigation";
-import { toogleTheme } from "../redux/features/themesSlice";
+import { toogleTheme, setTheme } from "../redux/features/themesSlice";
 import "./globals.css";
 
 import { updateColors } from "../redux/features/sortSlice";
@@ -33,7 +33,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatchTheme(toogleTheme());
     dispatchSortingColors(updateColors());
 
     setIsClient(true);

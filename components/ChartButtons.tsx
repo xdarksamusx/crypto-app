@@ -25,8 +25,9 @@ const ChartButtons: React.FC = () => {
           {units.map((unit) => (
             <button
               key={unit}
-              style={{ background: `${unit === selectedUnit ? "gray" : ""}` }}
-              className=" flex-grow        h-12  "
+              className={`flex-grow h-12 ${
+                unit === selectedUnit ? "bg-gray-500" : ""
+              }`}
               onClick={() => handleSelectedUnit(unit)}
             >
               {unit}

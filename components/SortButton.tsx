@@ -52,16 +52,15 @@ const SortButton: React.FC<SortButtonProps> = ({ sortKey, IconComponent }) => {
     <>
       {!isClicked ? (
         <button
-          className=""
+          className="w-2 "
           onClick={handleClick}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          style={{ width: "7px", height: "20px" }}
         >
           {isVisible && <IconComponent />}
         </button>
       ) : (
-        <button onClick={handleClick} style={{ width: "7px", height: "20px" }}>
+        <button className="w-2 " onClick={handleClick}>
           {" "}
           {isUp ? <SortUpArrow /> : <SortDownArrow />}
         </button>
