@@ -11,7 +11,7 @@ import ChartButtons from "@components/ChartButtons";
 import Header from "../components/Header";
 
 import Navigation from "../components/Navigation";
-import { toogleTheme } from "../redux/features/themesSlice";
+import { toogleTheme, setTheme } from "../redux/features/themesSlice";
 import "./globals.css";
 
 import { updateColors } from "../redux/features/sortSlice";
@@ -33,7 +33,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatchTheme(toogleTheme());
     dispatchSortingColors(updateColors());
 
     setIsClient(true);
@@ -53,19 +52,19 @@ const Home = () => {
   }
 
   return (
-    <div className="relative">
+    <div className="">
       <Header />
-      <div className="relative">
+      <div className="">
         <Navigation onClick={() => handdleThemeChange()} />
       </div>
-      <div className="relative  overflow-visible ">
+      <div className="max-w-full mx-auto ">
         <Carousels />
       </div>
-      <div className="flex max-w-7xl mx-auto justify-around ">
+      <div className=" mt-8 flex max-w-7xl mx-auto justify-around items-center ">
         <VolumeChart />
         <PriceChart />
       </div>
-      <div className="relative mt-8">
+      <div className=" mt-8">
         <ChartButtons />
       </div>
       <Table />

@@ -6,6 +6,39 @@ const initialState = {
 
 const updateTheme = (dark: boolean) => {
   document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+
+  document.documentElement.style.setProperty(
+    "--foreground-color",
+    dark ? "#ffffff" : "#000000"
+  );
+  document.documentElement.style.setProperty(
+    "--background-color",
+    dark ? "#000000" : "#ffffff"
+  );
+  document.documentElement.style.setProperty(
+    "--svg-color",
+    dark ? "#ffffff" : "#000000"
+  );
+  document.documentElement.style.setProperty(
+    "--input-bg-color",
+    dark ? "#1f2937" : "#f3f4f6"
+  );
+  document.documentElement.style.setProperty(
+    "--input-text-color",
+    dark ? "#ffffff" : "#000000"
+  );
+  document.documentElement.style.setProperty(
+    "--dropdown-bg-color",
+    dark ? "#374151" : "#f9fafb"
+  );
+  document.documentElement.style.setProperty(
+    "--dropdown-text-color",
+    dark ? "#ffffff" : "#000000"
+  );
+  document.documentElement.style.setProperty(
+    "--search-bar-color",
+    dark ? "#ffffff" : "#000000"
+  );
 };
 
 export const themeSlice = createSlice({
@@ -15,68 +48,14 @@ export const themeSlice = createSlice({
   reducers: {
     toogleTheme: (state) => {
       state.dark = !state.dark;
-
-      if (state.dark) {
-        document.documentElement.style.setProperty(
-          "--foreground-color",
-          "#fff"
-        );
-        document.documentElement.style.setProperty(
-          "--background-color",
-          "#000"
-        );
-        document.documentElement.style.setProperty("--svg-color", "#fff");
-
-        document.documentElement.style.setProperty(
-          "--dropdown-bg-color",
-          "#2d2d2d"
-        );
-        document.documentElement.style.setProperty(
-          "--dropdown-text-color",
-          "#fff"
-        );
-
-        document.documentElement.style.setProperty(
-          "--input-text-color",
-          "#9dafc7"
-        );
-
-        document.documentElement.style.setProperty(
-          "--input-bg-color",
-          "#202d3b"
-        );
-      } else {
-        document.documentElement.style.setProperty(
-          "--foreground-color",
-          "#000"
-        );
-        document.documentElement.style.setProperty(
-          "--background-color",
-          "#fff"
-        );
-        document.documentElement.style.setProperty("--svg-color", "#000");
-
-        document.documentElement.style.setProperty(
-          "--dropdown-bg-color",
-          "#ffffff"
-        );
-        document.documentElement.style.setProperty(
-          "--dropdown-text-color",
-          "#000"
-        );
-        document.documentElement.style.setProperty(
-          "--input-text-color",
-          "#64748b"
-        );
-
-        document.documentElement.style.setProperty(
-          "--input-bg-color",
-          "#f1f5f9"
-        );
-      }
+      updateTheme(state.dark);
+    },
+    setTheme: (state, action) => {
+      state.dark = action.payload;
+      updateTheme(state.dark);
     },
   },
 });
 
-export const { toogleTheme } = themeSlice.actions;
+export const { toogleTheme, setTheme } = themeSlice.actions;
 export default themeSlice.reducer;

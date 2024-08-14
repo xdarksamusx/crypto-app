@@ -5,17 +5,10 @@ import React from "react";
 function SearchBar() {
   return (
     <>
-      <div className=" flex bg-gray-400 items-center ">
-        <div
-          style={{
-            backgroundColor: "var(--input-bg-color)",
-            color: "var(--input-text-color)",
-          }}
-          className=" border-2 flex  bg-gray-400 items-center pl-1 "
-        >
+      <div className=" flex bg-gray-200   items-center ">
+        <div className=" border-2 flex bg-gray-200     items-center pl-1 ">
           <svg
-            fill="gray"
-            className="w-4 h-4   "
+            className="w-4 h-4 bg--search-bar-color  "
             version="1.1"
             id="Layer_1"
             xmlns="http://www.w3.org/2000/svg"
@@ -31,11 +24,7 @@ function SearchBar() {
             </g>
           </svg>
           <input
-            style={{
-              backgroundColor: "var(--input-bg-color)",
-              color: "var(--input-text-color)",
-            }}
-            className="  h-4 bg-gray-400   focus: outline-none px-0.5 "
+            className="  h-4 bg-gray-200  text-input-text-color  focus: outline-none px-0.5 "
             type="text"
             placeholder="search for coin"
           />

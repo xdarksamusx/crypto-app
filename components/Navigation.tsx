@@ -44,13 +44,7 @@ function Navigation({ onClick }: NavigationProps) {
             >
               <ProfileIcon />
               {accountDropdownVisible && (
-                <div
-                  style={{
-                    backgroundColor: "var(--dropdown-bg-color)",
-                    color: "var(--dropdown-text-color)",
-                  }}
-                  className="absolute top-6 right-3   shadow-md p-2 w-56 text-left      border-2 border-black-600  z-999"
-                >
+                <div className="absolute top-6 right-3 bg-dropdown-bg-color  shadow-md p-2 w-56 text-left      border-2 border-black-600  z-999">
                   <div className="flex  text-xs items-center  justify-between text-align">
                     {" "}
                     <div className="px-0 py-0 mx-0 my-0 ">Language</div>{" "}

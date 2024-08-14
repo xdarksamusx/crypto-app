@@ -2,7 +2,16 @@ import axios from "axios";
 import { previousDate, currentDate } from "./dateFunctions";
 import { pricePoint } from "./interfaces";
 import { CoinData } from "./interfaces";
-export const fetchCoins = async () => {
+
+interface HistoricalDataResponse {
+  prices: [number, number][];
+  total_volumes: [number, number][];
+}
+
+export const delay = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
+export const fetchCoins = async (): Promise<CoinData[]> => {
   const response = await axios.get(
     `https://api.coingecko.com/api/v3/coins/markets`,
     {
@@ -19,7 +28,11 @@ export const fetchCoins = async () => {
   return response.data;
 };
 
-export const fetchHistoricalData = async (coinName: any, days: number) => {
+export const fetchHistoricalData = async (
+  coinName: any,
+  days: number,
+  retries: number = 3
+): Promise<HistoricalDataResponse | undefined> => {
   try {
     const response = await axios.get(
       `https://api.coingecko.com/api/v3/coins/${coinName}/market_chart/range`,
@@ -34,7 +47,14 @@ export const fetchHistoricalData = async (coinName: any, days: number) => {
     const { data } = response;
     return data;
   } catch (error) {
-    console.log("check error", error);
+    if (retries > 0) {
+      console.log(`Retrying... attempts left: ${retries}`);
+      await delay(30000); // Wait for 3 seconds before retrying
+      return fetchHistoricalData(coinName, days, retries - 1);
+    } else {
+      console.error("Failed to fetch data after multiple attempts", error);
+      throw error;
+    }
   }
 };
 
@@ -72,15 +92,59 @@ export const calculateHourlyPriceChange = (
 export const createDailyChartArray = (chartData: any) => {
   const { prices, total_volumes } = chartData;
 
-  const dailyVolumesAndDates = total_volumes.slice(-1);
+  const dailyVolumesAndDates = total_volumes;
   const dailyVolumesArray = dailyVolumesAndDates.map(
     (volume: any) => volume[1]
   );
 
-  const dailyPricesAndDates = prices.slice(-1);
+  const dailyPricesAndDates = prices;
   const dailyPricesArray = dailyPricesAndDates.map((price: any) => price[1]);
 
   return { dailyVolumesArray, dailyPricesArray };
+};
+
+export const createWeeklyChartArray = (chartData: any) => {
+  const { prices, total_volumes } = chartData;
+
+  const weeklyVolumesAndDates = total_volumes;
+  const weeklyVolumesArray = weeklyVolumesAndDates.map(
+    (volume: any) => volume[1]
+  );
+
+  const dailyPricesAndDates = prices;
+  const weeklyPriceArray = dailyPricesAndDates.map((price: any) => price[1]);
+
+  return { weeklyVolumesArray, weeklyPriceArray };
+};
+
+export const createFourteenChartArray = (chartData: any) => {
+  const { prices, total_volumes } = chartData;
+
+  const fourteenDayVolumesAndDates = total_volumes;
+  const fourteenDayVolumesArray = fourteenDayVolumesAndDates.map(
+    (volume: any) => volume[1]
+  );
+
+  const fourteenDayPricesAndDates = prices;
+  const fourteenDayPriceArray = fourteenDayPricesAndDates.map(
+    (price: any) => price[1]
+  );
+
+  return { fourteenDayVolumesArray, fourteenDayPriceArray };
+};
+
+export const createMonthlyChartArray = (chartData: any) => {
+  const { prices, total_volumes } = chartData;
+
+  const monthlyVolumesAndDates = total_volumes;
+  const monthlyVolumesArray = monthlyVolumesAndDates.map(
+    (volume: any) => volume[1]
+  );
+
+  const monthlyPricesAndDates = prices;
+  const monthlyPriceArray = monthlyPricesAndDates.map((price: any) => price[1]);
+
+  return { monthlyVolumesArray, monthlyPriceArray };
 };
 
 export const createNinetyDayChartArray = (chartData: any) => {
@@ -120,6 +184,10 @@ export const fetchDataWithDelay = async (coinData: any[], delayMs: number) => {
     rank = rank + 1;
 
     const dailyChartData = await fetchHistoricalData(coin.id, 1);
+    const weeklyChartData = await fetchHistoricalData(coin.id, 7);
+    const fourteenDayChartData = await fetchHistoricalData(coin.id, 14);
+    const monthlyChartData = await fetchHistoricalData(coin.id, 30);
+
     const yearlyChartData = await fetchHistoricalData(coin.id, 364);
     const ninetyDayChartData = await fetchHistoricalData(coin.id, 90);
 
@@ -133,8 +201,19 @@ export const fetchDataWithDelay = async (coinData: any[], delayMs: number) => {
     );
 
     const dailyCharts = createDailyChartArray(dailyChartData);
+    await delay(12000);
+    const weeklyCharts = createWeeklyChartArray(weeklyChartData);
+    await delay(12000);
+
+    const monthlyCharts = createMonthlyChartArray(monthlyChartData);
+
+    const fourteenDayCharts = createFourteenChartArray(fourteenDayChartData);
+    await delay(12000);
+
     const ninetyDayCharts = createNinetyDayChartArray(ninetyDayChartData);
-    const yearlyCharts = createYearlyChartArray(ninetyDayChartData);
+    await delay(12000);
+
+    const yearlyCharts = createYearlyChartArray(yearlyChartData);
 
     const newCoinObject = {
       ...coin,
@@ -143,6 +222,12 @@ export const fetchDataWithDelay = async (coinData: any[], delayMs: number) => {
       weeklyPriceChange,
       dailyVolumes: dailyCharts.dailyVolumesArray,
       dailyPrices: dailyCharts.dailyPricesArray,
+      weeklyVolumes: weeklyCharts.weeklyVolumesArray,
+      weeklyPrices: weeklyCharts.weeklyPriceArray,
+      monthlyPrices: monthlyCharts.monthlyPriceArray,
+      monthlyVolumes: monthlyCharts.monthlyVolumesArray,
+      fourteenDayVolumes: fourteenDayCharts.fourteenDayVolumesArray,
+      fourteenDayPrices: fourteenDayCharts.fourteenDayPriceArray,
       ninetyDayVolumes: ninetyDayCharts.ninetyDayVolumesArray,
       ninetyDayPrices: ninetyDayCharts.ninetyDayPricesArray,
       yearlyVolumes: yearlyCharts.yearlyVolumesArray,
@@ -150,7 +235,10 @@ export const fetchDataWithDelay = async (coinData: any[], delayMs: number) => {
     };
 
     fetchedHistoricalData.push(newCoinObject);
-    await delay(90000);
+
+    console.log(fetchedHistoricalData);
+
+    await delay(8000);
   }
 
   return fetchedHistoricalData;
@@ -170,9 +258,6 @@ export const storage = async (storageData: any) => {
     return storeCoinData;
   }
 };
-
-export const delay = (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
 
 export const getInitialCoinState = (): CoinData[] => {
   if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
