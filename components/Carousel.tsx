@@ -89,11 +89,10 @@ export const Carousels: React.FC = () => {
       >
         {coins.map((coin) => (
           <div
-            style={{
-              background: `${coin.id === selectedCoin?.id ? "gray" : ""}`,
-            }}
             key={coin.id}
-            className="flex border border-blue-100 px-3 justify-center items-center py-4  hover:bg-slate-700  hover:text-white/80 "
+            className={` bg-${
+              coin.id === selectedCoin?.id ? "bg-gray-500" : "none"
+            }  flex border border-blue-100 px-3 justify-center items-center py-4  hover:bg-slate-700  hover:text-white/80 `}
             onClick={() => handleSelectedCoin(coin)}
           >
             <p>

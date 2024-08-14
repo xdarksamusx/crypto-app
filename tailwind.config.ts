@@ -8,10 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        "foreground-color": "var(--foreground-color)",
+        "background-color": "var(--background-color)",
+        "svg-color": "var(--svg-color)",
+        "input-bg-color": "var(--input-bg-color)",
+        "input-text-color": "var(--input-text-color)",
+        "dropdown-bg-color": "var(--dropdown-bg-color)",
+        "dropdown-text-color": "var(--dropdown-text-color)",
+        "search-bar-color": "var(--search-bar-color)",
       },
     },
   },

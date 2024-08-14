@@ -159,8 +159,11 @@ function Table() {
                     </span>
                   </td>
                   <td
-                    style={{ color: coin.hourlyColor }}
-                    className="px-0  border-b border-gray-200 text-sm "
+                    className={` ${
+                      coin.hourlyColor === "red"
+                        ? "text-red-500"
+                        : "text-green-500"
+                    }  px-0  border-b border-gray-200 text-sm `}
                   >
                     <span className=" px-3 text-center">
                       {" "}
@@ -168,8 +171,11 @@ function Table() {
                     </span>
                   </td>
                   <td
-                    style={{ color: coin.dailyColor }}
-                    className="px-0    border-b border-gray-200 text-sm "
+                    className={`  ${
+                      coin.dailyColor === "red"
+                        ? "text-red-500"
+                        : "text-green-500"
+                    }    px-0    border-b border-gray-200 text-sm `}
                   >
                     <span className=" px-3 text-center">
                       {" "}
@@ -177,8 +183,11 @@ function Table() {
                     </span>
                   </td>
                   <td
-                    style={{ color: coin.weeklyColor }}
-                    className="px-0  border-b border-gray-200 text-sm "
+                    className={`  ${
+                      coin.weeklyColor === "red"
+                        ? "text-red-500"
+                        : "text-green-500"
+                    }   px-0  border-b border-gray-200 text-sm `}
                   >
                     <span className="text-left ">
                       {coin.weeklyPriceChange}%
