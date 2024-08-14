@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { createPortal } from "react-dom";
-
+import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
+import { CoinData } from "../utils/interfaces";
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
@@ -28,38 +29,57 @@ interface CustomArrowProps {
 }
 
 const CustomLeftArrow: React.FC<CustomArrowProps> = ({ onClick }) => {
-  return createPortal(
-    <button
-      className=" flex justify-center items-center  absolute top-[42%] left-[99px] translate-y-[-50%]  border-2  text-2xl cursor-pointer rounded-full p-2 z-[9999] w-11 h-11  "
-      onClick={onClick}
-    >
-      &lt;
-    </button>,
-    document.body
+  return (
+    <>
+      <button
+        className=" mt-1.5  mx-3 shadow-md	 flex justify-center items-center  absolute top-[42%] left-0 translate-y-[-50%]  border-2  text-2xl cursor-pointer rounded-full p-2 z-[9999] w-9 h-9  "
+        onClick={onClick}
+      >
+        &lt;
+      </button>
+      ,
+    </>
   );
 };
 
 const CustomRightArrow: React.FC<CustomArrowProps> = ({ onClick }) => {
-  return createPortal(
-    <button
-      className=" flex justify-center items-center    absolute top-[42%] right-[99px] translate-y-[-50%]  border-2 text-2xl cursor-pointer rounded-full p-2 z-[9999]  w-11 h-11    "
-      onClick={onClick}
-    >
-      &gt;
-    </button>,
-    document.body
+  return (
+    <>
+      <button
+        className=" mx-3   mt-1.5 flex shadow-md justify-center items-center absolute top-[42%] right-0 translate-y-[-50%] border-2 text-2xl cursor-pointer rounded-full p-2 z-[9999] w-9 h-9"
+        onClick={onClick}
+      >
+        &gt;
+      </button>
+      ,
+    </>
   );
 };
 
 export const Carousels: React.FC = () => {
-  const coins = useAppSelector((state) => state.sort.coins);
+  const coins = useAppSelector((state) => state.selectedCoin.coins);
+  const selectedCoin = useAppSelector(
+    (state) => state.selectedCoin.selectedCoin
+  );
 
-  const handleOnClick = () => {
-    console.log("Arrow clicked");
+  const selectedUnit = useAppSelector(
+    (state) => state.selectedCoin.selectedUnit
+  );
+  const dispatch = useAppDispatch();
+
+  const handleOnClick = () => {};
+
+  const handleSelectedCoin = (coin: CoinData) => {
+    dispatch(selectCoin(coin));
   };
 
+  useEffect(() => {
+    if (selectedCoin === null) {
+    }
+  }, [selectedCoin, dispatch]);
+
   return (
-    <div className="relative max-w-7xl mx-auto mt-12 overflow-visible z-20    ">
+    <div className="relative max-w-7xl mx-auto mt-12 overflow-visible z-20  text-xs  ">
       <Carousel
         transitionDuration={0}
         infinite={true}
@@ -70,21 +90,26 @@ export const Carousels: React.FC = () => {
         {coins.map((coin) => (
           <div
             key={coin.id}
-            className="flex border border-blue-100 px-3 justify-center items-center py-4  hover:bg-slate-700  hover:text-white/80 "
+            className={` bg-${
+              coin.id === selectedCoin?.id ? "bg-gray-500" : "none"
+            }  flex border border-blue-100 px-3 justify-center items-center py-4  hover:bg-slate-700  hover:text-white/80 `}
+            onClick={() => handleSelectedCoin(coin)}
           >
             <p>
-              <img
-                className="w-11 h-11"
-                src={`${coin.image}`}
-                alt={coin.name}
-              />
+              <img className="w-8 h-8" src={`${coin.image}`} alt={coin.name} />
             </p>
             <div className="ml-2">
               <p>{coin.name}</p>
               <div className="flex">
                 <p className="mr-2">{coin.current_price}</p>
-                <p style={{ color: coin.dailyColor }}>
-                  {coin.market_cap_change_percentage_24h} %
+                <p
+                  className={`${
+                    coin.dailyColor === "red"
+                      ? "text-red-500"
+                      : "text-green-500"
+                  }`}
+                >
+                  {coin.market_cap_change_percentage_24h.toFixed(2)}%
                 </p>
               </div>
             </div>

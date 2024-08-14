@@ -7,7 +7,7 @@ import {
 } from "../../utils/apiData";
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Status, CoinState } from "../../utils/interfaces";
+import { CoinState } from "../../utils/interfaces";
 import axios from "axios";
 
 export const fetchTop20Coins = createAsyncThunk(
@@ -16,7 +16,7 @@ export const fetchTop20Coins = createAsyncThunk(
   async () => {
     try {
       const coinData = await fetchCoins();
-      const delayMS = 12000;
+      const delayMS = 300000;
 
       const fetchedHistoricalData = await fetchDataWithDelay(coinData, delayMS);
 

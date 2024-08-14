@@ -11,7 +11,7 @@ export const Gear: React.FC = () => {
   return (
     <>
       <svg
-        style={{ height: "15px", width: "31px", fill: "var(--svg-color)" }}
+        className="h-4 w-7 fill--svg-color"
         fill="gray"
         version="1.1"
         id="Layer_1"

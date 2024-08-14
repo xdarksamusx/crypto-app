@@ -81,3 +81,5 @@ function LineChart(chart: any) {
 }
 
 export default LineChart;
+
+// 287 , 7, 14, 30 , 90, 3

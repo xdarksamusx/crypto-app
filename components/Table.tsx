@@ -20,14 +20,12 @@ import {
 import SortDownArrow from "../icons/SortDownArrow";
 import SortUpArrow from "../icons/SortUpArrow";
 import SortButton from "./SortButton";
+import Link from "next/link";
 
 function Table() {
   const dispatch = useAppDispatch();
   const coinData = useAppSelector((state) => state.sort.coins);
   const coinsForChart = useAppSelector((state) => state.coins.coins);
-
-  // };
-
 
   return (
     <div className="  max-w-7xl mx-auto  mt-12   ">
@@ -146,7 +144,13 @@ function Table() {
                   <td className="px-0   border-b border-gray-200 text-sm">
                     <div className="flex items-center ">
                       <img className="w-6 h-6" src={`${coin.image}`} />{" "}
-                      <span className="px-2">{coinName}</span>
+                      <span className="px-2">
+                        {" "}
+                        <Link href={`/coins/${coin.id.toLowerCase()}`}>
+                          {" "}
+                          {coinName}
+                        </Link>
+                      </span>
                     </div>
                   </td>
                   <td className="px-0    border-b border-gray-200 text-sm">
@@ -155,8 +159,11 @@ function Table() {
                     </span>
                   </td>
                   <td
-                    style={{ color: coin.hourlyColor }}
-                    className="px-0  border-b border-gray-200 text-sm "
+                    className={` ${
+                      coin.hourlyColor === "red"
+                        ? "text-red-500"
+                        : "text-green-500"
+                    }  px-0  border-b border-gray-200 text-sm `}
                   >
                     <span className=" px-3 text-center">
                       {" "}
@@ -164,8 +171,11 @@ function Table() {
                     </span>
                   </td>
                   <td
-                    style={{ color: coin.dailyColor }}
-                    className="px-0    border-b border-gray-200 text-sm "
+                    className={`  ${
+                      coin.dailyColor === "red"
+                        ? "text-red-500"
+                        : "text-green-500"
+                    }    px-0    border-b border-gray-200 text-sm `}
                   >
                     <span className=" px-3 text-center">
                       {" "}
@@ -173,8 +183,11 @@ function Table() {
                     </span>
                   </td>
                   <td
-                    style={{ color: coin.weeklyColor }}
-                    className="px-0  border-b border-gray-200 text-sm "
+                    className={`  ${
+                      coin.weeklyColor === "red"
+                        ? "text-red-500"
+                        : "text-green-500"
+                    }   px-0  border-b border-gray-200 text-sm `}
                   >
                     <span className="text-left ">
                       {coin.weeklyPriceChange}%

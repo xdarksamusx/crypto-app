@@ -12,8 +12,7 @@ const SortDownArrow: React.FC = () => {
   return (
     <>
       <svg
-        style={{ fill: "var(--svg-color)" }}
-        className="h-1 w-2  my-4 relative  "
+        className="h-1 w-2 bg-svg-color  my-4 relative  "
         xmlns="http://www.w3.org/2000/svg"
         height="17"
         width="7"
