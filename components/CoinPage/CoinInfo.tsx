@@ -165,9 +165,8 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
                       {" "}
                       <div className="flex items-center ">
                         {" "}
-                        <div className="  h-4 text-center flex justify-center items-stretch">
+                        <div className="  fill-green-300 h-4 text-center flex justify-center items-stretch">
                           <svg
-                            style={{ fill: "green" }}
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#000000"
                             width="22px"
@@ -196,9 +195,8 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
                       {" "}
                       <div className="flex items-center ">
                         {" "}
-                        <div className="  h-4 text-center flex justify-center items-end">
+                        <div className=" fill-green-300 h-4 text-center flex justify-center items-end">
                           <svg
-                            style={{ fill: "red" }}
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#000000"
                             width="22px"

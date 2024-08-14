@@ -11,7 +11,8 @@ export const Profile: React.FC = () => {
   return (
     <>
       <svg
-        style={{ height: "15px", width: "31px", fill: "var(--svg-color)" }}
+        className="h-4 w-7 fill--svg-color"
+        fill="gray"
         xmlns="http://www.w3.org/2000/svg"
         shape-rendering="geometricPrecision"
         text-rendering="geometricPrecision"

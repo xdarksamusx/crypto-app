@@ -102,7 +102,13 @@ export const Carousels: React.FC = () => {
               <p>{coin.name}</p>
               <div className="flex">
                 <p className="mr-2">{coin.current_price}</p>
-                <p style={{ color: coin.dailyColor }}>
+                <p
+                  className={`${
+                    coin.dailyColor === "red"
+                      ? "text-red-500"
+                      : "text-green-500"
+                  }`}
+                >
                   {coin.market_cap_change_percentage_24h.toFixed(2)}%
                 </p>
               </div>
