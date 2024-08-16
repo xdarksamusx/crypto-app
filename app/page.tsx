@@ -15,7 +15,6 @@ import { toogleTheme, setTheme } from "../redux/features/themesSlice";
 import "./globals.css";
 
 import { updateColors } from "../redux/features/sortSlice";
-import { relative } from "path";
 
 const Home = () => {
   const dispatch = useAppDispatch();

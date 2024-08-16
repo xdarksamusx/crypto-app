@@ -26,6 +26,7 @@ export default function RootLayout({
           <nav>
             <Link href="/">Home</Link>
             <Link href="/portfolio">Portfolio</Link>
+            <Link href="/convertor">Convertor</Link>
           </nav>
           {children}
         </StoreProvider>
