@@ -29,12 +29,12 @@ export default function Convertor() {
 
   return (
     <div>
+      this is the converter page
+      <RatioChart selectedUnit={selectedUnit} />
       <ChartButtons
         selectedUnit={selectedUnit}
         handleSelectedUnit={handleSelectedUnit}
       />
-      this is the converter page
-      <RatioChart selectedUnit={selectedUnit} />
     </div>
   );
 }
