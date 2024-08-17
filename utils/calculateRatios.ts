@@ -14,12 +14,17 @@ export const calculateRatios = (bitcoinData: Prices, ethereumData: Prices) => {
   const weeklyRatios = calculateWeeklyRatios(bitcoinData, ethereumData);
   const monthlyRatios = calculateMonthlyRatios(bitcoinData, ethereumData);
   const ninetyDayRatios = calculateNinetyDayRatios(bitcoinData, ethereumData);
+  const fourteenDayRatios = calculateFourteenDayRatios(
+    bitcoinData,
+    ethereumData
+  );
 
   const yearlyRatios = calculateYearlyRatios(bitcoinData, ethereumData);
 
   const ratios = {
     dailyRatios,
     weeklyRatios,
+    fourteenDayRatios,
     monthlyRatios,
     ninetyDayRatios,
     yearlyRatios,
@@ -41,6 +46,18 @@ const calculateDailyRatios = (bitcoinData: Prices, ethereumData: Prices) => {
 const calculateWeeklyRatios = (bitcoinData: Prices, ethereumData: Prices) => {
   const { weeklyPrices: bitcoinPrices } = bitcoinData;
   const { weeklyPrices: ethereumPrices } = ethereumData;
+  const ratios = bitcoinPrices.map(
+    (bitcoinPrice, index) => ethereumPrices[index] / bitcoinPrice
+  );
+  return ratios;
+};
+
+const calculateFourteenDayRatios = (
+  bitcoinData: Prices,
+  ethereumData: Prices
+) => {
+  const { fourteenDayPrices: bitcoinPrices } = bitcoinData;
+  const { fourteenDayPrices: ethereumPrices } = ethereumData;
   const ratios = bitcoinPrices.map(
     (bitcoinPrice, index) => ethereumPrices[index] / bitcoinPrice
   );

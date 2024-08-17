@@ -30,8 +30,6 @@ export const getFourteenDayLabels = () => {
     const day = newDay.getDate();
 
     dayArray.push(`${month} ${day}`);
-
-    console.log("14 days", dayArray);
   }
 
   return dayArray;
