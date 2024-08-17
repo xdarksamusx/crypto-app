@@ -111,7 +111,7 @@ export const getIntervalLabels = (dataLength: number, numLabels: number) => {
   return labels.reverse();
 };
 
-export const selectRatio = (selectedUnit: string, ratios) => {
+export const selectRatio = (selectedUnit: string, ratios: any) => {
   const {
     dailyRatios,
     weeklyRatios,
