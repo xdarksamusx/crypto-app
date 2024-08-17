@@ -1,21 +1,40 @@
 "use client";
 
 import React from "react";
-import { useAppSelector } from "../../redux/hooks";
-import { calculateRatios } from "@utils/calculateRatios";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { CoinData } from "@utils/interfaces";
+import ChartButtons from "@components/ChartButtons";
+import RatioChart from "@components/Convertor/RatioChart";
+import { selectUnit } from "../../redux/features/coinSelectionSlice";
+import { useMemo } from "react";
+
+interface Prices {
+  dailyPrices: number[];
+  weeklyPrices: number[];
+  fourteenDayPrices: number[];
+  monthlyPrices: number[];
+  ninetyDayPrices: number[];
+  yearlyPrices: number[];
+}
 
 export default function Convertor() {
-  const coins = useAppSelector((state) => state.coins.coins);
+  const dispatch = useAppDispatch();
+  const selectedUnit = useAppSelector(
+    (state) => state.selectedCoin.selectedUnit
+  );
 
-  const bitcoinData = coins[0];
-  const ethereumData = coins[1];
-  calculateRatios(bitcoinData, ethereumData);
+  const handleSelectedUnit = (unit: string) => {
+    dispatch(selectUnit(unit));
+  };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {" "}
+    <div>
+      <ChartButtons
+        selectedUnit={selectedUnit}
+        handleSelectedUnit={handleSelectedUnit}
+      />
       this is the converter page
-    </main>
+      <RatioChart selectedUnit={selectedUnit} />
+    </div>
   );
 }
