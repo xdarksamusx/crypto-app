@@ -87,7 +87,7 @@ const RatioChart: React.FC<SelectedUnit> = ({ selectedUnit }) => {
 
   return (
     <>
-      <div className="w-9/12 h-full relative mr-4  py-8 border-2   px-16 ">
+      <div className="w-9/12 h-full relative mr-4  py-8 border-2   px-16 bg-slate-300 my-8 ">
         Eth-BTC Ratio
         <Line data={data} options={options} />
       </div>

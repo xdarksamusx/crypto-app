@@ -15,7 +15,7 @@ const ChartButtons: React.FC<ChartButtonsProps> = ({
 
   return (
     <>
-      <div className="max-w-7xl mx-auto  ">
+      <div className="  ">
         <div className="  h-full    flex  justify-around w-96 border-2 ">
           {units.map((unit) => (
             <button
