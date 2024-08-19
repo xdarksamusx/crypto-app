@@ -1,11 +1,12 @@
 import { CoinData } from "@utils/interfaces";
+import { useState } from "react";
+import { convertCurrency } from "@utils/conversions";
 
 interface BoxProps extends CoinData {
   data: CoinData;
 }
 
-const Box: React.FC<BoxProps> = ({ data }) => {
-  console.log("looking at data object", data);
+const Box: React.FC<BoxProps> = ({ data, input, setInput }) => {
   return (
     <>
       <div className="px-9 py-3 w-[650px] h-[200px]  bg-slate-300">
@@ -22,10 +23,14 @@ const Box: React.FC<BoxProps> = ({ data }) => {
             </p>{" "}
             <span className="flex items-center justify-center"></span>
           </div>
-          <div className="amount"></div>amount
+          <div className="amount">
+            <input onChange={setInput} value={input} type="amount" />
+          </div>
         </div>
 
-        <p className="mt-5">1BTC = {data.current_price}</p>
+        <p className="mt-5">
+          1 {data.symbol.toUpperCase()} = {data.current_price}
+        </p>
       </div>
     </>
   );
