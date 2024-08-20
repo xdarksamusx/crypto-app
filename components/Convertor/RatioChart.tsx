@@ -5,7 +5,10 @@ import { createVolumeChart } from "@utils/selectedChartPeriod";
 // import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
 
 import { useMemo } from "react";
-import { calculateRatios } from "@utils/calculateRatios";
+import {
+  calculateEthereumRatios,
+  calculateBitcoinRatios,
+} from "@utils/calculateRatios";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
 ChartJS.register(...registerables);
@@ -17,19 +20,25 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 interface SelectedUnit {
   selectedUnit: string;
+  boxSwap: boolean;
 }
 
-const RatioChart: React.FC<SelectedUnit> = ({ selectedUnit }) => {
+const RatioChart: React.FC<SelectedUnit> = ({ selectedUnit, boxSwap }) => {
   const coins = useAppSelector((state) => state.coins.coins);
+  const [ratios, setRatios] = useState<any>({});
 
   const bitcoinData = coins[0];
   const ethereumData = coins[1];
-  const ratios = useMemo(
-    () => calculateRatios(bitcoinData, ethereumData),
-    [bitcoinData, ethereumData]
-  );
 
-  const selectedRatioData = selectRatio(selectedUnit, ratios);
+  useEffect(() => {
+    const calculatedRatios = boxSwap
+      ? calculateEthereumRatios(bitcoinData, ethereumData)
+      : calculateBitcoinRatios(bitcoinData, ethereumData);
+
+    setRatios(calculatedRatios);
+  }, [boxSwap, bitcoinData, ethereumData]);
+
+  const selectedRatioData = selectRatio(selectedUnit, ratios) || [];
 
   const dataLabels = createLabels(selectedUnit);
 
@@ -39,8 +48,6 @@ const RatioChart: React.FC<SelectedUnit> = ({ selectedUnit }) => {
   for (let i = 0; i < dataLabels.length; i++) {
     extendedLabels[i * interval] = dataLabels[i];
   }
-
-  // const dispatch = useAppDispatch();
 
   const data = {
     labels: extendedLabels,
@@ -81,14 +88,16 @@ const RatioChart: React.FC<SelectedUnit> = ({ selectedUnit }) => {
     },
   };
 
-  //   useEffect(() => {
-  //     if (!coin) return;
-  //   }, [selectedUnit, selectedCoin]);
-
   return (
     <>
       <div className="w-9/12 h-full relative mr-4  py-8 border-2   px-16 bg-slate-300 my-8 ">
-        Eth-BTC Ratio
+        {boxSwap
+          ? ` Eth-BTC Ratio ${(
+              ethereumData.current_price / bitcoinData.current_price
+            ).toFixed(3)}`
+          : `BTC-ETh Ratio ${(
+              bitcoinData.current_price / ethereumData.current_price
+            ).toFixed(3)}`}
         <Line data={data} options={options} />
       </div>
     </>

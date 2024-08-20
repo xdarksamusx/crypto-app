@@ -80,6 +80,8 @@ export default function Convertor() {
 
   const handleCurrencySwap = () => {
     setBoxSwap(!boxSwap);
+    //you want to swap the ratios as well
+    // pass this variable to ratios
   };
 
   return (
@@ -100,7 +102,7 @@ export default function Convertor() {
         )}
       </div>
 
-      <RatioChart selectedUnit={selectedUnit} />
+      <RatioChart selectedUnit={selectedUnit} boxSwap={boxSwap} />
       <ChartButtons
         selectedUnit={selectedUnit}
         handleSelectedUnit={handleSelectedUnit}
