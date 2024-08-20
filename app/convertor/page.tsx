@@ -80,8 +80,6 @@ export default function Convertor() {
 
   const handleCurrencySwap = () => {
     setBoxSwap(!boxSwap);
-    //you want to swap the ratios as well
-    // pass this variable to ratios
   };
 
   return (
