@@ -1,7 +1,12 @@
-const DoubleArrows: React.FC = () => {
+interface DoubleArrowButton {
+  handleCurrencySwap: () => void;
+}
+
+const DoubleArrows: React.FC<DoubleArrowButton> = ({ handleCurrencySwap }) => {
   return (
     <>
       <svg
+        onClick={handleCurrencySwap}
         width="48"
         height="48"
         viewBox="0 0 48 48"

@@ -1,9 +1,13 @@
+"use  client";
+
 import { CoinData } from "@utils/interfaces";
 import { useState } from "react";
 import { convertCurrency } from "@utils/conversions";
 
-interface BoxProps extends CoinData {
+interface BoxProps {
   data: CoinData;
+  input: string;
+  setInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Box: React.FC<BoxProps> = ({ data, input, setInput }) => {

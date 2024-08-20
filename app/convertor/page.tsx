@@ -11,7 +11,7 @@ import { useMemo } from "react";
 import DoubleArrows from "@components/Convertor/DoubleArrows";
 import Box from "@components/Convertor/Boxes";
 import { convertCurrency } from "@utils/conversions";
-
+import { useEffect } from "react";
 interface Prices {
   dailyPrices: number[];
   weeklyPrices: number[];
@@ -32,11 +32,21 @@ export default function Convertor() {
 
   const [btcInput, setBtcInput] = useState<string>("");
   const [ethInput, setEthInput] = useState<string>("");
+  const [boxSwap, setBoxSwap] = useState<boolean>(true);
+  const [isClient, setIsClient] = useState(false);
   const bitcoinData = coins[0];
   const ethereumData = coins[1];
 
-  const btcToUsd = bitcoinData.current_price;
-  const ethToUsd = ethereumData.current_price;
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return <div>Loading...</div>;
+  }
+
+  const btcToUsd: number = bitcoinData.current_price;
+  const ethToUsd: number = ethereumData.current_price;
 
   const ethValue = btcInput
     ? convertCurrency(parseFloat(btcInput), btcToUsd, ethToUsd).toString()
@@ -68,14 +78,26 @@ export default function Convertor() {
     }
   };
 
+  const handleCurrencySwap = () => {
+    setBoxSwap(!boxSwap);
+  };
+
   return (
     <div className="flex flex-col">
       <div className=" flex gap-5 ">
-        <Box data={bitcoinData} input={btcInput} setInput={handleBtcInput} />
+        {boxSwap ? (
+          <Box data={bitcoinData} input={btcInput} setInput={handleBtcInput} />
+        ) : (
+          <Box data={ethereumData} input={ethInput} setInput={handleEthInput} />
+        )}
         <div className="flex items-center justify-center">
-          <DoubleArrows />
+          <DoubleArrows handleCurrencySwap={handleCurrencySwap} />
         </div>
-        <Box data={ethereumData} input={ethInput} setInput={handleEthInput} />
+        {!boxSwap ? (
+          <Box data={bitcoinData} input={btcInput} setInput={handleBtcInput} />
+        ) : (
+          <Box data={ethereumData} input={ethInput} setInput={handleEthInput} />
+        )}
       </div>
 
       <RatioChart selectedUnit={selectedUnit} />
