@@ -115,8 +115,6 @@ const calculateEthereumYearlyRatios = (
   return ratios;
 };
 
-/////////////
-
 export const calculateBitcoinRatios = (
   bitcoinData: Prices,
   ethereumData: Prices
@@ -223,4 +221,66 @@ const calculateBitcoinYearlyRatios = (
     (ethereumPrice, index) => bitcoinPrices[index] / ethereumPrice
   );
   return ratios;
+};
+
+export const computeRatioValue = (selectedUnit: string, array: number[]) => {
+  let initialValue, sum;
+  switch (selectedUnit) {
+    case "1D":
+      initialValue = 0;
+      sum = array.reduce(
+        (accumulator: number, currentValue: number) =>
+          accumulator + currentValue,
+        initialValue
+      );
+
+      return sum / array.length;
+    case "7D":
+      initialValue = 0;
+      sum = array.reduce(
+        (accumulator: number, currentValue: number) =>
+          accumulator + currentValue,
+        initialValue
+      );
+
+      return sum / array.length;
+
+    case "14D":
+      initialValue = 0;
+      sum = array.reduce(
+        (accumulator: number, currentValue: number) =>
+          accumulator + currentValue,
+        initialValue
+      );
+
+      return sum / array.length;
+    case "1M":
+      initialValue = 0;
+      sum = array.reduce(
+        (accumulator: number, currentValue: number) =>
+          accumulator + currentValue,
+        initialValue
+      );
+
+      return sum / array.length;
+    case "3M":
+      initialValue = 0;
+      sum = array.reduce(
+        (accumulator: number, currentValue: number) =>
+          accumulator + currentValue,
+        initialValue
+      );
+
+      return sum / array.length;
+
+    case "1Y":
+      initialValue = 0;
+      sum = array.reduce(
+        (accumulator: number, currentValue: number) =>
+          accumulator + currentValue,
+        initialValue
+      );
+
+      return sum / array.length;
+  }
 };
