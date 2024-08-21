@@ -154,12 +154,10 @@ const calculateBitcoinDailyRatios = (
 ) => {
   const { dailyPrices: bitcoinPrices } = bitcoinData;
   const { dailyPrices: ethereumPrices } = ethereumData;
-  console.log("Ethereum Prices: ", ethereumPrices.slice(0, 5));
   const ratios = ethereumPrices.map(
     (ethereumPrice, index) => bitcoinPrices[index] / ethereumPrice
   );
 
-  console.log("Bitcoin Prices: ", bitcoinPrices.slice(0, 5));
   return ratios;
 };
 
@@ -224,62 +222,82 @@ const calculateBitcoinYearlyRatios = (
 };
 
 export const computeRatioValue = (selectedUnit: string, array: number[]) => {
-  let initialValue, sum;
+  let initialValue, sum: number;
+  let numericArray;
   switch (selectedUnit) {
     case "1D":
       initialValue = 0;
-      sum = array.reduce(
-        (accumulator: number, currentValue: number) =>
-          accumulator + currentValue,
-        initialValue
+
+      numericArray = array.filter(
+        (value) => typeof value === "number" && !isNaN(value)
       );
+
+      sum = numericArray.reduce((accumulator: number, currentValue: number) => {
+        return accumulator + currentValue;
+      }, initialValue);
 
       return sum / array.length;
     case "7D":
       initialValue = 0;
-      sum = array.reduce(
-        (accumulator: number, currentValue: number) =>
-          accumulator + currentValue,
-        initialValue
+
+      numericArray = array.filter(
+        (value) => typeof value === "number" && !isNaN(value)
       );
+
+      sum = numericArray.reduce((accumulator: number, currentValue: number) => {
+        return accumulator + currentValue;
+      }, initialValue);
 
       return sum / array.length;
 
     case "14D":
       initialValue = 0;
-      sum = array.reduce(
-        (accumulator: number, currentValue: number) =>
-          accumulator + currentValue,
-        initialValue
+
+      numericArray = array.filter(
+        (value) => typeof value === "number" && !isNaN(value)
       );
 
+      sum = numericArray.reduce((accumulator: number, currentValue: number) => {
+        return accumulator + currentValue;
+      }, initialValue);
+
       return sum / array.length;
+
     case "1M":
       initialValue = 0;
-      sum = array.reduce(
-        (accumulator: number, currentValue: number) =>
-          accumulator + currentValue,
-        initialValue
+
+      numericArray = array.filter(
+        (value) => typeof value === "number" && !isNaN(value)
       );
+
+      sum = numericArray.reduce((accumulator: number, currentValue: number) => {
+        return accumulator + currentValue;
+      }, initialValue);
 
       return sum / array.length;
     case "3M":
       initialValue = 0;
-      sum = array.reduce(
-        (accumulator: number, currentValue: number) =>
-          accumulator + currentValue,
-        initialValue
+
+      numericArray = array.filter(
+        (value) => typeof value === "number" && !isNaN(value)
       );
+
+      sum = numericArray.reduce((accumulator: number, currentValue: number) => {
+        return accumulator + currentValue;
+      }, initialValue);
 
       return sum / array.length;
 
     case "1Y":
       initialValue = 0;
-      sum = array.reduce(
-        (accumulator: number, currentValue: number) =>
-          accumulator + currentValue,
-        initialValue
+
+      numericArray = array.filter(
+        (value) => typeof value === "number" && !isNaN(value)
       );
+
+      sum = numericArray.reduce((accumulator: number, currentValue: number) => {
+        return accumulator + currentValue;
+      }, initialValue);
 
       return sum / array.length;
   }
