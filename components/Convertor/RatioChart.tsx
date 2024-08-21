@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import { createVolumeChart } from "@utils/selectedChartPeriod";
-// import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
 
 import { useMemo } from "react";
 import {
   calculateEthereumRatios,
   calculateBitcoinRatios,
+  computeRatioValue,
 } from "@utils/calculateRatios";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
@@ -48,6 +48,8 @@ const RatioChart: React.FC<SelectedUnit> = ({ selectedUnit, boxSwap }) => {
   for (let i = 0; i < dataLabels.length; i++) {
     extendedLabels[i * interval] = dataLabels[i];
   }
+
+  const computedRatio = computeRatioValue(selectedUnit, selectedRatioData);
 
   const data = {
     labels: extendedLabels,
@@ -92,12 +94,8 @@ const RatioChart: React.FC<SelectedUnit> = ({ selectedUnit, boxSwap }) => {
     <>
       <div className="w-9/12 h-full relative mr-4  py-8 border-2   px-16 bg-slate-300 my-8 ">
         {boxSwap
-          ? ` Eth-BTC Ratio ${(
-              ethereumData.current_price / bitcoinData.current_price
-            ).toFixed(3)}`
-          : `BTC-ETh Ratio ${(
-              bitcoinData.current_price / ethereumData.current_price
-            ).toFixed(3)}`}
+          ? ` Eth-BTC Ratio ${computedRatio?.toFixed(3)}`
+          : `BTC-ETh Ratio  ${computedRatio?.toFixed(3)}`}
         <Line data={data} options={options} />
       </div>
     </>
