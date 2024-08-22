@@ -29,8 +29,11 @@ export interface CoinData {
   dailyPrices: number[];
   dailyVolunes: number[];
   image: string;
-  ninetyDayPrices: [];
-  ninnetyDayVolumes: [];
+  weeklyPrices: number[];
+  monthlyPrices: number[];
+  fourteenDayPrices: number[];
+  ninetyDayPrices: number[];
+  ninnetyDayVolumes: number[];
 
   price_change_percentage_24h: number;
   market_cap_change_percentage_24h: number;
