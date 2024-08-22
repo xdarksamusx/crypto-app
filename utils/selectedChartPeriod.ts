@@ -105,9 +105,39 @@ export const getIntervalLabels = (dataLength: number, numLabels: number) => {
     date.setDate(date.getDate() - i * interval);
     const month = date.toLocaleString("default", { month: "short" });
     const day = date.getDate();
-    console.log("month", month, "day", day);
     labels.push(`${month} ${day}`);
   }
 
   return labels.reverse();
+};
+
+export const selectRatio = (selectedUnit: string, ratios: any) => {
+  const {
+    dailyRatios,
+    weeklyRatios,
+    fourteenDayRatios,
+    monthlyRatios,
+    ninetyDayRatios,
+    yearlyRatios,
+  } = ratios;
+
+  switch (selectedUnit) {
+    case "7D":
+      return weeklyRatios;
+
+    case "14D":
+      return fourteenDayRatios;
+
+    case "1M":
+      return monthlyRatios;
+
+    case "3M":
+      return ninetyDayRatios;
+
+    case "1Y":
+      return yearlyRatios;
+
+    default:
+      return dailyRatios;
+  }
 };

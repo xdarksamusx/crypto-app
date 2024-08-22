@@ -8,6 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      width: {
+        "650": "650px",
+      },
+      height: {
+        "200": "200px",
+      },
       colors: {
         "foreground-color": "var(--foreground-color)",
         "background-color": "var(--background-color)",

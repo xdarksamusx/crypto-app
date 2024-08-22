@@ -15,10 +15,11 @@ import { toogleTheme, setTheme } from "../redux/features/themesSlice";
 import "./globals.css";
 
 import { updateColors } from "../redux/features/sortSlice";
-import { relative } from "path";
+import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
 
 const Home = () => {
   const dispatch = useAppDispatch();
+  const dispatchBox = useAppDispatch();
   const coins = useAppSelector((state) => state.coins.coins);
   const dispatchSortingColors = useAppDispatch();
   const status = useAppSelector((state) => state.coins.status);
@@ -28,8 +29,20 @@ const Home = () => {
   const themeColor = useAppSelector((state) => state.theme.dark);
   const [isClient, setIsClient] = useState(false);
 
+  const selectedCoin = useAppSelector(
+    (state) => state.selectedCoin.selectedCoin
+  );
+
+  const selectedUnit = useAppSelector(
+    (state) => state.selectedCoin.selectedUnit
+  );
+
   const handdleThemeChange = () => {
     dispatchTheme(toogleTheme());
+  };
+
+  const handleSelectedUnit = (unit: string) => {
+    dispatchBox(selectUnit(unit));
   };
 
   useEffect(() => {
@@ -65,7 +78,10 @@ const Home = () => {
         <PriceChart />
       </div>
       <div className=" mt-8">
-        <ChartButtons />
+        <ChartButtons
+          handleSelectedUnit={handleSelectedUnit}
+          selectedUnit={selectedUnit}
+        />
       </div>
       <Table />
     </div>
