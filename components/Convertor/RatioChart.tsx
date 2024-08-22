@@ -90,15 +90,11 @@ const RatioChart: React.FC<SelectedUnit> = ({ selectedUnit, boxSwap }) => {
     },
   };
 
-  console.log("selected unit", selectedUnit);
-  console.log("ratio computed", computedRatio);
-
   return (
     <>
       <div className="w-9/12 h-full relative mr-4  py-8 border-2   px-16 bg-slate-300 my-8 ">
-        {boxSwap
-          ? ` Eth-BTC Ratio ${computedRatio?.toFixed(3)}`
-          : `BTC-ETh Ratio  ${computedRatio?.toFixed(3)}`}
+        {boxSwap && `Eth-BTC Ratio ${computedRatio}`}
+        {!boxSwap && `BTC-ETh Ratio  ${computedRatio}`}
         <Line data={data} options={options} />
       </div>
     </>
