@@ -10,9 +10,19 @@ const config: Config = {
     extend: {
       width: {
         "650": "650px",
+        "600": "600px",
+        "28%": "28%",
+        "60%": "60%",
+        "45%": "45%",
+        "15p": "15%",
       },
       height: {
         "200": "200px",
+        "300": "350px",
+        "400": "400",
+      },
+      translate: {
+        "1/5": "20%",
       },
       colors: {
         "foreground-color": "var(--foreground-color)",
@@ -23,6 +33,9 @@ const config: Config = {
         "dropdown-bg-color": "var(--dropdown-bg-color)",
         "dropdown-text-color": "var(--dropdown-text-color)",
         "search-bar-color": "var(--search-bar-color)",
+      },
+      blur: {
+        xs: "2px",
       },
     },
   },
