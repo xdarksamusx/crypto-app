@@ -1,10 +1,64 @@
-import React from "react";
-
+"use client";
+import React, { useEffect } from "react";
+import AddCoinModal from "@components/Portfolio/AddCoinModal";
+import { createPortal } from "react-dom";
+import { useState } from "react";
+import SearchableDropdown from "@components/Portfolio/SearchableDropDown";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import axios from "axios";
 export default function Portfolio() {
+  const [isClient, setIsClient] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [value, setValue] = useState("");
+
+  const [allCoins, setAllCoins] = useState(null);
+
+  const coins = useAppSelector((state) => state.coins.coins);
+
+  useEffect(() => {
+    setIsClient(true);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://api.coingecko.com/api/v3/coins/list"
+        );
+        setAllCoins(response.data);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {" "}
-      this is the portfolio page...
-    </main>
+    <>
+      <div className=" flex justify-around relative">
+        {" "}
+        <p>Your statistics</p>
+        <div className=" flex gap-3">
+          <button className="px-4 py-1 bg-blue-400">Greed & Fear Index</button>
+          <button className="px-4 py-1 bg-blue-400">
+            Investments Calculator
+          </button>
+          <button
+            className="px-4 py-1 bg-blue-400 "
+            onClick={() => setShowModal(!showModal)}
+          >
+            Add Asset
+          </button>
+        </div>
+      </div>
+      <div></div>
+
+      {showModal &&
+        createPortal(
+          <AddCoinModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            allCoins={allCoins}
+          />,
+          document.body
+        )}
+    </>
   );
 }
