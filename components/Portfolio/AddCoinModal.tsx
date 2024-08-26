@@ -6,10 +6,21 @@ const AddCoinModal = ({ setShowModal, showModal, allCoins }) => {
   const [isClient, setIsClient] = useState(false);
   const [value, setValue] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
+  const [investmentAmount, setInvestmentAmount] = useState("");
+  const [date, setDate] = useState("");
 
-  useEffect(() => {
-    console.log("selected option", selectedOption);
-  }, [selectedOption]);
+  useEffect(() => {}, [selectedOption]);
+
+  const handleInvestmentAmount = (e) => {
+    const value = e.target.value;
+
+    setInvestmentAmount(value);
+  };
+
+  const handleDate = (e) => {
+    const value = e.target.value;
+    setDate(value);
+  };
 
   return (
     <>
@@ -49,10 +60,25 @@ const AddCoinModal = ({ setShowModal, showModal, allCoins }) => {
                 handleChange={(val) => setValue(val)}
               />
 
-              <input className="" placeholder="Purchased Amount" type="text" />
-              <input className="" placeholder="Purchased Date" type="text" />
+              <input
+                onChange={(e) => handleInvestmentAmount(e)}
+                className=""
+                placeholder="Purchased Amount"
+                type="text"
+                value={investmentAmount}
+              />
+              <input
+                onChange={(e) => handleDate(e)}
+                className=""
+                placeholder="Purchased Date"
+                type="datetime-local"
+                value={date}
+              />
               <div className="flex justify-between  px-0 py-0 mx-2 my-0 ">
-                <button className=" px-2 py-2 rounded-md bg-yellow-300 cursor-pointer  box-border">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className=" px-2 py-2 rounded-md bg-yellow-300 cursor-pointer  box-border"
+                >
                   cancel
                 </button>
                 <button className=" px-2 py-2 rounded-md bg-yellow-300 cursor-pointer  box-border">
