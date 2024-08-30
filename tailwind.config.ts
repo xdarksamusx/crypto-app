@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       width: {
+        "100": "100px",
         "650": "650px",
         "600": "600px",
         "28%": "28%",
@@ -17,8 +18,10 @@ const config: Config = {
         "15p": "15%",
       },
       height: {
+        "100": "100px",
         "200": "200px",
-        "300": "350px",
+        "300": "300px",
+        "350": "350px",
         "400": "400",
       },
       translate: {

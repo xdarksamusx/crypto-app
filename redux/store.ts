@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import coinSlice from "./features/marketSlice";
 import sortSlice from "./features/sortSlice";
 import coinSelectionSlice from "./features/coinSelectionSlice";
+import portfolioSlice from "./features/portfolioSlice";
 
 import themesSlice from "./features/themesSlice";
 const store = configureStore({
@@ -10,6 +11,7 @@ const store = configureStore({
     theme: themesSlice,
     sort: sortSlice,
     selectedCoin: coinSelectionSlice,
+    portfolio: portfolioSlice,
   },
 });
 
