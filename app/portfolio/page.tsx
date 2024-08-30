@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
+import CoinCard from "@components/Portfolio/CoinCard";
 import AddCoinModal from "@components/Portfolio/AddCoinModal";
 import { createPortal } from "react-dom";
 import { useState } from "react";
@@ -13,7 +14,11 @@ export default function Portfolio() {
 
   const [allCoins, setAllCoins] = useState(null);
 
-  const coins = useAppSelector((state) => state.coins.coins);
+  const portfolio = useAppSelector((state) => state.portfolio.portfolio);
+
+  useEffect(() => {
+    console.log("Portfolio after update:", portfolio);
+  }, [portfolio]);
 
   useEffect(() => {
     setIsClient(true);
@@ -42,13 +47,14 @@ export default function Portfolio() {
           </button>
           <button
             className="px-4 py-1 bg-blue-400 "
-            onClick={() => setShowModal(!showModal)}
+            onClick={() => setShowModal(true)}
           >
             Add Asset
           </button>
         </div>
       </div>
       <div></div>
+      <div className="flex justify-center items-center"></div>
 
       {showModal &&
         createPortal(
@@ -59,6 +65,11 @@ export default function Portfolio() {
           />,
           document.body
         )}
+
+      {portfolio.length > 0 &&
+        portfolio.map((coin, index) => {
+          return <CoinCard key={index} coin={coin} />;
+        })}
     </>
   );
 }
