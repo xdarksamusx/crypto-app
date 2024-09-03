@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import CoinCard from "@components/Portfolio/CoinCard";
+import InvestmentsCalculator from "@components/Portfolio/InvestmentsModal";
 import AddCoinModal from "@components/Portfolio/AddCoinModal";
 import { createPortal } from "react-dom";
 import { useState } from "react";
@@ -10,15 +11,14 @@ import axios from "axios";
 export default function Portfolio() {
   const [isClient, setIsClient] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showInvestments, setShowInvestments] = useState(false);
   const [value, setValue] = useState("");
 
   const [allCoins, setAllCoins] = useState(null);
 
   const portfolio = useAppSelector((state) => state.portfolio.portfolio);
 
-  useEffect(() => {
-    console.log("Portfolio after update:", portfolio);
-  }, [portfolio]);
+  useEffect(() => {}, [portfolio]);
 
   useEffect(() => {
     setIsClient(true);
@@ -42,25 +42,36 @@ export default function Portfolio() {
         <p>Your statistics</p>
         <div className=" flex gap-3">
           <button className="px-4 py-1 bg-blue-400">Greed & Fear Index</button>
-          <button className="px-4 py-1 bg-blue-400">
+          <button
+            className="px-4 py-1 bg-blue-400 "
+            onClick={() => {
+              setShowModal(false);
+              setShowInvestments(true);
+            }}
+          >
             Investments Calculator
           </button>
           <button
             className="px-4 py-1 bg-blue-400 "
-            onClick={() => setShowModal(true)}
+            onClick={() => {
+              setShowInvestments(false);
+              setShowModal(true);
+            }}
           >
             Add Asset
           </button>
         </div>
       </div>
-      <div></div>
       <div className="flex justify-center items-center"></div>
 
       {showModal &&
+        !showInvestments &&
         createPortal(
           <AddCoinModal
             showModal={showModal}
             setShowModal={setShowModal}
+            showInvestments={showInvestments}
+            setShowInvestments={setShowInvestments}
             allCoins={allCoins}
           />,
           document.body
@@ -70,6 +81,19 @@ export default function Portfolio() {
         portfolio.map((coin, index) => {
           return <CoinCard key={index} coin={coin} />;
         })}
+
+      {showInvestments &&
+        !showModal &&
+        createPortal(
+          <InvestmentsCalculator
+            showInvestments={showInvestments}
+            setShowInvestments={setShowInvestments}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            allCoins={allCoins}
+          />,
+          document.body
+        )}
     </>
   );
 }

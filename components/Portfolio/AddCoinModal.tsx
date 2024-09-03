@@ -6,7 +6,12 @@ import SearchableDropdown from "./SearchableDropDown";
 import { addCoin, deleteCoin } from "../../redux/features/portfolioSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
-const AddCoinModal = ({ setShowModal, showModal, allCoins }) => {
+const AddCoinModal = ({
+  setShowModal,
+  showModal,
+  allCoins,
+  setShowInvestments,
+}) => {
   const [isClient, setIsClient] = useState(false);
   const [value, setValue] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
@@ -38,7 +43,6 @@ const AddCoinModal = ({ setShowModal, showModal, allCoins }) => {
   };
 
   const handleSave = () => {
-    console.log("selected option", selectedOption);
     const item = {
       name: value,
       amountBought: investmentAmount,
@@ -46,28 +50,27 @@ const AddCoinModal = ({ setShowModal, showModal, allCoins }) => {
       data: selectedOption,
     };
 
-    console.log("Before dispatch:", portfolio);
     dispatch(addCoin(item));
-    console.log("After dispatch:", portfolio);
     setDate("");
     setValue("");
     setInvestmentAmount("");
   };
 
+  const handleModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
       <form onSubmit={handleSubmit} action="">
-        <div className="relative">
+        <div className="relative mx-auto">
           <div className="fixed inset-0 bg-gray-200 bg-opacity-60  backdrop-blur-xs z-0"></div>
 
           <div className="bg-red-500  bg-opacity-90  inset-x-0  w-[600px] py-7 absolute translate-x-2/3 translate-y-11  z-50 ">
             <div className=" px-8 flex  mb-6 justify-between">
               <p>Select Coins</p>
               <div className="close-button">
-                <CloseCircle
-                  showModal={showModal}
-                  setShowModal={setShowModal}
-                />
+                <CloseCircle handleModal={handleModal} />
               </div>
             </div>
 
