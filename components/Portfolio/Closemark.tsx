@@ -1,8 +1,8 @@
-const CloseCircle = ({ setShowModal, showModal }) => {
+const CloseCircle = ({ handleModal }) => {
   return (
     <>
       <svg
-        onClick={() => setShowModal(false)}
+        onClick={() => handleModal()}
         xmlns="http://www.w3.org/2000/svg"
         width="20px"
         height="20px"
