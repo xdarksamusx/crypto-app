@@ -38,7 +38,8 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
   const [fundsRate, setFundsRate] = useState("");
 
   const [error, setError] = useState<Error | null>(null);
-  const [selectedButton, setSelectedButton] = useState("valueCostAveraging");
+  const [selectedButton, setSelectedButton] =
+    useState<string>("valueCostAveraging");
 
   const coinValue = selectedOption?.market_data?.current_price?.usd;
 
@@ -113,7 +114,7 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
       <div className="relative mx-auto ">
         <div className="fixed inset-0 bg-gray-200 bg-opacity-60  backdrop-blur-xs z-0"></div>
 
-        <div className=" flex flex-col justify-evenly w-5/6 h-[700px] bg-green-500  inset-x-0  absolute translate-x-[1/5] translate-y-11  px-12 py-2 mx-auto ">
+        <div className=" flex flex-col justify-evenly w-2/3 h-[700px] bg-green-500  inset-x-0  absolute translate-x-[1/5] mt-5    px-12 py-2 mx-auto ">
           <div className=" flex justify-between">
             <h4>Investments Calculator</h4>
             <CloseCircle handleModal={handleModal} />
@@ -122,7 +123,6 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
             <div className="your coin">Your coin (ABC)</div>
             <SearchableDropdown
               setSelectedOption={setSelectedOption}
-              selectedOption={selectedOption}
               options={allCoins}
               label="name"
               id="id"

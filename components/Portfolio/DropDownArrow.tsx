@@ -4,14 +4,27 @@ interface CustomSVGStyle extends React.CSSProperties {
   enableBackground?: string;
 }
 
-const DropDownArrow: React.FC = ({ isOpen, setIsOpen, setShowList }) => {
+interface DropDownArrow {
+  isOpen: boolean;
+  showList: boolean;
+
+  setIsOpen: (value: boolean) => void;
+  setShowList: (value: boolean) => void;
+}
+
+const DropDownArrow: React.FC<DropDownArrow> = ({
+  isOpen,
+  setIsOpen,
+  setShowList,
+  showList,
+}) => {
   const style: CustomSVGStyle = {
     enableBackground: "new 0 0 841.9 595.3",
   };
 
   const handleClick = () => {
-    setIsOpen((prev) => !prev);
-    setShowList((prev) => !prev);
+    setIsOpen(!isOpen);
+    setShowList(!showList);
   };
   return (
     <>

@@ -19,6 +19,11 @@ interface CoinOption {
     small: string;
     thumb: string;
   };
+  market_data: {
+    current_price: {
+      usd: number;
+    };
+  };
 }
 
 const AddCoinModal: React.FC<AddCoinModalProps> = ({
@@ -68,9 +73,9 @@ const AddCoinModal: React.FC<AddCoinModalProps> = ({
   return (
     <>
       <div className="relative mx-auto ">
-        <div className="fixed inset-0 bg-gray-200 bg-opacity-60  backdrop-blur-xs z-0"></div>
+        <div className="absolute inset-0 bg-gray-200 bg-opacity-60  backdrop-blur-xs z-0  "></div>
 
-        <div className="bg-red-500  bg-opacity-90  inset-x-0  w-[600px] py-7 absolute translate-x-2/3 translate-y-11  z-50 ">
+        <div className="bg-red-500  bg-opacity-90  inset-x-0   w-1/2  py-7 absolute translate-x-1/5  mt-5 z-50 mx-auto ">
           <div className=" px-8 flex  mb-6 justify-between">
             <p>Select Coins</p>
             <div className="close-button">
@@ -95,7 +100,6 @@ const AddCoinModal: React.FC<AddCoinModalProps> = ({
             <div className="w-60 flex flex-col px-0 py-2 box-border mt-5  mb-2 h-[300px] justify-between  ">
               <SearchableDropdown
                 setSelectedOption={setSelectedOption}
-                selectedOption={selectedOption}
                 options={allCoins}
                 label="name"
                 id="id"

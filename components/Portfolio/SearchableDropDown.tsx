@@ -2,8 +2,41 @@
 import { useEffect, useRef, useState } from "react";
 import DropDownArrow from "./DropDownArrow";
 import axios from "axios";
-const SearchableDropdown = ({
-  selectedOption,
+
+interface CoinOption {
+  id: string;
+  name: string;
+  image: {
+    large: string;
+    small: string;
+    thumb: string;
+  };
+  market_data: {
+    current_price: {
+      usd: number;
+    };
+  };
+}
+
+type StringKeys<T> = {
+  [K in keyof T]: T[K] extends string ? K : never;
+}[keyof T];
+
+interface SearchableDropdownProps {
+  setSelectedOption: (option: CoinOption | null) => void;
+  options: CoinOption[];
+  label: StringKeys<CoinOption>;
+
+  id: string;
+  selectedVal: string;
+  handleChange: (value: any) => void;
+}
+
+interface Error {
+  error: string;
+}
+
+const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
   setSelectedOption,
   options,
   label,
@@ -12,19 +45,19 @@ const SearchableDropdown = ({
   handleChange,
 }) => {
   const [query, setQuery] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isClient, setIsClient] = useState(false);
-  const [showList, setShowList] = useState(false);
+  const [showList, setShowList] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  const fetchData = async (option) => {
+  const fetchData = async (optionId: string) => {
     try {
       const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${option}`
+        `https://api.coingecko.com/api/v3/coins/${optionId}`
       );
       const data = response.data;
 
@@ -36,8 +69,9 @@ const SearchableDropdown = ({
 
   const inputRef = useRef(null);
 
-  const selectOption = async (option) => {
+  const selectOption = async (option: any) => {
     setQuery(() => "");
+
     handleChange(option[label]);
     setIsOpen((isOpen) => !isOpen);
     const data = await fetchData(option.id);
@@ -51,10 +85,14 @@ const SearchableDropdown = ({
     return "";
   };
 
-  const filter = (options) => {
-    return options.filter(
-      (option) => option[label].toLowerCase().indexOf(query.toLowerCase()) > -1
-    );
+  const filter = (options: CoinOption[]) => {
+    return options.filter((option: CoinOption) => {
+      const value = option[label];
+      if (typeof value === "string") {
+        return value.toLowerCase().indexOf(query.toLowerCase()) > -1;
+      }
+      return false;
+    });
   };
 
   return (
@@ -84,6 +122,7 @@ const SearchableDropdown = ({
 
           <DropDownArrow
             isOpen={isOpen}
+            showList={showList}
             setIsOpen={setIsOpen}
             setShowList={setShowList}
           />
