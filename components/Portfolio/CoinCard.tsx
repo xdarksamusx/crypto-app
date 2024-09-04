@@ -1,18 +1,65 @@
 "use client";
 
-const CoinCard = ({ coin }) => {
+interface Coin {
+  id: string;
+  name: string;
+
+  data: {
+    market_data: {
+      current_price: {
+        usd: number;
+      };
+      price_change_24h_in_currency: {
+        usd: number;
+      };
+      market_cap: {
+        usd: number;
+      };
+      total_volume: {
+        usd: number;
+      };
+      circulating_supply: number;
+      max_supply: number;
+    };
+    image: {
+      small: string;
+    };
+  };
+  amountBought?: number;
+  date?: string;
+}
+
+interface CoinCardProps {
+  coin: Coin | null;
+}
+
+const CoinCard: React.FC<CoinCardProps> = ({ coin }) => {
   if (!coin) {
     return null;
   }
 
-  const { data = {}, amountBought = 0, date = "" } = coin;
-  const { image = {}, market_data = {}, id: name = "" } = data;
+  const {
+    amountBought = 0,
+    name = "",
+    date = "",
+    data: {
+      image = { small: "", large: "", thumb: "" },
+      market_data = {
+        current_price: { usd: 0 },
+        price_change_24h_in_currency: { usd: 0 },
+        market_cap: { usd: 0 },
+        total_volume: { usd: 0 },
+        circulating_supply: 0,
+        max_supply: 0,
+      },
+    } = {},
+  } = coin;
 
   return (
     <div className="flex justify-center items-stretch h-[350px] border-2 border-black w-11/12">
       <div className="flex items-center flex-col justify-center w-1/4">
         <div className="image">
-          {image.small ? (
+          {image?.small ? (
             <img className="w-[100px] h-[100px]" src={image.small} alt={name} />
           ) : (
             <p>No Image Available</p>
@@ -29,25 +76,26 @@ const CoinCard = ({ coin }) => {
             <div className="current-price w-1/4">
               <div className="w-32">Current price</div>
               <p className="w-32 text-center pr-16  ">
-                {market_data.current_price
-                  ? market_data.current_price.usd
+                {market_data?.current_price
+                  ? market_data?.current_price?.usd
                   : "N/A"}
               </p>
             </div>
             <div className="w-1/4 ">
               <div className="w-32 text-center">Price range 24h</div>
               <p className="w-32 text-center">
-                {market_data.price_change_24h_in_currency
-                  ? market_data.price_change_24h_in_currency.usd
+                {market_data?.price_change_24h_in_currency
+                  ? market_data?.price_change_24h_in_currency?.usd
                   : "N/A"}
               </p>
             </div>
             <div className="market-cap-volume w-1/4">
               <div className="w-32">Market Cap vs Volume</div>
               <p className=" w-32 text-center">
-                {market_data.market_cap && market_data.total_volume
+                {market_data?.market_cap && market_data?.total_volume
                   ? (
-                      market_data.market_cap.usd / market_data.total_volume.usd
+                      market_data?.market_cap.usd /
+                      market_data?.total_volume?.usd
                     ).toFixed(2)
                   : "N/A"}
               </p>
@@ -55,9 +103,9 @@ const CoinCard = ({ coin }) => {
             <div className="circulating-supply w-1/4">
               <div className="w-32">Cir vs Max Supply</div>
               <p className="text-center w-32">
-                {market_data.circulating_supply && market_data.max_supply
+                {market_data?.circulating_supply && market_data?.max_supply
                   ? (
-                      market_data.circulating_supply / market_data.max_supply
+                      market_data?.circulating_supply / market_data?.max_supply
                     ).toFixed(2)
                   : "N/A"}
               </p>
@@ -74,7 +122,7 @@ const CoinCard = ({ coin }) => {
             <div className="amount-value w-1/4">
               <div className="w-32 text-center">Amount value:</div>
               <p className="text-center w-32">
-                {market_data.current_price
+                {market_data?.current_price
                   ? (amountBought * market_data.current_price.usd).toFixed(2)
                   : "N/A"}
               </p>
@@ -82,8 +130,8 @@ const CoinCard = ({ coin }) => {
             <div className="gain-loss w-1/4">
               <div className="w-32 text-center">Gain/Loss</div>
               <p className=" w-32 text-center">
-                {market_data.price_change_24h_in_currency
-                  ? market_data.price_change_24h_in_currency.usd
+                {market_data?.price_change_24h_in_currency
+                  ? market_data?.price_change_24h_in_currency.usd
                   : "N/A"}
               </p>
             </div>
