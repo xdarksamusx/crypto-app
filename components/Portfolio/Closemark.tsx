@@ -1,4 +1,8 @@
-const CloseCircle = ({ handleModal }) => {
+interface HandleModal {
+  handleModal: () => void;
+}
+
+const CloseCircle: React.FC<HandleModal> = ({ handleModal }) => {
   return (
     <>
       <svg

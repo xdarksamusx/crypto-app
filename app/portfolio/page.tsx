@@ -3,18 +3,16 @@ import React, { useEffect } from "react";
 import CoinCard from "@components/Portfolio/CoinCard";
 import InvestmentsCalculator from "@components/Portfolio/InvestmentsModal";
 import AddCoinModal from "@components/Portfolio/AddCoinModal";
-import { createPortal } from "react-dom";
 import { useState } from "react";
-import SearchableDropdown from "@components/Portfolio/SearchableDropDown";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import axios from "axios";
 export default function Portfolio() {
-  const [isClient, setIsClient] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [showInvestments, setShowInvestments] = useState(false);
-  const [value, setValue] = useState("");
+  const [isClient, setIsClient] = useState<Boolean>(false);
+  const [showModal, setShowModal] = useState<Boolean>(false);
+  const [showInvestments, setShowInvestments] = useState<Boolean>(false);
+  const [value, setValue] = useState<string>("");
 
-  const [allCoins, setAllCoins] = useState(null);
+  const [allCoins, setAllCoins] = useState<any>(null);
 
   const portfolio = useAppSelector((state) => state.portfolio.portfolio);
 
@@ -37,7 +35,7 @@ export default function Portfolio() {
 
   return (
     <>
-      <div className=" flex justify-around relative">
+      <div className=" flex justify-around relative z-10">
         {" "}
         <p>Your statistics</p>
         <div className=" flex gap-3">
@@ -64,36 +62,25 @@ export default function Portfolio() {
       </div>
       <div className="flex justify-center items-center"></div>
 
-      {showModal &&
-        !showInvestments &&
-        createPortal(
-          <AddCoinModal
-            showModal={showModal}
-            setShowModal={setShowModal}
-            showInvestments={showInvestments}
+      <div className="z-40">
+        {showModal && !showInvestments && (
+          <AddCoinModal setShowModal={setShowModal} allCoins={allCoins} />
+        )}
+      </div>
+
+      <div className="z-40">
+        {showInvestments && !showModal && (
+          <InvestmentsCalculator
             setShowInvestments={setShowInvestments}
             allCoins={allCoins}
-          />,
-          document.body
+          />
         )}
+      </div>
 
       {portfolio.length > 0 &&
         portfolio.map((coin, index) => {
           return <CoinCard key={index} coin={coin} />;
         })}
-
-      {showInvestments &&
-        !showModal &&
-        createPortal(
-          <InvestmentsCalculator
-            showInvestments={showInvestments}
-            setShowInvestments={setShowInvestments}
-            showModal={showModal}
-            setShowModal={setShowModal}
-            allCoins={allCoins}
-          />,
-          document.body
-        )}
     </>
   );
 }
