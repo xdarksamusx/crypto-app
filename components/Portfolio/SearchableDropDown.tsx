@@ -69,7 +69,7 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
 
   const inputRef = useRef(null);
 
-  const selectOption = async (option: any) => {
+  const handleSelectOption = async (option: any) => {
     setQuery(() => "");
 
     handleChange(option[label]);
@@ -78,14 +78,14 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
     setSelectedOption(data);
   };
 
-  const getDisplayValue = () => {
+  const handleGetDisplayValue = () => {
     if (query) return query;
     if (selectedVal) return selectedVal;
 
     return "";
   };
 
-  const filter = (options: CoinOption[]) => {
+  const handleFilter = (options: CoinOption[]) => {
     return options.filter((option: CoinOption) => {
       const value = option[label];
       if (typeof value === "string") {
@@ -110,7 +110,7 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
             className="bg-gray-200 focus:outline-none"
             ref={inputRef}
             type="text"
-            value={getDisplayValue()}
+            value={handleGetDisplayValue()}
             name="searchTerm"
             onChange={(e) => {
               setQuery(e.target.value);
@@ -132,12 +132,12 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
 
       {showList && (
         <div className={` ${isOpen ? "block" : "hidden"}`}>
-          {filter(options).map((option, index) => {
+          {handleFilter(options).map((option, index) => {
             if (index >= 9) return;
             return (
               <div
                 onClick={() => {
-                  selectOption(option);
+                  handleSelectOption(option);
                   setIsOpen(false);
                 }}
                 className={`option ${
