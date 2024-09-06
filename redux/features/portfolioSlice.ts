@@ -2,19 +2,21 @@
 
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  portfolio: [],
+import { Portfolio } from "@utils/portfolioInterface";
+
+const initialState: { portfolio: Portfolio[] } = {
+  portfolio: [] as Portfolio[],
 };
 
 const portfolioSlice = createSlice({
   name: "portfolio",
   initialState,
   reducers: {
-    addCoin: (state, action) => {
+    addCoin: (state, action: PayloadAction<Portfolio>) => {
       state.portfolio.push(action.payload);
     },
     deleteCoin: (state, action) => {
-      state.portfolio.filter((coin) => coin.id !== action.payload);
+      state.portfolio.filter((coin) => coin.name !== action.payload);
     },
   },
 });

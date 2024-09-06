@@ -6,6 +6,7 @@ import axios from "axios";
 interface CoinOption {
   id: string;
   name: string;
+  symbol: string;
   image: {
     large: string;
     small: string;
@@ -15,6 +16,17 @@ interface CoinOption {
     current_price: {
       usd: number;
     };
+    price_change_24h_in_currency: {
+      usd: number;
+    };
+    market_cap: {
+      usd: number;
+    };
+    total_volume: {
+      usd: number;
+    };
+    circulating_supply: number;
+    max_supply: number;
   };
 }
 
@@ -69,13 +81,50 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
 
   const inputRef = useRef(null);
 
-  const handleSelectOption = async (option: any) => {
+  const handleSelectOption = async (option: CoinOption) => {
     setQuery(() => "");
-
-    handleChange(option[label]);
+    handleChange(option.name);
     setIsOpen((isOpen) => !isOpen);
+
     const data = await fetchData(option.id);
-    setSelectedOption(data);
+
+    const transformedData: CoinOption = {
+      id: data.id,
+      name: data.name,
+      symbol: data.symbol,
+      image: {
+        large: data.image.large,
+        small: data.image.small,
+        thumb: data.image.thumb,
+      },
+      market_data: {
+        current_price: {
+          usd: data.market_data?.current_price?.usd || 0,
+        },
+        price_change_24h_in_currency: {
+          usd: data.market_data?.price_change_24h_in_currency?.usd || 0,
+        },
+        market_cap: {
+          usd: data.market_data?.market_cap?.usd || 0,
+        },
+        total_volume: {
+          usd: data.market_data?.total_volume?.usd || 0,
+        },
+        circulating_supply: data.market_data?.circulating_supply || 0,
+        max_supply: data.market_data?.max_supply || 0,
+      } || {
+        current_price: { usd: 0 },
+        price_change_24h_in_currency: { usd: 0 },
+        market_cap: { usd: 0 },
+        total_volume: { usd: 0 },
+        circulating_supply: 0,
+        max_supply: 0,
+      },
+    };
+
+    setSelectedOption(transformedData);
+
+    setSelectedOption(transformedData);
   };
 
   const handleGetDisplayValue = () => {
@@ -143,7 +192,7 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
                 className={`option ${
                   option[label] === selectedVal ? "selected" : ""
                 }`}
-                key={`${id}-${index}`}
+                key={`${id}`}
               >
                 {option[label]}
               </div>

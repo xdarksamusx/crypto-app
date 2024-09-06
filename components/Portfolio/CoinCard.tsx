@@ -1,40 +1,12 @@
 "use client";
-
-interface Coin {
-  id: string;
-  name: string;
-
-  data: {
-    market_data: {
-      current_price: {
-        usd: number;
-      };
-      price_change_24h_in_currency: {
-        usd: number;
-      };
-      market_cap: {
-        usd: number;
-      };
-      total_volume: {
-        usd: number;
-      };
-      circulating_supply: number;
-      max_supply: number;
-    };
-    image: {
-      small: string;
-    };
-  };
-  amountBought?: number;
-  date?: string;
-}
+import { Portfolio } from "@utils/portfolioInterface";
 
 interface CoinCardProps {
-  coin: Coin | null;
+  coin: Portfolio;
 }
 
 const CoinCard: React.FC<CoinCardProps> = ({ coin }) => {
-  if (!coin) {
+  if (!coin.data) {
     return null;
   }
 
