@@ -33,6 +33,8 @@ export default function Portfolio() {
     fetchData();
   }, []);
 
+  console.log("coin", portfolio);
+
   return (
     <>
       <div className=" flex justify-around relative z-10">
@@ -79,7 +81,7 @@ export default function Portfolio() {
 
       {portfolio.length > 0 &&
         portfolio.map((coin, index) => {
-          return <CoinCard key={index} coin={coin} />;
+          return <CoinCard key={coin.name} coin={coin} />;
         })}
     </>
   );

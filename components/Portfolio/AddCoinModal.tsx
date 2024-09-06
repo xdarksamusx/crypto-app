@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import SearchableDropdown from "./SearchableDropDown";
 import { addCoin, deleteCoin } from "../../redux/features/portfolioSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-
+import { Portfolio } from "@utils/portfolioInterface";
 interface AddCoinModalProps {
   setShowModal: (value: boolean) => void;
   allCoins: any[];
@@ -14,6 +14,7 @@ interface AddCoinModalProps {
 interface CoinOption {
   id: string;
   name: string;
+  symbol: string;
   image: {
     large: string;
     small: string;
@@ -23,6 +24,17 @@ interface CoinOption {
     current_price: {
       usd: number;
     };
+    price_change_24h_in_currency: {
+      usd: number;
+    };
+    market_cap: {
+      usd: number;
+    };
+    total_volume: {
+      usd: number;
+    };
+    circulating_supply: number;
+    max_supply: number;
   };
 }
 
@@ -53,9 +65,9 @@ const AddCoinModal: React.FC<AddCoinModalProps> = ({
   };
 
   const handleSave = () => {
-    const item = {
+    const item: Portfolio = {
       name: value,
-      amountBought: investmentAmount,
+      amountBought: parseFloat(investmentAmount),
       date: date,
       data: selectedOption,
     };
