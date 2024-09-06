@@ -4,7 +4,7 @@
     "no-console": "warn", // Warns about console logs, change to "error" to disallow
     "no-unused-vars": "warn", // Warns about unused variables, change to "error" to disallow
     // "curly": ["error", "all"], // Requires curly braces for all control statements
-    "no-multi-spaces": "error", // Disallows multiple spaces
+    // "no-multi-spaces": "error", // Disallows multiple spaces
     "semi": ["error", "always"] // Requires semicolons at the end of statements
   }
 }
