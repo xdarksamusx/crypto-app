@@ -37,10 +37,6 @@ const Home = () => {
     (state) => state.selectedCoin.selectedUnit
   );
 
-  const handdleThemeChange = () => {
-    dispatchTheme(toogleTheme());
-  };
-
   const handleSelectedUnit = (unit: string) => {
     dispatchBox(selectUnit(unit));
   };
@@ -66,9 +62,7 @@ const Home = () => {
 
   return (
     <div className="">
-      <div className="">
-        <Navigation onClick={() => handdleThemeChange()} />
-      </div>
+      <div className=""></div>
       <div className="max-w-full mx-auto ">
         <Carousels />
       </div>

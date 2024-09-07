@@ -11,9 +11,16 @@ interface NavigationProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function Navigation({ onClick }: NavigationProps) {
+function Navigation() {
   const [settingsDropdownVisible, setSettingsDropdownVisible] = useState(false);
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
+
+  const dispatchTheme = useAppDispatch();
+
+  const handdleThemeChange = () => {
+    dispatchTheme(toogleTheme());
+  };
+
   return (
     <div className="w-full border-b  shadow-sm  border-t relative">
       <div className="   max-w-7xl mx-auto flex justify-between items-center py-4  ">
@@ -29,7 +36,7 @@ function Navigation({ onClick }: NavigationProps) {
               className=" border-2   transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
               onMouseEnter={() => setSettingsDropdownVisible(true)}
               onMouseLeave={() => setSettingsDropdownVisible(false)}
-              onClick={onClick}
+              onClick={() => handdleThemeChange()}
             >
               <div className="flex justify-start pr-3	">
                 <Gear />
