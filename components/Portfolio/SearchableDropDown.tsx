@@ -145,18 +145,18 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
   };
 
   return (
-    <div className="dropdown">
-      <div className="control">
+    <div className="w-33">
+      <div className="w-full">
         <div
           ref={inputRef}
           onClick={() => {
             setIsOpen(true);
             setShowList(true);
           }}
-          className="selected-value flex bg-gray-200 w-1/6 "
+          className="selected-value flex bg-gray-200  justify-evenly  items-center "
         >
           <input
-            className="bg-gray-200 focus:outline-none"
+            className="bg-gray-200 focus:outline-none "
             ref={inputRef}
             type="text"
             value={handleGetDisplayValue()}
