@@ -4,6 +4,7 @@ import React from "react";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import StoreProvider from "./StoreProvider";
+import Header from "@components/Header";
 
 import "./globals.css";
 
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <StoreProvider>
+          <Header />
           <nav>
             <Link href="/">Home</Link>
             <Link href="/portfolio">Portfolio</Link>

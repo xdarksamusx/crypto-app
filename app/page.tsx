@@ -66,7 +66,6 @@ const Home = () => {
 
   return (
     <div className="">
-      <Header />
       <div className="">
         <Navigation onClick={() => handdleThemeChange()} />
       </div>
