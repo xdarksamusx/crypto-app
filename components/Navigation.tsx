@@ -6,6 +6,8 @@ import Gear from "../icons/Gear";
 import ProfileIcon from "../icons/Profile";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { toogleTheme } from "../redux/features/themesSlice";
+import Moon from "../icons/Moon";
+import Sun from "../icons/Sun";
 
 interface NavigationProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -14,11 +16,17 @@ interface NavigationProps {
 function Navigation() {
   const [settingsDropdownVisible, setSettingsDropdownVisible] = useState(false);
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
+  const [changeImage, setChangeImage] = useState(false);
 
   const dispatchTheme = useAppDispatch();
 
   const handdleThemeChange = () => {
     dispatchTheme(toogleTheme());
+  };
+
+  const handleChangeImage = () => {
+    setChangeImage(!changeImage);
+    console.log("image status", changeImage);
   };
 
   return (
@@ -36,11 +44,20 @@ function Navigation() {
               className=" border-2   transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
               onMouseEnter={() => setSettingsDropdownVisible(true)}
               onMouseLeave={() => setSettingsDropdownVisible(false)}
-              onClick={() => handdleThemeChange()}
+              onClick={() => {
+                handdleThemeChange();
+                handleChangeImage();
+              }}
             >
-              <div className="flex justify-start pr-3	">
-                <Gear />
-              </div>
+              {changeImage ? (
+                <div className="flex justify-center items-center 	">
+                  <Moon />
+                </div>
+              ) : (
+                <div className="flex justify-start items-center 	">
+                  <Sun />
+                </div>
+              )}
             </button>
           </div>
           <div>
