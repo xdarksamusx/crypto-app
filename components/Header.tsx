@@ -22,6 +22,8 @@ function Header() {
 
   const coins = useAppSelector((state) => state.coins.coins);
 
+  const currency = useAppSelector((state) => state.currency.currency);
+
   useEffect(() => {
     const fetchData = async () => {
       const exchangeData = await axios.get(
@@ -68,13 +70,16 @@ function Header() {
           <span>Exchanges: {exchanges}</span>
           <span>
             {" "}
-            Total marketcap {(totalMarketCap / 1e12).toFixed(2)} trillion{" "}
+            Total marketcap: {currency}
+            {(totalMarketCap / 1e12).toFixed(2)} trillion{" "}
           </span>
           <span>
-            Total 24 hr volume: {(totalVolume / 1e9).toFixed(2)} billion
+            {" "}
+            Total 24 hr volume: {currency}
+            {(totalVolume / 1e9).toFixed(2)} billion
           </span>
           <span>Bitcoin dominance: {(btcDominance * 100).toFixed(2)} %</span>
-          <span>Ethereum dominance: {(ethDominance * 100).toFixed(2)}</span>
+          <span>Ethereum dominance: {(ethDominance * 100).toFixed(2)}%</span>
         </h5>
       </div>
     </div>

@@ -26,6 +26,7 @@ function Table() {
   const dispatch = useAppDispatch();
   const coinData = useAppSelector((state) => state.sort.coins);
   const coinsForChart = useAppSelector((state) => state.coins.coins);
+  const currency = useAppSelector((state) => state.currency.currency);
 
   return (
     <div className="  max-w-7xl mx-auto  mt-12   ">
@@ -155,7 +156,9 @@ function Table() {
                   </td>
                   <td className="px-0    border-b border-gray-200 text-sm">
                     <span className="px-3">
-                      (d){coin.current_price.toLocaleString()}
+                      <span>{currency}</span>
+
+                      {coin.current_price.toLocaleString()}
                     </span>
                   </td>
                   <td
@@ -194,10 +197,12 @@ function Table() {
                     </span>
                   </td>
                   <td className="px-0 border-b border-gray-200 text-sm">
-                    (d){coin.total_volume.toLocaleString()}
+                    <span>{currency}</span>
+                    {coin.total_volume.toLocaleString()}
                   </td>
                   <td className="px-0   border-b border-gray-200 text-sm">
-                    (d){coin.market_cap.toLocaleString()}
+                    <span>{currency}</span>
+                    {coin.market_cap.toLocaleString()}
                   </td>
                   <td className="px-0   border-b border-gray-200 text-sm">
                     <LineChart coin={coin} />
