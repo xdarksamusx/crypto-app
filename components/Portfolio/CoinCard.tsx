@@ -2,12 +2,15 @@
 import { Portfolio } from "@utils/portfolioInterface";
 import Trash from "../../icons/Trash";
 import { deleteCoin } from "../../redux/features/portfolioSlice";
+import { useAppSelector } from "../../redux/hooks";
 
 interface CoinCardProps {
   coin: Portfolio;
 }
 
 const CoinCard: React.FC<CoinCardProps> = ({ coin }) => {
+  const currency = useAppSelector((state) => state.currency.currency);
+
   if (!coin.data) {
     return null;
   }

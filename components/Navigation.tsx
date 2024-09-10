@@ -8,17 +8,23 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { toogleTheme } from "../redux/features/themesSlice";
 import Moon from "../icons/Moon";
 import Sun from "../icons/Sun";
+import { selectCurrency } from "../redux/features/currencySelection";
 
 interface NavigationProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function Navigation() {
+  const currencyArray = ["$", "€", "£", "₿", "Ξ"];
   const [settingsDropdownVisible, setSettingsDropdownVisible] = useState(false);
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
   const [changeImage, setChangeImage] = useState(false);
 
+  const currency = useAppSelector((state) => state.currency.currency);
+
   const dispatchTheme = useAppDispatch();
+
+  const dispatchCurrency = useAppDispatch();
 
   const handdleThemeChange = () => {
     dispatchTheme(toogleTheme());
@@ -26,7 +32,14 @@ function Navigation() {
 
   const handleChangeImage = () => {
     setChangeImage(!changeImage);
-    console.log("image status", changeImage);
+  };
+
+  const handleDropDownMenu = () => {
+    setAccountDropdownVisible(false);
+  };
+
+  const handleCurrencySelection = (currency: string) => {
+    dispatchCurrency(selectCurrency(currency));
   };
 
   return (
@@ -41,9 +54,7 @@ function Navigation() {
           <div className="static  w-28 focus:outline-none   ">
             {" "}
             <button
-              className=" border-2   transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
-              onMouseEnter={() => setSettingsDropdownVisible(true)}
-              onMouseLeave={() => setSettingsDropdownVisible(false)}
+              className=" border-2   bg-slate-200 transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
               onClick={() => {
                 handdleThemeChange();
                 handleChangeImage();
@@ -54,7 +65,7 @@ function Navigation() {
                   <Moon />
                 </div>
               ) : (
-                <div className="flex justify-start items-center 	">
+                <div className="flex justify-start items-center  	">
                   <Sun />
                 </div>
               )}
@@ -62,36 +73,26 @@ function Navigation() {
           </div>
           <div>
             <button
-              className=" border-2   transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
+              className=" border-2  bg-slate-200 transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
               onMouseEnter={() => setAccountDropdownVisible(true)}
-              onMouseLeave={() => setAccountDropdownVisible(false)}
+              onClick={() => handleDropDownMenu()}
             >
-              <ProfileIcon />
+              <div className="w-6 h-6   flex justify-center items-center ">
+                {currency}
+              </div>
               {accountDropdownVisible && (
-                <div className="absolute top-6 right-3 bg-dropdown-bg-color  shadow-md p-2 w-56 text-left      border-2 border-black-600  z-999">
-                  <div className="flex  text-xs items-center  justify-between text-align">
-                    {" "}
-                    <div className="px-0 py-0 mx-0 my-0 ">Language</div>{" "}
-                    <div className="px-0 py-0 mx-0 my-0 text-left ">
-                      {" "}
-                      Selected Language
-                    </div>{" "}
-                  </div>
-                  <div className="flex justify-between  text-xs items-center  ">
-                    {" "}
-                    <div className="px-0 py-0 mx-0 my-0 ">Currency</div>{" "}
-                    <div className="px-0 py-0 mx-0 my-0 text-left ">
-                      {" "}
-                      Selected Currency
-                    </div>{" "}
-                  </div>
-                  <div className="flex  text-xs  justify-between   items-center ">
-                    {" "}
-                    <div className="px-0 py-0 mx-0 my-0 "> Dark Mode</div>{" "}
-                    <div className="px-0 py-0 mx-0 my-0 text-left ">
-                      {" "}
-                      Selected Mode
-                    </div>{" "}
+                <div className="absolute top-4  bg-dropdown-bg-color  shadow-md p-2  text-left  w-8     bg-slate-200 border-2 border-black-600  z-999">
+                  <div className="flex flex-col  text-xs items-end  justify-between text-align">
+                    {currencyArray.map((currency) => {
+                      return (
+                        <p
+                          key={currency}
+                          onClick={() => handleCurrencySelection(currency)}
+                        >
+                          {currency}
+                        </p>
+                      );
+                    })}
                   </div>
                 </div>
               )}
