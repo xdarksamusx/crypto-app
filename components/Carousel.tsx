@@ -5,6 +5,8 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { createPortal } from "react-dom";
 import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
 import { CoinData } from "../utils/interfaces";
+import { convertCurrency } from "@utils/CurrencyConversions";
+
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
@@ -59,6 +61,9 @@ const CustomRightArrow: React.FC<CustomArrowProps> = ({ onClick }) => {
 export const Carousels: React.FC = () => {
   const coins = useAppSelector((state) => state.selectedCoin.coins);
   const currency = useAppSelector((state) => state.currency.currency);
+  const previousCurrency = useAppSelector(
+    (state) => state.currency.previousCurrency
+  );
 
   const selectedCoin = useAppSelector(
     (state) => state.selectedCoin.selectedCoin
@@ -105,7 +110,12 @@ export const Carousels: React.FC = () => {
               <div className="flex">
                 <p className="mr-2">
                   {" "}
-                  <span>{currency}</span> {coin.current_price}
+                  <span>{currency}</span>
+                  {convertCurrency(
+                    currency,
+                    previousCurrency,
+                    coin.current_price
+                  )?.toFixed(2)}
                 </p>
                 <p
                   className={`${

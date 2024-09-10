@@ -1,11 +1,18 @@
+"use client";
+
+import BigNumber from "bignumber.js";
+
 export const convertCurrency = (
   currentCurrency: string,
-  selectedCurrency: string,
+  selectedCurrency: string | null,
   amount: number
 ) => {
   let conversion;
 
-  switch (currentCurrency) {
+  const btcToUSD = 57000;
+  const ethToUSD = 2300;
+
+  switch (currentCurrency.trim().toLowerCase()) {
     case "$":
       switch (selectedCurrency) {
         case "€":
@@ -13,70 +20,88 @@ export const convertCurrency = (
           return conversion;
         case "£":
           conversion = amount / 1.3;
-        case "btc":
-          conversion = amount / 57000;
           return conversion;
-        case "eth":
+        case "₿":
+          conversion = amount / btcToUSD;
+
+          return conversion;
+        case "Ξ":
           conversion = amount / 2300;
+          return conversion;
+        default:
+          return amount;
       }
     case "€":
-      switch (selectedCurrency) {
+      switch (selectedCurrency?.trim().toLowerCase()) {
         case "$":
-          conversion = amount / 0.91;
+          conversion = amount * 1.1;
           return conversion;
         case "£":
           conversion = amount / 1.18;
           return conversion;
-        case "btc":
-          conversion = amount / 52000;
+        case "₿":
+          conversion = amount / btcToUSD;
           return conversion;
-        case "eth":
-          conversion = amount / 2150;
+        case "Ξ":
+          conversion = amount / ethToUSD;
           return conversion;
+        default:
+          return amount;
       }
     case "£":
-      switch (selectedCurrency) {
+      switch (selectedCurrency?.trim().toLowerCase()) {
         case "$":
-          conversion = amount / 0.71;
+          conversion = amount * 1.31;
           return conversion;
         case "€":
-          conversion = amount / 0.85;
+          conversion = amount * 1.18;
           return conversion;
-        case "btc":
+        case "₿":
           conversion = amount / 44000;
+          return conversion;
 
-        case "eth":
+        case "Ξ":
           conversion = amount / 1800;
           return conversion;
+        default:
+          return amount;
       }
-    case "btc":
-      switch (selectedCurrency) {
+    case "₿":
+      switch (selectedCurrency?.trim().toLowerCase()) {
         case "$":
-          conversion = amount / 1.75e-5;
+          conversion = amount * 57000;
           return conversion;
         case "€":
-          conversion = amount / 1.92e-5;
+          conversion = amount * 52000;
           return conversion;
         case "£":
-          conversion = amount / (2.273 - 5);
+          conversion = amount * 44000;
           return conversion;
-        case "eth":
+        case "Ξ":
+          conversion = amount * 24;
+          return conversion;
+        default:
+          return amount;
+      }
+    case "Ξ":
+      switch (selectedCurrency?.trim().toLowerCase()) {
+        case "$":
+          conversion = amount * 2300;
+          return conversion;
+
+        case "€":
+          conversion = amount * 2150;
+          return conversion;
+        case "£":
+          conversion = amount * 1800;
+          return conversion;
+        case "₿":
           conversion = amount / 24;
           return conversion;
+        default:
+          return amount;
       }
-    case "eth":
-      switch (selectedCurrency) {
-        case "$":
-          conversion = amount / (4.343 - 4);
-        case "€":
-          conversion = amount / (4.653 - 4);
-          return conversion;
-        case "£":
-          conversion = amount / 5.553e-4;
-          return conversion;
-        case "btc":
-          conversion = amount / 0.41;
-          return conversion;
-      }
+    default:
+      return amount;
   }
 };

@@ -21,12 +21,18 @@ import SortDownArrow from "../icons/SortDownArrow";
 import SortUpArrow from "../icons/SortUpArrow";
 import SortButton from "./SortButton";
 import Link from "next/link";
+import { convertCurrency } from "@utils/CurrencyConversions";
 
 function Table() {
   const dispatch = useAppDispatch();
   const coinData = useAppSelector((state) => state.sort.coins);
   const coinsForChart = useAppSelector((state) => state.coins.coins);
   const currency = useAppSelector((state) => state.currency.currency);
+  const previousCurrency = useAppSelector(
+    (state) => state.currency.previousCurrency
+  );
+
+  console.log("conversion", convertCurrency(currency, previousCurrency, 59000));
 
   return (
     <div className="  max-w-7xl mx-auto  mt-12   ">
@@ -158,7 +164,11 @@ function Table() {
                     <span className="px-3">
                       <span>{currency}</span>
 
-                      {coin.current_price.toLocaleString()}
+                      {convertCurrency(
+                        currency,
+                        previousCurrency,
+                        coin.current_price
+                      )?.toFixed(2)}
                     </span>
                   </td>
                   <td
@@ -198,7 +208,11 @@ function Table() {
                   </td>
                   <td className="px-0 border-b border-gray-200 text-sm">
                     <span>{currency}</span>
-                    {coin.total_volume.toLocaleString()}
+                    {convertCurrency(
+                      currency,
+                      previousCurrency,
+                      coin.total_volume
+                    )?.toLocaleString()}
                   </td>
                   <td className="px-0   border-b border-gray-200 text-sm">
                     <span>{currency}</span>

@@ -21,6 +21,9 @@ function Navigation() {
   const [changeImage, setChangeImage] = useState(false);
 
   const currency = useAppSelector((state) => state.currency.currency);
+  const previousCurrency = useAppSelector(
+    (state) => state.currency.previousCurrency
+  );
 
   const dispatchTheme = useAppDispatch();
 
