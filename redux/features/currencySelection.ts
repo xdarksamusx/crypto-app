@@ -2,10 +2,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface Currency {
   currency: string;
+  previousCurrency: string | null;
 }
 
 const initialState: Currency = {
   currency: "$",
+  previousCurrency: null,
 };
 
 const currencySlice = createSlice({
@@ -13,6 +15,7 @@ const currencySlice = createSlice({
   initialState: initialState,
   reducers: {
     selectCurrency: (state, action: PayloadAction<string>) => {
+      state.previousCurrency = state.currency;
       state.currency = action.payload;
     },
   },
