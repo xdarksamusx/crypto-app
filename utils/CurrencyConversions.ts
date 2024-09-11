@@ -12,6 +12,10 @@ export const convertCurrency = (
   const btcToUSD = 57000;
   const ethToUSD = 2300;
 
+  if (!currentCurrency || !selectedCurrency || !amount) {
+    return amount;
+  }
+
   switch (currentCurrency.trim().toLowerCase()) {
     case "$":
       switch (selectedCurrency) {
@@ -26,7 +30,7 @@ export const convertCurrency = (
 
           return conversion;
         case "Ξ":
-          conversion = amount / 2300;
+          conversion = amount / ethToUSD;
           return conversion;
         default:
           return amount;
@@ -103,5 +107,166 @@ export const convertCurrency = (
       }
     default:
       return amount;
+  }
+};
+
+export const convertCurrencyArray = (
+  currentCurrency: string,
+  selectedCurrency: string | null,
+  currencyArray: number[]
+) => {
+  const btcToUSD = 57000;
+  const ethToUSD = 2300;
+
+  let convertedCurrencyArray;
+
+  switch (currentCurrency.trim().toLowerCase()) {
+    case "$":
+      switch (selectedCurrency) {
+        case "€":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency / 1.1;
+          });
+          return convertedCurrencyArray;
+
+        case "£":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency / 1.3;
+          });
+          return convertedCurrencyArray;
+
+        case "₿":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency / btcToUSD;
+          });
+          return convertedCurrencyArray;
+
+        case "Ξ":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency / ethToUSD;
+          });
+          return convertedCurrencyArray;
+
+        default:
+          return currencyArray;
+      }
+    case "€":
+      switch (selectedCurrency?.trim().toLowerCase()) {
+        case "$":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency * 1.1;
+          });
+          return convertedCurrencyArray;
+
+        case "£":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency / 1.18;
+          });
+          return convertedCurrencyArray;
+
+        case "₿":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency / btcToUSD;
+          });
+          return convertedCurrencyArray;
+
+        case "Ξ":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency / ethToUSD;
+          });
+          return convertedCurrencyArray;
+
+        default:
+          return currencyArray;
+      }
+    case "£":
+      switch (selectedCurrency?.trim().toLowerCase()) {
+        case "$":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency * 1.31;
+          });
+          return convertedCurrencyArray;
+
+        case "€":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency * 1.18;
+          });
+          return convertedCurrencyArray;
+
+        case "₿":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency / btcToUSD;
+          });
+          return convertedCurrencyArray;
+
+        case "Ξ":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency / ethToUSD;
+          });
+          return convertedCurrencyArray;
+
+        default:
+          return currencyArray;
+      }
+    case "₿":
+      switch (selectedCurrency?.trim().toLowerCase()) {
+        case "$":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency * 57000;
+          });
+          return convertedCurrencyArray;
+
+        case "€":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency * 52000;
+          });
+          return convertedCurrencyArray;
+
+        case "£":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency * 42000;
+          });
+          return convertedCurrencyArray;
+
+        case "Ξ":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency * 24;
+          });
+          return convertedCurrencyArray;
+
+        default:
+          return currencyArray;
+      }
+    case "Ξ":
+      switch (selectedCurrency?.trim().toLowerCase()) {
+        case "$":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency * 2300;
+          });
+          return convertedCurrencyArray;
+
+        case "€":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency * 2150;
+          });
+          return convertedCurrencyArray;
+
+        case "£":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency * 1800;
+          });
+          return convertedCurrencyArray;
+
+        case "₿":
+          convertedCurrencyArray = currencyArray.map((currency) => {
+            return currency / 24;
+          });
+          return convertedCurrencyArray;
+
+        default:
+          return currencyArray;
+      }
+    default:
+      return currencyArray;
   }
 };
