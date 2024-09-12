@@ -16,7 +16,9 @@ const portfolioSlice = createSlice({
       state.portfolio.push(action.payload);
     },
     deleteCoin: (state, action) => {
-      state.portfolio.filter((coin) => coin.name !== action.payload);
+      state.portfolio = state.portfolio.filter(
+        (coin) => coin.name !== action.payload
+      );
     },
   },
 });

@@ -18,6 +18,7 @@ import { Bar } from "react-chartjs-2";
 import { ChartOptions, ChartData } from "chart.js";
 
 import { createLabels } from "@utils/selectedChartPeriod";
+import { convertCurrencyArray } from "@utils/CurrencyConversions";
 
 const VolumeChart: React.FC = () => {
   const coins = useAppSelector((state) => state.selectedCoin.coins);
@@ -29,9 +30,19 @@ const VolumeChart: React.FC = () => {
     (state) => state.selectedCoin.selectedCoin
   );
 
+  const currency = useAppSelector((state) => state.currency.currency);
+  const previousCurrency = useAppSelector(
+    (state) => state.currency.previousCurrency
+  );
+
   const unit = selectedUnit;
   const coin = selectedCoin;
   const volumeData: [] = createVolumeChart(coin, unit);
+  const currencyArray: number[] = convertCurrencyArray(
+    currency,
+    previousCurrency,
+    volumeData
+  );
 
   const dataLabels = createLabels(unit);
 
@@ -48,7 +59,7 @@ const VolumeChart: React.FC = () => {
     labels: extendedLabels,
     datasets: [
       {
-        data: volumeData,
+        data: currencyArray,
         barPercentage: 0.5,
         barThickness: 6,
         maxBarThickness: 8,
@@ -85,7 +96,7 @@ const VolumeChart: React.FC = () => {
 
   useEffect(() => {
     if (!coin) return;
-  }, [selectedUnit, selectedCoin]);
+  }, [selectedUnit, selectedCoin, currency]);
 
   return (
     <>

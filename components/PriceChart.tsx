@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { createPriceChart } from "@utils/selectedChartPeriod";
 import { createLabels } from "@utils/selectedChartPeriod";
+import { convertCurrencyArray } from "@utils/CurrencyConversions";
 
 import {
   Chart,
@@ -38,9 +39,20 @@ const PriceChart: React.FC = () => {
     (state) => state.selectedCoin.selectedCoin
   );
 
+  const currency = useAppSelector((state) => state.currency.currency);
+  const previousCurrency = useAppSelector(
+    (state) => state.currency.previousCurrency
+  );
+
   const unit = selectedUnit;
   const coin = selectedCoin;
   const priceData: [] = createPriceChart(coin, unit);
+
+  const currencyArray: number[] = convertCurrencyArray(
+    currency,
+    previousCurrency,
+    priceData
+  );
 
   const dataLabels = createLabels(unit);
 
@@ -57,7 +69,7 @@ const PriceChart: React.FC = () => {
     labels: extendedLabels,
     datasets: [
       {
-        data: priceData,
+        data: currencyArray,
         barPercentage: 0.5,
         barThickness: 6,
         maxBarThickness: 8,
@@ -95,7 +107,7 @@ const PriceChart: React.FC = () => {
 
   useEffect(() => {
     if (!coin) return;
-  }, [selectedUnit, selectedCoin]);
+  }, [selectedUnit, selectedCoin, currency]);
 
   return (
     <>
