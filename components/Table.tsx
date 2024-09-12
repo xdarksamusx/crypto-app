@@ -32,8 +32,6 @@ function Table() {
     (state) => state.currency.previousCurrency
   );
 
-  console.log("conversion", convertCurrency(currency, previousCurrency, 59000));
-
   return (
     <div className="  max-w-7xl mx-auto  mt-12   ">
       <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
