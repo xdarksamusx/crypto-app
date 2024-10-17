@@ -121,14 +121,14 @@ const AddCoinModal: React.FC<AddCoinModalProps> = ({
 
               <input
                 onChange={(e) => handleInvestmentAmount(e)}
-                className=""
+                className="w-42"
                 placeholder="Purchased Amount"
                 type="text"
                 value={investmentAmount}
               />
               <input
                 onChange={(e) => handleDate(e)}
-                className=""
+                className="w-42"
                 placeholder="Purchased Date"
                 type="datetime-local"
                 value={date}

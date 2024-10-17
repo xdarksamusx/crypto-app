@@ -3,6 +3,7 @@ import coinSlice from "./features/marketSlice";
 import sortSlice from "./features/sortSlice";
 import coinSelectionSlice from "./features/coinSelectionSlice";
 import portfolioSlice from "./features/portfolioSlice";
+import currencySelection from "./features/currencySelection";
 
 import themesSlice from "./features/themesSlice";
 const store = configureStore({
@@ -12,6 +13,7 @@ const store = configureStore({
     sort: sortSlice,
     selectedCoin: coinSelectionSlice,
     portfolio: portfolioSlice,
+    currency: currencySelection,
   },
 });
 

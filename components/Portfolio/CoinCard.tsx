@@ -1,11 +1,16 @@
 "use client";
 import { Portfolio } from "@utils/portfolioInterface";
+import Trash from "../../icons/Trash";
+import { deleteCoin } from "../../redux/features/portfolioSlice";
+import { useAppSelector } from "../../redux/hooks";
 
 interface CoinCardProps {
   coin: Portfolio;
 }
 
 const CoinCard: React.FC<CoinCardProps> = ({ coin }) => {
+  const currency = useAppSelector((state) => state.currency.currency);
+
   if (!coin.data) {
     return null;
   }
@@ -41,8 +46,12 @@ const CoinCard: React.FC<CoinCardProps> = ({ coin }) => {
       </div>
       <div className="flex flex-col justify-around w-3/4">
         <div className="flex flex-col">
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <p>Market Price</p>
+            <div className=" pr-12">
+              {" "}
+              <Trash coin={coin} />{" "}
+            </div>
           </div>
           <div className="flex justify-start flex-column text-xs ">
             <div className="current-price w-1/4">
