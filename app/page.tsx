@@ -67,8 +67,8 @@ const Home = () => {
         <Carousels />
       </div>
       <div className=" mt-8 flex max-w-7xl mx-auto justify-around items-center ">
-        <VolumeChart />
-        <PriceChart />
+        {/* <VolumeChart /> */}
+        {/* <PriceChart /> */}
       </div>
       <div className=" mt-8">
         <ChartButtons
