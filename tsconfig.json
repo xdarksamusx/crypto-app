@@ -30,7 +30,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "components/**/*",
-    "custom.d.ts"
+    "custom.d.ts",
+    "firebase/transferData.js"
   ],
   "exclude": ["node_modules"]
 }

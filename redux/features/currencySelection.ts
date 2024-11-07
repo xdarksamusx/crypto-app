@@ -3,10 +3,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 interface Currency {
   currency: string;
   previousCurrency: string | null;
+  currencySymbol: string | null;
 }
 
 const initialState: Currency = {
-  currency: "$",
+  currency: "usd",
+  currencySymbol: "$",
   previousCurrency: null,
 };
 

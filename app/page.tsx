@@ -1,37 +1,34 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import fetchCoinData from "../utils/fetchCoinData";
+import { fetchCoins } from "@utils/apiData";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { fetchTop20Coins } from "../redux/features/marketSlice";
 import Table from "../components/Table";
 import Carousels from "@components/Carousel";
-import PriceChart from "@components/PriceChart";
-import VolumeChart from "@components/VolumeChart";
-import ChartButtons from "@components/ChartButtons";
-import Header from "../components/Header";
+import Pagination from "@components/Pagination";
 
-import Navigation from "../components/Navigation";
-import { toogleTheme, setTheme } from "../redux/features/themesSlice";
-import "./globals.css";
+import ChartButtons from "@components/ChartButtons";
 
 import { updateColors } from "../redux/features/sortSlice";
-import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
+import { selectUnit } from "../redux/features/coinSelectionSlice";
 
 const Home = () => {
+  const [coins, setCoins] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [lastVisible, setLastVisible] = useState(null);
   const dispatch = useAppDispatch();
-  const dispatchBox = useAppDispatch();
-  const coins = useAppSelector((state) => state.coins.coins);
-  const dispatchSortingColors = useAppDispatch();
+  // const coins = useAppSelector((state) => state.coins.coins);
   const status = useAppSelector((state) => state.coins.status);
-  const error = useAppSelector((state) => state.coins.error);
+  const dispatchSortingColors = useAppDispatch();
   const fetchOnce = useRef(false);
-  const dispatchTheme = useAppDispatch();
-  const themeColor = useAppSelector((state) => state.theme.dark);
   const [isClient, setIsClient] = useState(false);
+  const currency = useAppSelector((state) => state.currency);
 
-  const selectedCoin = useAppSelector(
-    (state) => state.selectedCoin.selectedCoin
-  );
+  const dispatchBox = useAppDispatch();
+
+  const itemsPerPage = 100;
 
   const selectedUnit = useAppSelector(
     (state) => state.selectedCoin.selectedUnit
@@ -41,42 +38,57 @@ const Home = () => {
     dispatchBox(selectUnit(unit));
   };
 
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentCoins = coins.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(coins.length / itemsPerPage);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchCoinData(currency);
+      setCoins(data);
+    };
+
+    fetchData();
+  }, []);
+
+  // Log the coins to the console
+
+  // Handle sorting colors
   useEffect(() => {
     dispatchSortingColors(updateColors());
-
     setIsClient(true);
   }, [dispatch]);
 
-  useEffect(() => {
-    if (!fetchOnce.current) {
-      if (status === "idle" && coins.length === 0) {
-        dispatch(fetchTop20Coins());
-      }
-      fetchOnce.current = true;
-    }
-  }, [dispatch, status]);
-
+  // Render nothing on the server-side
   if (!isClient) {
     return null;
   }
 
   return (
-    <div className="">
-      <div className=""></div>
-      <div className="max-w-full mx-auto ">
+    <div>
+      <div className="max-w-full mx-auto">
         <Carousels />
       </div>
-      <div className=" mt-8 flex max-w-7xl mx-auto justify-around items-center ">
-        {/* <VolumeChart /> */}
-        {/* <PriceChart /> */}
+      <div className="mt-8 flex max-w-7xl mx-auto justify-around items-center">
+        {/* Charts can be added here */}
       </div>
-      <div className=" mt-8">
+      <div className="mt-8">
         <ChartButtons
           handleSelectedUnit={handleSelectedUnit}
           selectedUnit={selectedUnit}
         />
       </div>
-      <Table />
+      {/* Pass the tokens to your Table component */}
+      <Table coins={currentCoins} />
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
+
+      <div className="text-center mt-4"></div>
     </div>
   );
 };
