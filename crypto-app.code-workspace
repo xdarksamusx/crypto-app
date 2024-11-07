@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "../../Documents/charts"
+	},
+	{
+		"path": "../data"
+	}
+],
+  "settings": {}
+}
