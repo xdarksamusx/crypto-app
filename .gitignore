@@ -34,3 +34,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+firebase/crypto-proje-firebase-adminsdk-wv6g4-531d6c10f4.json
+firebase/crypto-three-firebase-adminsdk-rqz2r-cc0fa623e6.json
