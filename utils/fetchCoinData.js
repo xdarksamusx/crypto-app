@@ -10,11 +10,21 @@ const fetchCoinData = async (currency) => {
 
     // Extract and log the data
     const coins = querySnapshot.docs.map((doc) => doc.data());
+    console.log(
+      "Before sorting:",
+      coins.map((coin) => coin.market_cap_rank)
+    );
+
     const sortedData = coins.sort((a, b) => {
       if (a.market_cap_rank === null) return 1;
       if (b.market_cap_rank === null) return -1;
       return a.market_cap_rank - b.market_cap_rank;
     });
+
+    console.log(
+      "After sorting:",
+      sortedData.map((coin) => coin.market_cap_rank)
+    );
 
     return sortedData;
   } catch (error) {
