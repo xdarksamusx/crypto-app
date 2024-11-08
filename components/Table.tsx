@@ -10,9 +10,10 @@ import SortUpArrow from "../icons/SortUpArrow";
 import Link from "next/link";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySelection";
+import { numberWithCommas } from "@utils/moreComputations";
 
 function Table({ coins }) {
-  const currency = useAppSelector((state) => state.currency.currency);
+  const currency = useAppSelector((state) => state.currency.currencySymbol);
   console.log("checking coins", coins);
 
   return (
@@ -140,12 +141,63 @@ function Table({ coins }) {
                   <td className="px-6 border-b border-gray-200 text-sm">
                     <span className="px-3">
                       <span>
-                        {currency} {coin.current_price}{" "}
+                        {currency} {numberWithCommas(coin.current_price)}{" "}
                       </span>
                     </span>
                   </td>
                   <td className="px-6 border-b border-gray-200 text-sm">
-                    {/* <LineChart coin={coin} /> */}
+                    <span className="px-3">
+                      <span>
+                        {currency}
+                        {coin.price_change_percentage_1h_in_currency.toFixed(
+                          2
+                        )}{" "}
+                      </span>
+                    </span>
+                  </td>
+
+                  <td className="px-6 border-b border-gray-200 text-sm">
+                    <span className="px-3">
+                      <span>
+                        {currency}
+                        {coin.price_change_percentage_24h_in_currency.toFixed(
+                          2
+                        )}{" "}
+                      </span>
+                    </span>
+                  </td>
+
+                  <td className="px-6 border-b border-gray-200 text-sm">
+                    <span className="px-3">
+                      <span>
+                        {currency}
+                        {coin.price_change_percentage_7d_in_currency.toFixed(
+                          2
+                        )}{" "}
+                      </span>
+                    </span>
+                  </td>
+
+                  <td className="px-6 border-b border-gray-200 text-sm">
+                    <span className="px-3">
+                      <span>
+                        {currency}
+                        {numberWithCommas(coin.total_volume)}{" "}
+                      </span>
+                    </span>
+                  </td>
+
+                  <td className="px-6 border-b border-gray-200 text-sm">
+                    <span className="px-3">
+                      <span>
+                        {currency}
+                        {numberWithCommas(coin.market_cap)}{" "}
+                      </span>
+                    </span>
+                  </td>
+
+                  <td className="px-6 border-b border-gray-200 text-sm">
+                    {/* <LineChart data={coin.sparkline_in_7d} /> */}
                   </td>
                 </tr>
               );
@@ -158,3 +210,5 @@ function Table({ coins }) {
 }
 
 export default Table;
+
+// sparkline_in_7d
