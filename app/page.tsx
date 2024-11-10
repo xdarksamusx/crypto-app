@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import fetchCoinData from "../utils/fetchCoinData";
-import { fetchCoins } from "@utils/apiData";
+import fetchCoinData from "./utils/fetchCoinData";
+import { fetchCoins } from "./utils/apiData";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { fetchTop20Coins } from "../redux/features/marketSlice";
 import Table from "../components/Table";
-import Carousels from "@components/Carousel";
-import Pagination from "@components/Pagination";
+import Carousels from "../components/Carousel";
+import Pagination from "../components/Pagination";
 
-import ChartButtons from "@components/ChartButtons";
+import ChartButtons from "../components/ChartButtons";
 
 import { updateColors } from "../redux/features/sortSlice";
 import { selectUnit } from "../redux/features/coinSelectionSlice";
