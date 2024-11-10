@@ -22,7 +22,7 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
+console.log("API Key:", process.env.NEXT_PUBLIC_FIREBASE_API_KEY);
 
 // Export your Firestore instance if needed
 
