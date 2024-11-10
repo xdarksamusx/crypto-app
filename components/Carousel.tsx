@@ -4,8 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { createPortal } from "react-dom";
 import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
-import { CoinData } from "../utils/interfaces";
-import { convertCurrency } from "@utils/CurrencyConversions";
+import { CoinData } from "../app/utils/interfaces"; // import { convertCurrency } from "@utils/CurrencyConversions";
 
 const responsive = {
   superLargeDesktop: {
@@ -111,11 +110,6 @@ export const Carousels: React.FC = () => {
                 <p className="mr-2">
                   {" "}
                   <span>{currency}</span>
-                  {convertCurrency(
-                    currency,
-                    previousCurrency,
-                    coin.current_price
-                  )?.toFixed(2)}
                 </p>
                 <p
                   className={`${
