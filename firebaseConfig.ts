@@ -11,13 +11,13 @@ import coinData from "/Users/gus100/Desktop/data/coinData copy.json";
 
 // Your Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyBh6v9mv7JSN3c4q-pLTh3Bz7elJpXnRKE",
+  authDomain: "crypto-proje.firebaseapp.com",
+  projectId: "crypto-proje",
+  storageBucket: "crypto-proje.firebasestorage.app",
+  messagingSenderId: "578800292022",
+  appId: "1:578800292022:web:91cac9a08bbc5c4e765617",
+  measurementId: "G-1VJBRDX9PY",
 };
 
 // Initialize Firebase

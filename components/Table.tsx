@@ -10,7 +10,7 @@ import SortUpArrow from "../icons/SortUpArrow";
 import Link from "next/link";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySelection";
-import { numberWithCommas } from "@utils/moreComputations";
+import { numberWithCommas } from "../utils/moreComputations";
 
 function Table({ coins }) {
   const currency = useAppSelector((state) => state.currency.currencySymbol);
@@ -197,7 +197,7 @@ function Table({ coins }) {
                   </td>
 
                   <td className="px-6 border-b border-gray-200 text-sm">
-                    {/* <LineChart data={coin.sparkline_in_7d} /> */}
+                    <LineChart chart={coin.sparkline_in_7d} />
                   </td>
                 </tr>
               );

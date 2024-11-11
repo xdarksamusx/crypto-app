@@ -10,6 +10,9 @@ import { CategoryScale } from "chart.js";
 
 Chart.register(CategoryScale);
 
+interface LineChartProps {
+  chart: number[]; // Directly accept an array
+}
 const monthsArray: string[] = [
   "July-2023",
   "August-2023",
@@ -25,25 +28,16 @@ const monthsArray: string[] = [
 
 const labels = monthsArray;
 
-function LineChart(chart: any) {
-  const { coin } = chart;
-
-  const { ninetyDayPrices } = coin;
-
-  const weeklyPriceArray = ninetyDayPrices.slice(
-    ninetyDayPrices.length - 7,
-    ninetyDayPrices.length
-  );
-
+function LineChart(chart: ChartData) {
   const data = {
     labels: labels,
 
     datasets: [
       {
         label: "data",
-        backgroundColor: `${coin.weeklyColor}`,
-        borderColor: `${coin.weeklyColor}`,
-        data: weeklyPriceArray,
+        backgroundColor: "blue",
+        borderColor: "blue",
+        data: chart.chart.price,
       },
     ],
   };

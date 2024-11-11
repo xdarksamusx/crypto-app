@@ -9,7 +9,7 @@ import {
   calculateEthereumDominance,
   calculateTotalMarketCap,
   calculateTotalVolume,
-} from "@utils/headerCalculations";
+} from "../utils/headerCalculations";
 function Header() {
   const [headerState, setHeaderState] = useState({
     totalMarketCap: 0,
