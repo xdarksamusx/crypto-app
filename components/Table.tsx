@@ -14,7 +14,6 @@ import { numberWithCommas } from "../app/utils/moreComputations";
 
 function Table({ coins }) {
   const currency = useAppSelector((state) => state.currency.currencySymbol);
-  console.log("checking coins", coins);
 
   return (
     <div className="max-w-7xl mx-auto mt-12">
@@ -197,7 +196,7 @@ function Table({ coins }) {
                   </td>
 
                   <td className="px-6 border-b border-gray-200 text-sm">
-                    {/* <LineChart data={coin.sparkline_in_7d} /> */}
+                    <LineChart chart={coin.sparkline_in_7d} />
                   </td>
                 </tr>
               );

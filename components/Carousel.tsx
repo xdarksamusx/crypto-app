@@ -4,6 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { createPortal } from "react-dom";
 import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
+
 import { CoinData } from "../app/utils/interfaces"; // import { convertCurrency } from "@utils/CurrencyConversions";
 
 const responsive = {
@@ -59,6 +60,7 @@ const CustomRightArrow: React.FC<CustomArrowProps> = ({ onClick }) => {
 
 export const Carousels: React.FC = () => {
   const coins = useAppSelector((state) => state.selectedCoin.coins);
+  // console.log("coins", coins);
   const currency = useAppSelector((state) => state.currency.currency);
   const previousCurrency = useAppSelector(
     (state) => state.currency.previousCurrency
