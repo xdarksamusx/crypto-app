@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getInitialCoinState } from "../../utils/apiData";
-import { CoinState, CoinData } from "../../utils/interfaces";
+import { getInitialCoinState } from "../../app/utils/apiData";
+import { CoinState, CoinData } from "../../app/utils/interfaces";
 
 const initialState: CoinState = {
   coins: getInitialCoinState().map((coin) => ({

@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import fetchCoinData from "../utils/fetchCoinData";
-import { fetchCoins } from "@utils/apiData";
+import fetchCoinData from "./utils/fetchCoinData";
+import { fetchCoins } from "./utils/apiData";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { fetchTop20Coins } from "../redux/features/marketSlice";
 import Table from "../components/Table";

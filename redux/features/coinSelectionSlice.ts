@@ -1,6 +1,6 @@
-import { CoinData, CoinState } from "../../utils/interfaces";
+import { CoinData, CoinState } from "../../app/utils/interfaces";
 
-import { getInitialCoinState } from "../../utils/apiData";
+import { getInitialCoinState } from "../../app/utils/apiData";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface SelectedCoinState extends CoinState {

@@ -3,14 +3,14 @@
 import React from "react";
 import Star from "../icons/Star";
 import LineChart from "./7DayChart";
-import { capitalizeFirstLetter } from "../utils/apiData";
+import { capitalizeFirstLetter } from "../app/utils/apiData";
 import SortButton from "./SortButton";
 import SortDownArrow from "../icons/SortDownArrow";
 import SortUpArrow from "../icons/SortUpArrow";
 import Link from "next/link";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrency } from "../redux/features/currencySelection";
-import { numberWithCommas } from "../utils/moreComputations";
+import { numberWithCommas } from "../app/utils/moreComputations";
 
 function Table({ coins }) {
   const currency = useAppSelector((state) => state.currency.currencySymbol);

@@ -3,7 +3,7 @@ import axios from "axios";
 
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { createVolumeChart } from "../utils/selectedChartPeriod";
+import { createVolumeChart } from "@app/utils/selectedChartPeriod";
 import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
 import {
   Chart,
@@ -18,8 +18,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import { ChartOptions, ChartData } from "chart.js";
 
-import { createLabels } from "../utils/selectedChartPeriod";
-import { convertCurrencyArray } from "../utils/CurrencyConversions";
+import { createLabels } from "@app/utils/selectedChartPeriod";
 
 const VolumeChart: React.FC = ({ coindata }) => {
   // console.log("volume chart", coindata);
