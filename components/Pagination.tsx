@@ -11,16 +11,30 @@ const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   onPageChange,
 }) => {
-  const pageNumbers: number[] = []; // Specify type as number[]
-  const maxPageButtons = 5; // Number of page buttons to show
+  const pageNumbers: number[] = [];
+  const maxPageButtons = 5; // Show 5 page numbers at a time
 
-  for (let i = 1; i <= totalPages; i++) {
-    if (
-      i === 1 || // Always show the first page
-      i === totalPages || // Always show the last page
-      (i >= currentPage - 2 && i <= currentPage + 2) // Show pages around the current page
-    ) {
+  // Calculate which page numbers to show
+  if (totalPages <= maxPageButtons) {
+    for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(i);
+    }
+  } else {
+    const startPage = Math.max(1, currentPage - 2);
+    const endPage = Math.min(totalPages, currentPage + 2);
+
+    if (startPage > 1) {
+      pageNumbers.push(1); // Always show the first page
+      if (startPage > 2) pageNumbers.push(-1); // Ellipsis indicator
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    if (endPage < totalPages - 1) {
+      pageNumbers.push(-1); // Ellipsis indicator
+      pageNumbers.push(totalPages); // Always show the last page
     }
   }
 
@@ -46,16 +60,17 @@ const Pagination: React.FC<PaginationProps> = ({
         &lt; {/* Left arrow */}
       </button>
       {pageNumbers.map((number, index) => (
-        <React.Fragment key={number}>
-          {index > 0 && pageNumbers[index - 1] !== number - 1 && (
+        <React.Fragment key={index}>
+          {number === -1 ? (
             <span>...</span> // Ellipsis for skipped pages
+          ) : (
+            <button
+              onClick={() => handlePageClick(number)}
+              className={currentPage === number ? "font-bold underline" : ""}
+            >
+              {number}
+            </button>
           )}
-          <button
-            onClick={() => handlePageClick(number)}
-            className={currentPage === number ? "font-bold" : ""}
-          >
-            {number}
-          </button>
         </React.Fragment>
       ))}
       <button onClick={handleNextPage} disabled={currentPage === totalPages}>

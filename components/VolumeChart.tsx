@@ -1,8 +1,9 @@
 "use client";
+import axios from "axios";
 
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { createVolumeChart } from "@utils/selectedChartPeriod";
+import { createVolumeChart } from "../utils/selectedChartPeriod";
 import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
 import {
   Chart,
@@ -17,10 +18,12 @@ import {
 import { Bar } from "react-chartjs-2";
 import { ChartOptions, ChartData } from "chart.js";
 
-import { createLabels } from "@utils/selectedChartPeriod";
-import { convertCurrencyArray } from "@utils/CurrencyConversions";
+import { createLabels } from "../utils/selectedChartPeriod";
+import { convertCurrencyArray } from "../utils/CurrencyConversions";
 
-const VolumeChart: React.FC = () => {
+const VolumeChart: React.FC = ({ coindata }) => {
+  // console.log("volume chart", coindata);
+
   const coins = useAppSelector((state) => state.selectedCoin.coins);
   const selectedUnit = useAppSelector(
     (state) => state.selectedCoin.selectedUnit
@@ -38,11 +41,6 @@ const VolumeChart: React.FC = () => {
   const unit = selectedUnit;
   const coin = selectedCoin;
   const volumeData: [] = createVolumeChart(coin, unit);
-  const currencyArray: number[] = convertCurrencyArray(
-    currency,
-    previousCurrency,
-    volumeData
-  );
 
   const dataLabels = createLabels(unit);
 
@@ -59,7 +57,7 @@ const VolumeChart: React.FC = () => {
     labels: extendedLabels,
     datasets: [
       {
-        data: currencyArray,
+        data: volumeData,
         barPercentage: 0.5,
         barThickness: 6,
         maxBarThickness: 8,
@@ -97,6 +95,39 @@ const VolumeChart: React.FC = () => {
   useEffect(() => {
     if (!coin) return;
   }, [selectedUnit, selectedCoin, currency]);
+
+  useEffect(() => {
+    if (!coin || !currency) return; // Ensures data is only fetched if both are defined
+
+    const fetchData = async () => {
+      try {
+        console.log(
+          "url",
+          `https://xdarksamusx.github.io/chart-files/charts/${currency}-charts/${coin.name.toLowerCase()}.json`
+        );
+        console.log("Selected currency and coin:", currency, coin?.name);
+        const response = await fetch(
+          `https://xdarksamusx.github.io/chart-files/charts/${currency}-charts/${coin.name.toLowerCase()}.json`
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Checking Netlify data", data);
+      } catch (error) {
+        console.error("Error fetching data:", {
+          message: error.message,
+          stack: error.stack,
+          coin,
+          currency,
+        });
+      }
+    };
+
+    fetchData();
+  }, [coin, currency]);
 
   return (
     <>

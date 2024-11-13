@@ -6,10 +6,11 @@ import { fetchCoins } from "@utils/apiData";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { fetchTop20Coins } from "../redux/features/marketSlice";
 import Table from "../components/Table";
-import Carousels from "@components/Carousel";
-import Pagination from "@components/Pagination";
+import Carousels from "../components/Carousel";
+import Pagination from "../components/Pagination";
+import VolumeChart from "../components/VolumeChart";
 
-import ChartButtons from "@components/ChartButtons";
+import ChartButtons from "../components/ChartButtons";
 
 import { updateColors } from "../redux/features/sortSlice";
 import { selectUnit } from "../redux/features/coinSelectionSlice";
@@ -43,6 +44,8 @@ const Home = () => {
   const currentCoins = coins.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(coins.length / itemsPerPage);
 
+  const top20Coins = coins.slice(0, 20);
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchCoinData(currency);
@@ -70,9 +73,8 @@ const Home = () => {
       <div className="max-w-full mx-auto">
         <Carousels />
       </div>
-      <div className="mt-8 flex max-w-7xl mx-auto justify-around items-center">
-        {/* Charts can be added here */}
-      </div>
+      <div className="mt-8 flex max-w-7xl mx-auto justify-around items-center"></div>
+      <VolumeChart coindata={top20Coins} />
       <div className="mt-8">
         <ChartButtons
           handleSelectedUnit={handleSelectedUnit}

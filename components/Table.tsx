@@ -14,7 +14,6 @@ import { numberWithCommas } from "../utils/moreComputations";
 
 function Table({ coins }) {
   const currency = useAppSelector((state) => state.currency.currencySymbol);
-  console.log("checking coins", coins);
 
   return (
     <div className="max-w-7xl mx-auto mt-12">

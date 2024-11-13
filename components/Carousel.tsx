@@ -60,6 +60,7 @@ const CustomRightArrow: React.FC<CustomArrowProps> = ({ onClick }) => {
 
 export const Carousels: React.FC = () => {
   const coins = useAppSelector((state) => state.selectedCoin.coins);
+  // console.log("coins", coins);
   const currency = useAppSelector((state) => state.currency.currency);
   const previousCurrency = useAppSelector(
     (state) => state.currency.previousCurrency
