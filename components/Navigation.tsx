@@ -21,8 +21,8 @@ function Navigation() {
   const [changeImage, setChangeImage] = useState(false);
 
   const currency = useAppSelector((state) => state.currency.currency);
-  const previousCurrency = useAppSelector(
-    (state) => state.currency.previousCurrency
+  const currencySymbol = useAppSelector(
+    (state) => state.currency.currencySymbol
   );
 
   const dispatchTheme = useAppDispatch();
@@ -41,8 +41,18 @@ function Navigation() {
     setAccountDropdownVisible(false);
   };
 
-  const handleCurrencySelection = (currency: string) => {
-    dispatchCurrency(selectCurrency(currency));
+  const handleCurrencySelection = (currencySymbol: string) => {
+    const currencyMap = {
+      $: "usd",
+      "€": "eur",
+      "£": "gbp",
+      "₿": "btc",
+      Ξ: "eth",
+    };
+    const currency = currencyMap[currencySymbol];
+    if (currency) {
+      dispatchCurrency(selectCurrency({ currency, currencySymbol }));
+    }
   };
 
   return (
@@ -81,18 +91,18 @@ function Navigation() {
               onClick={() => handleDropDownMenu()}
             >
               <div className="w-6 h-6   flex justify-center items-center ">
-                {currency}
+                {currencySymbol}
               </div>
               {accountDropdownVisible && (
                 <div className="absolute top-4  bg-dropdown-bg-color  shadow-md p-2  text-left  w-8     bg-slate-200 border-2 border-black-600  z-999">
                   <div className="flex flex-col  text-xs items-end  justify-between text-align">
-                    {currencyArray.map((currency) => {
+                    {currencyArray.map((currencySymb) => {
                       return (
                         <p
                           key={currency}
-                          onClick={() => handleCurrencySelection(currency)}
+                          onClick={() => handleCurrencySelection(currencySymb)}
                         >
-                          {currency}
+                          {currencySymb}
                         </p>
                       );
                     })}
