@@ -55,6 +55,7 @@ const Home = () => {
     fetchData();
   }, []);
 
+  console.log("currency", currency);
   // Log the coins to the console
 
   // Handle sorting colors

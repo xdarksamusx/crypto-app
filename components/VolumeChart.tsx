@@ -33,9 +33,6 @@ const VolumeChart: React.FC = ({ coindata }) => {
   );
 
   const currency = useAppSelector((state) => state.currency.currency);
-  const previousCurrency = useAppSelector(
-    (state) => state.currency.previousCurrency
-  );
 
   const unit = selectedUnit;
   const coin = selectedCoin;
@@ -91,6 +88,8 @@ const VolumeChart: React.FC = ({ coindata }) => {
     },
   };
 
+  console.log("curerency", currency);
+
   useEffect(() => {
     if (!coin) return;
   }, [selectedUnit, selectedCoin, currency]);
@@ -104,7 +103,6 @@ const VolumeChart: React.FC = ({ coindata }) => {
           "url",
           `https://xdarksamusx.github.io/chart-files/charts/${currency}-charts/${coin.name.toLowerCase()}.json`
         );
-        console.log("Selected currency and coin:", currency, coin?.name);
         const response = await fetch(
           `https://xdarksamusx.github.io/chart-files/charts/${currency}-charts/${coin.name.toLowerCase()}.json`
         );
@@ -114,7 +112,6 @@ const VolumeChart: React.FC = ({ coindata }) => {
         }
 
         const data = await response.json();
-        console.log("Checking Netlify data", data);
       } catch (error) {
         console.error("Error fetching data:", {
           message: error.message,
