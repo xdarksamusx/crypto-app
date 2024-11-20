@@ -1,12 +1,23 @@
+// src/utils/fetchCoinData.js
 import { collection, getDocs } from "firebase/firestore";
-import db from "../firebaseConfig";
+import db from "../firebaseConfig"; // Adjust the path to your firebaseConfig file
 
-const fetchCoinData = async (currency: string): Promise<Coin[]> => {
+const fetchCoinData = async (currency) => {
   try {
-     const collectionRef = collection(db, `${currency}Coins`);
+    console.log("currency", currency);
+    const collectionRef = collection(db, `${currency.currency}Coins`); // Your collection name
     const querySnapshot = await getDocs(collectionRef);
 
-    return querySnapshot.docs.map((doc) => doc.data() as Coin);
+    // Extract and log the data
+    const coins = querySnapshot.docs.map((doc) => doc.data());
+
+    const sortedData = coins.sort((a, b) => {
+      if (a.market_cap_rank === null) return 1;
+      if (b.market_cap_rank === null) return -1;
+      return a.market_cap_rank - b.market_cap_rank;
+    });
+
+    return sortedData;
   } catch (error) {
     console.error("Error fetching coin data:", error);
     return [];

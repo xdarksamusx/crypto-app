@@ -55,11 +55,11 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchCoinData(currency);
-      dispatch(setCurrencyData(data));
+      setCoins(data);
     };
 
     fetchData();
-  }, [dispatch]);
+  }, []);
 
   // Handle sorting colors
   useEffect(() => {

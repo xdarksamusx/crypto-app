@@ -16,7 +16,7 @@ function Table({ coins }) {
   const coinData = useAppSelector((state) => state.currency.data);
 
   const currency = useAppSelector((state) => state.currency.currencySymbol);
-  console.log("coins", coinData);
+  console.log("coins", coins);
 
   return (
     <div className="max-w-7xl mx-auto mt-12">
@@ -115,7 +115,7 @@ function Table({ coins }) {
             </tr>
           </thead>
           <tbody>
-            {coinData.map((coin: any) => {
+            {coins.map((coin: any) => {
               const coinName = capitalizeFirstLetter(coin.id);
 
               return (

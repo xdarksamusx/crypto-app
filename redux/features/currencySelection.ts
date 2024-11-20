@@ -33,6 +33,7 @@ const currencySlice = createSlice({
     },
     setCurrencyData: (state, action: PayloadAction<any[]>) => {
       state.data = action.payload;
+      console.log("stgate data", state.data);
     },
   },
 });
