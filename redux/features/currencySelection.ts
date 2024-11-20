@@ -22,7 +22,6 @@ const initialState: Currency = {
   currencySymbol: "$",
   data: [],
 };
-
 const currencySlice = createSlice({
   name: "currency",
   initialState,
@@ -33,6 +32,7 @@ const currencySlice = createSlice({
     },
     setCurrencyData: (state, action: PayloadAction<any[]>) => {
       state.data = action.payload;
+    }, // <-- Missing this closing bracket
     selectCurrency: (
       state,
       action: PayloadAction<{ currency: string; currencySymbol: string }>
