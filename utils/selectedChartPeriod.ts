@@ -8,36 +8,45 @@ import {
   getDayLabels,
 } from "@utils/labels";
 
-export const createVolumeChart = function (coin: any, unit: string) {
-  const {
-    dailyVolumes,
-    ninetyDayVolumes,
-    yearlyVolumes,
-    monthlyVolumes,
-    weeklyVolumes,
-    fourteenDayVolumes,
-  } = coin;
+export const computeVolumeCharts = function (chart: any, unit: string) {
+  let volumeChart, total_Volumes_Array;
+
+  const { dailyData, ninetyDayData, yearlyData } = chart;
 
   switch (unit) {
     case "7D":
-      return weeklyVolumes;
+      volumeChart = ninetyDayData.total_volumes.slice(0, 100);
+      total_Volumes_Array = volumeChart.map((volume) => volume[1]);
+
+      return total_Volumes_Array;
 
     case "14D":
-      return fourteenDayVolumes;
+      volumeChart = ninetyDayData.total_volumes.slice(0, 200);
+      total_Volumes_Array = volumeChart.map((volume) => volume[1]);
+
+      return total_Volumes_Array;
 
     case "1M":
-      return monthlyVolumes;
+      volumeChart = ninetyDayData.total_volumes.slice(0, 800);
+      total_Volumes_Array = volumeChart.map((volume) => volume[1]);
+
+      return total_Volumes_Array;
 
     case "3M":
-      return ninetyDayVolumes;
+      volumeChart = ninetyDayData.total_volumes;
+      return ninetyDayData;
 
     case "1Y":
-      return yearlyVolumes;
+      volumeChart = yearlyData.total_volumes;
+      total_Volumes_Array = volumeChart.map((volume) => volume[1]);
 
+      return total_Volumes_Array;
     case "5Y":
 
     default:
-      return dailyVolumes;
+      total_Volumes_Array = dailyData.total_volumes.map((volume) => volume[1]);
+
+      return total_Volumes_Array;
   }
 };
 

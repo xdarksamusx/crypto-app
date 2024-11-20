@@ -9,6 +9,10 @@ import Table from "../components/Table";
 import Carousels from "../components/Carousel";
 import Pagination from "../components/Pagination";
 import VolumeChart from "../components/VolumeChart";
+import {
+  setCurrency,
+  setCurrencyData,
+} from "../redux/features/currencySelection";
 
 import ChartButtons from "../components/ChartButtons";
 
@@ -17,9 +21,11 @@ import { selectUnit } from "../redux/features/coinSelectionSlice";
 
 const Home = () => {
   const [coins, setCoins] = useState([]);
+  const coinData = useAppSelector((state) => state.currency.data);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastVisible, setLastVisible] = useState(null);
   const dispatch = useAppDispatch();
+  const dispatchCurrencyData = useAppDispatch();
   // const coins = useAppSelector((state) => state.coins.coins);
   const status = useAppSelector((state) => state.coins.status);
   const dispatchSortingColors = useAppDispatch();
@@ -49,13 +55,11 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchCoinData(currency);
-      setCoins(data);
+      dispatch(setCurrencyData(data));
     };
 
     fetchData();
-  }, []);
-
-  // Log the coins to the console
+  }, [dispatch]);
 
   // Handle sorting colors
   useEffect(() => {
