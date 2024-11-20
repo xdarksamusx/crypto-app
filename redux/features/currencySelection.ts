@@ -3,17 +3,36 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 interface Currency {
   currency: string;
   currencySymbol: string | null;
+  data: any[]; // Assuming data is an array
 }
+
+const mapCurrencySymbolToCode = (symbol: string): string => {
+  const currencyMapping: Record<string, string> = {
+    $: "usd",
+    "€": "euro",
+    "£": "gbp",
+    "₿": "btc",
+    Ξ: "eth",
+  };
+  return currencyMapping[symbol] || symbol;
+};
 
 const initialState: Currency = {
   currency: "usd",
   currencySymbol: "$",
+  data: [],
 };
 
 const currencySlice = createSlice({
   name: "currency",
-  initialState: initialState,
+  initialState,
   reducers: {
+    setCurrency: (state, action: PayloadAction<string>) => {
+      state.currencySymbol = action.payload;
+      state.currency = mapCurrencySymbolToCode(action.payload);
+    },
+    setCurrencyData: (state, action: PayloadAction<any[]>) => {
+      state.data = action.payload;
     selectCurrency: (
       state,
       action: PayloadAction<{ currency: string; currencySymbol: string }>
@@ -24,11 +43,6 @@ const currencySlice = createSlice({
   },
 });
 
-// if i select a currency, i replace the symbol and perform some calculations
-// if I  have  a dollar,  i select another currency and covert it. there are 12 conversions
-
-// each currency would need four conversions
-
-export const { selectCurrency } = currencySlice.actions;
+export const { setCurrency, setCurrencyData } = currencySlice.actions;
 
 export default currencySlice.reducer;

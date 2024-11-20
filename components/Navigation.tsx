@@ -8,7 +8,10 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { toogleTheme } from "../redux/features/themesSlice";
 import Moon from "../icons/Moon";
 import Sun from "../icons/Sun";
-import { selectCurrency } from "../redux/features/currencySelection";
+import {
+  setCurrency,
+  setCurrencyData,
+} from "../redux/features/currencySelection";
 
 interface NavigationProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -21,6 +24,7 @@ function Navigation() {
   const [changeImage, setChangeImage] = useState(false);
 
   const currency = useAppSelector((state) => state.currency.currency);
+
   const currencySymbol = useAppSelector(
     (state) => state.currency.currencySymbol
   );
@@ -40,6 +44,7 @@ function Navigation() {
   const handleDropDownMenu = () => {
     setAccountDropdownVisible(false);
   };
+
 
   const handleCurrencySelection = (currencySymbol: string) => {
     const currencyMap = {

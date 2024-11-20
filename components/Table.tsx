@@ -13,7 +13,10 @@ import { selectCurrency } from "../redux/features/currencySelection";
 import { numberWithCommas } from "../app/utils/moreComputations";
 
 function Table({ coins }) {
+  const coinData = useAppSelector((state) => state.currency.data);
+
   const currency = useAppSelector((state) => state.currency.currencySymbol);
+  console.log("coins", coins);
 
   return (
     <div className="max-w-7xl mx-auto mt-12">
@@ -148,7 +151,7 @@ function Table({ coins }) {
                     <span className="px-3">
                       <span>
                         {currency}
-                        {coin.price_change_percentage_1h_in_currency.toFixed(
+                        {coin.price_change_percentage_1h_in_currency?.toFixed(
                           2
                         )}{" "}
                       </span>
@@ -159,7 +162,7 @@ function Table({ coins }) {
                     <span className="px-3">
                       <span>
                         {currency}
-                        {coin.price_change_percentage_24h_in_currency.toFixed(
+                        {coin.price_change_percentage_24h_in_currency?.toFixed(
                           2
                         )}{" "}
                       </span>
@@ -170,7 +173,7 @@ function Table({ coins }) {
                     <span className="px-3">
                       <span>
                         {currency}
-                        {coin.price_change_percentage_7d_in_currency.toFixed(
+                        {coin.price_change_percentage_7d_in_currency?.toFixed(
                           2
                         )}{" "}
                       </span>
