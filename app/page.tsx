@@ -61,6 +61,7 @@ const Home = () => {
     fetchData();
   }, []);
 
+
   // Handle sorting colors
   useEffect(() => {
     dispatchSortingColors(updateColors());
