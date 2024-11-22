@@ -9,6 +9,7 @@ import Table from "../components/Table";
 import Carousels from "../components/Carousel";
 import Pagination from "../components/Pagination";
 import VolumeChart from "../components/VolumeChart";
+import PriceChart from "@components/PriceChart";
 import {
   setCurrency,
   setCurrencyData,
@@ -61,7 +62,6 @@ const Home = () => {
     fetchData();
   }, []);
 
-
   // Handle sorting colors
   useEffect(() => {
     dispatchSortingColors(updateColors());
@@ -78,15 +78,17 @@ const Home = () => {
       <div className="max-w-full mx-auto">
         <Carousels />
       </div>
-      <div className="mt-8 flex max-w-7xl mx-auto justify-around items-center"></div>
-      <VolumeChart coindata={top20Coins} />
+      <div className="mt-8 flex max-w-7xl mx-auto justify-around items-center">
+        <VolumeChart coindata={top20Coins} />
+        <PriceChart coindata={top20Coins} />
+      </div>
+
       <div className="mt-8">
         <ChartButtons
           handleSelectedUnit={handleSelectedUnit}
           selectedUnit={selectedUnit}
         />
       </div>
-      {/* Pass the tokens to your Table component */}
       <Table coins={currentCoins} />
 
       <Pagination
