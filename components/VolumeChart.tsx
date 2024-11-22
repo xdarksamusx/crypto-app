@@ -48,7 +48,6 @@ const VolumeChart: React.FC = () => {
 
     const fetchData = async () => {
       try {
-        console.log("Selected currency and coin:", currency, coin?.name);
         const response = await fetch(
           `https://xdarksamusx.github.io/chart-files/charts/${currency.toLowerCase()}-charts/${coin.name.toLowerCase()}.json`
         );
@@ -60,7 +59,6 @@ const VolumeChart: React.FC = () => {
         const data = await response.json();
 
         const newVolumeData = computeVolumeCharts(data, unit);
-        console.log("see the data her", console.log(newVolumeData));
 
         setChart(data);
       } catch (error) {

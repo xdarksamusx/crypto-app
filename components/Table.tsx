@@ -9,14 +9,14 @@ import SortDownArrow from "../icons/SortDownArrow";
 import SortUpArrow from "../icons/SortUpArrow";
 import Link from "next/link";
 import { useAppSelector } from "../redux/hooks";
-import { selectCurrency } from "../redux/features/currencySelection";
 import { numberWithCommas } from "../app/utils/moreComputations";
+import { absoluteValue } from "@utils/calculations";
+import { formatPercentage } from "@utils/calculations";
 
 function Table({ coins }) {
   const coinData = useAppSelector((state) => state.currency.data);
 
   const currency = useAppSelector((state) => state.currency.currencySymbol);
-  console.log("coins", coins);
 
   return (
     <div className="max-w-7xl mx-auto mt-12">
@@ -110,8 +110,6 @@ function Table({ coins }) {
                   <span className="mx-1">Last 7 Days</span>
                 </div>
               </th>
-
-              {/* Other headers here */}
             </tr>
           </thead>
           <tbody>
@@ -143,39 +141,64 @@ function Table({ coins }) {
                   <td className="px-6 border-b border-gray-200 text-sm">
                     <span className="px-3">
                       <span>
-                        {currency} {numberWithCommas(coin.current_price)}{" "}
+                        {currency}
+                        {numberWithCommas(coin.current_price)}
                       </span>
                     </span>
                   </td>
                   <td className="px-6 border-b border-gray-200 text-sm">
                     <span className="px-3">
-                      <span>
-                        {currency}
-                        {coin.price_change_percentage_1h_in_currency?.toFixed(
-                          2
-                        )}{" "}
+                      <span
+                        className={`${
+                          coin.price_change_percentage_1h_in_currency > 0
+                            ? "text-green-500"
+                            : " text-red-500"
+                        } flex`}
+                      >
+                        {coin.price_change_percentage_1h_in_currency > 0
+                          ? "▲"
+                          : "▼"}
+                        {formatPercentage(
+                          coin.price_change_percentage_1h_in_currency
+                        )}
                       </span>
                     </span>
                   </td>
 
                   <td className="px-6 border-b border-gray-200 text-sm">
-                    <span className="px-3">
-                      <span>
-                        {currency}
-                        {coin.price_change_percentage_24h_in_currency?.toFixed(
-                          2
-                        )}{" "}
+                    <span className="px-1">
+                      <span
+                        className={`${
+                          coin.price_change_percentage_24h_in_currency > 0
+                            ? "text-green-500"
+                            : " text-red-500"
+                        } flex`}
+                      >
+                        {coin.price_change_percentage_24h_in_currency > 0
+                          ? "▲"
+                          : "▼"}
+                        {formatPercentage(
+                          coin.price_change_percentage_24h_in_currency
+                        )}
                       </span>
                     </span>
                   </td>
 
                   <td className="px-6 border-b border-gray-200 text-sm">
-                    <span className="px-3">
-                      <span>
-                        {currency}
-                        {coin.price_change_percentage_7d_in_currency?.toFixed(
-                          2
-                        )}{" "}
+                    <span className="px-1 ">
+                      <span
+                        className={`${
+                          coin.price_change_percentage_7d_in_currency > 0
+                            ? "text-green-500"
+                            : " text-red-500"
+                        } `}
+                      >
+                        {coin.price_change_percentage_7d_in_currency > 0
+                          ? "▲"
+                          : "▼"}
+                        {formatPercentage(
+                          coin.price_change_percentage_7d_in_currency
+                        )}
                       </span>
                     </span>
                   </td>
