@@ -1,6 +1,6 @@
 "use client";
-
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import Gear from "../icons/Gear";
 import ProfileIcon from "../icons/Profile";
@@ -8,20 +8,60 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { toogleTheme } from "../redux/features/themesSlice";
 import Moon from "../icons/Moon";
 import Sun from "../icons/Sun";
+import SearchableDropdown from "./Portfolio/SearchableDropDown";
 import {
   setCurrency,
   setCurrencyData,
 } from "../redux/features/currencySelection";
+import Link from "next/link";
+
+interface CoinOption {
+  id: string;
+  name: string;
+  symbol: string;
+  image: {
+    large: string;
+    small: string;
+    thumb: string;
+  };
+  market_data: {
+    current_price: {
+      usd: number;
+    };
+    price_change_24h_in_currency: {
+      usd: number;
+    };
+    market_cap: {
+      usd: number;
+    };
+    total_volume: {
+      usd: number;
+    };
+    circulating_supply: number;
+    max_supply: number;
+  };
+}
 
 interface NavigationProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
+
+// setSelectedOption={setSelectedOption}
+// options={allCoins}
+// label="name"
+// id="id"
+// selectedVal={value}
+// handleChange={(val: string) => setValue(val)}
 
 function Navigation() {
   const currencyArray = ["$", "€", "£", "₿", "Ξ"];
   const [settingsDropdownVisible, setSettingsDropdownVisible] = useState(false);
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
   const [changeImage, setChangeImage] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const [value, setValue] = useState<string>("");
+  const [selectedOption, setSelectedOption] = useState<CoinOption | null>(null);
+  const [allCoins, setAllCoins] = useState<any>(null);
 
   const currency = useAppSelector((state) => state.currency.currency);
 
@@ -45,7 +85,6 @@ function Navigation() {
     setAccountDropdownVisible(false);
   };
 
-
   const handleCurrencySelection = (currencySymbol: string) => {
     const currencyMap = {
       $: "usd",
@@ -60,14 +99,39 @@ function Navigation() {
     }
   };
 
+  useEffect(() => {
+    setIsClient(true);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://api.coingecko.com/api/v3/coins/list"
+        );
+        setAllCoins(response.data);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="w-full border-b  shadow-sm  border-t relative">
       <div className="   max-w-7xl mx-auto flex justify-between items-center py-4  ">
         <div className="flex items-center">
           <span className="text-xl font-bold">LOGO</span>
         </div>
-        <div className="flex h-5  space-x-8">
-          <SearchBar />
+        <div className="flex h-5  space-x-8  ">
+          <div className="">
+            <SearchableDropdown
+              setSelectedOption={setSelectedOption}
+              options={allCoins}
+              label="name"
+              id="id"
+              selectedVal={value}
+              handleChange={(val: string) => setValue(val)}
+              href={(id) => `/coins/${id}`}
+            />
+          </div>
 
           <div className="static  w-28 focus:outline-none   ">
             {" "}

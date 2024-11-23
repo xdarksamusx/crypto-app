@@ -33,8 +33,6 @@ export default function Portfolio() {
     fetchData();
   }, []);
 
-  console.log("coin", portfolio);
-
   return (
     <>
       <div className=" flex justify-around relative z-10">
