@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import DropDownArrow from "./DropDownArrow";
+import Link from "next/link";
 import axios from "axios";
 
 interface CoinOption {
@@ -38,10 +39,10 @@ interface SearchableDropdownProps {
   setSelectedOption: (option: CoinOption | null) => void;
   options: CoinOption[];
   label: StringKeys<CoinOption>;
-
   id: string;
   selectedVal: string;
   handleChange: (value: any) => void;
+  href?: (id: string) => string; // Optional function to generate href links
 }
 
 interface Error {
@@ -55,6 +56,7 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
   id,
   selectedVal,
   handleChange,
+  href, // Optional href generator
 }) => {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -66,19 +68,6 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
     setIsClient(true);
   }, []);
 
-  const fetchData = async (optionId: string) => {
-    try {
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${optionId}`
-      );
-      const data = response.data;
-
-      return data;
-    } catch (error) {
-      setError({ error: "Failed to fetch data" });
-    }
-  };
-
   const inputRef = useRef(null);
 
   const handleSelectOption = async (option: CoinOption) => {
@@ -86,45 +75,7 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
     handleChange(option.name);
     setIsOpen((isOpen) => !isOpen);
 
-    const data = await fetchData(option.id);
-
-    const transformedData: CoinOption = {
-      id: data.id,
-      name: data.name,
-      symbol: data.symbol,
-      image: {
-        large: data.image.large,
-        small: data.image.small,
-        thumb: data.image.thumb,
-      },
-      market_data: {
-        current_price: {
-          usd: data.market_data?.current_price?.usd || 0,
-        },
-        price_change_24h_in_currency: {
-          usd: data.market_data?.price_change_24h_in_currency?.usd || 0,
-        },
-        market_cap: {
-          usd: data.market_data?.market_cap?.usd || 0,
-        },
-        total_volume: {
-          usd: data.market_data?.total_volume?.usd || 0,
-        },
-        circulating_supply: data.market_data?.circulating_supply || 0,
-        max_supply: data.market_data?.max_supply || 0,
-      } || {
-        current_price: { usd: 0 },
-        price_change_24h_in_currency: { usd: 0 },
-        market_cap: { usd: 0 },
-        total_volume: { usd: 0 },
-        circulating_supply: 0,
-        max_supply: 0,
-      },
-    };
-
-    setSelectedOption(transformedData);
-
-    setSelectedOption(transformedData);
+    setSelectedOption(option);
   };
 
   const handleGetDisplayValue = () => {
@@ -145,22 +96,23 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
   };
 
   return (
-    <div className="w-33">
-      <div className="w-full">
+    <div className="w-64 relative">
+      <div className="w-full py-2">
         <div
           ref={inputRef}
           onClick={() => {
             setIsOpen(true);
             setShowList(true);
           }}
-          className="selected-value flex bg-gray-200  justify-evenly  items-center "
+          className="selected-value flex bg-gray-200 justify-between items-center px-4 py-2 rounded border border-gray-300 cursor-pointer"
         >
           <input
-            className="bg-gray-200 focus:outline-none "
+            className="bg-gray-200 focus:outline-none w-full"
             ref={inputRef}
             type="text"
             value={handleGetDisplayValue()}
             name="searchTerm"
+            placeholder="Search..."
             onChange={(e) => {
               setQuery(e.target.value);
               handleChange(null);
@@ -168,7 +120,6 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
               setIsOpen(true);
             }}
           />
-
           <DropDownArrow
             isOpen={isOpen}
             showList={showList}
@@ -179,22 +130,37 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
         <div className={`arrow ${isOpen ? "block" : "hidden"}`}></div>
       </div>
 
+      {/* Dropdown Menu */}
       {showList && (
-        <div className={` ${isOpen ? "block" : "hidden"}`}>
+        <div
+          className={`${
+            isOpen ? "block" : "hidden"
+          } absolute left-0 mt-1 z-50 w-full bg-white border border-gray-300 rounded shadow-lg`}
+        >
           {handleFilter(options).map((option, index) => {
-            if (index >= 9) return;
+            if (index >= 9) return null;
             return (
               <div
-                onClick={() => {
-                  handleSelectOption(option);
-                  setIsOpen(false);
-                }}
-                className={`option ${
-                  option[label] === selectedVal ? "selected" : ""
-                }`}
-                key={`${id}`}
+                key={`${id}-${index}`}
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
               >
-                {option[label]}
+                {href ? (
+                  <Link href={href(option.id)} className="block">
+                    {option[label]}
+                  </Link>
+                ) : (
+                  <div
+                    onClick={() => {
+                      handleSelectOption(option);
+                      setIsOpen(false);
+                    }}
+                    className={`option ${
+                      option[label] === selectedVal ? "font-bold" : ""
+                    }`}
+                  >
+                    {option[label]}
+                  </div>
+                )}
               </div>
             );
           })}
