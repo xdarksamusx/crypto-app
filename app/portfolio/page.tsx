@@ -43,7 +43,7 @@ export default function Portfolio() {
         <div className=" flex gap-3">
           <button className="px-4 py-1 bg-gray-100">Greed & Fear Index</button>
           <button
-            className="px-4 py-1 bg-blue-400 "
+            className="px-4 py-1 bg-gray-100 "
             onClick={() => {
               setShowModal(false);
               setShowInvestments(true);
@@ -52,7 +52,7 @@ export default function Portfolio() {
             Investments Calculator
           </button>
           <button
-            className="px-4 py-1 bg-blue-400 "
+            className="px-4 py-1 bg-gray-100 "
             onClick={() => {
               setShowInvestments(false);
               setShowModal(true);
