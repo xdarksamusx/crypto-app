@@ -97,14 +97,14 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
 
   return (
     <div className="w-64 relative">
-      <div className="w-full py-2">
+      <div className="w-full ">
         <div
           ref={inputRef}
           onClick={() => {
             setIsOpen(true);
             setShowList(true);
           }}
-          className="selected-value flex bg-gray-200 justify-between items-center px-4 py-2 rounded border border-gray-300 cursor-pointer"
+          className="selected-value flex bg-gray-200 justify-between items-center px-4  rounded border border-gray-300 cursor-pointer"
         >
           <input
             className="bg-gray-200 focus:outline-none w-full"
@@ -130,7 +130,6 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
         <div className={`arrow ${isOpen ? "block" : "hidden"}`}></div>
       </div>
 
-      {/* Dropdown Menu */}
       {showList && (
         <div
           className={`${
@@ -142,7 +141,7 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
             return (
               <div
                 key={`${id}-${index}`}
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                className="px-4  hover:bg-gray-100 cursor-pointer"
               >
                 {href ? (
                   <Link href={href(option.id)} className="block">

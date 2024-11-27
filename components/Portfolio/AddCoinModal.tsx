@@ -42,6 +42,16 @@ const AddCoinModal: React.FC<AddCoinModalProps> = ({
   setShowModal,
   allCoins,
 }) => {
+  const fetchData = async () => {
+    console.log("selected option", selectedOption);
+    const data =
+      await fetch(`https://api.coingecko.com/api/v3/coins/${selectedOption.id}
+      `);
+
+    return await data.json();
+  };
+
+  const [coinData, setCoinData] = useState(null);
   const [isClient, setIsClient] = useState(false);
   const [value, setValue] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<CoinOption | null>(null);
@@ -64,12 +74,14 @@ const AddCoinModal: React.FC<AddCoinModalProps> = ({
     setDate(value);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    const coinData = await fetchData();
+    const { market_data } = coinData;
     const item: Portfolio = {
       name: value,
       amountBought: parseFloat(investmentAmount),
       date: date,
-      data: selectedOption,
+      market_data,
     };
 
     dispatch(addCoin(item));
@@ -81,6 +93,21 @@ const AddCoinModal: React.FC<AddCoinModalProps> = ({
   const handleModal = () => {
     setShowModal(false);
   };
+
+  // console.log("sel;ected", selectedOption);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data =
+  //       await fetch(`https://api.coingecko.com/api/v3/coins/${selectedOption}
+  //     `);
+
+  //     const coinData = data.json();
+  //     console.log("coin data for coin", coinData);
+  //     setCoinData(coinData);
+  //   };
+  //   fetchData();
+  // }, [selectedOption]);
 
   return (
     <>
@@ -101,7 +128,7 @@ const AddCoinModal: React.FC<AddCoinModalProps> = ({
                 {selectedOption && (
                   <img
                     className="h-34 w-36 mx-auto"
-                    src={`${selectedOption.image.large}`}
+                    src={`${selectedOption.image?.large}`}
                     alt=""
                   />
                 )}

@@ -48,7 +48,6 @@ const PriceChart: React.FC = () => {
 
     const fetchData = async () => {
       try {
-        console.log("Selected currency and coin:", currency, coin?.name);
         const response = await fetch(
           `https://xdarksamusx.github.io/chart-files/charts/${currency.toLowerCase()}-charts/${coin.name.toLowerCase()}.json`
         );
@@ -60,7 +59,6 @@ const PriceChart: React.FC = () => {
         const data = await response.json();
 
         const newPriceData = computePriceCharts(data, unit);
-        console.log("see the data her", console.log(newPriceData));
 
         setChart(data);
       } catch (error) {
@@ -80,7 +78,6 @@ const PriceChart: React.FC = () => {
     if (chart) {
       try {
         const computedData = computePriceCharts(chart, selectedUnit);
-        console.log("compiuted data", computedData);
         setPriceChart(computedData);
       } catch (error) {
         console.error("Error computing chart data:", error);

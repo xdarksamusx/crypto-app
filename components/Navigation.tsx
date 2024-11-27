@@ -12,6 +12,7 @@ import SearchableDropdown from "./Portfolio/SearchableDropDown";
 import {
   setCurrency,
   setCurrencyData,
+  selectCurrency,
 } from "../redux/features/currencySelection";
 import Link from "next/link";
 

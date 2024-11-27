@@ -60,7 +60,7 @@ const Home = () => {
     };
 
     fetchData();
-  }, []);
+  }, [currency]);
 
   // Handle sorting colors
   useEffect(() => {
@@ -83,7 +83,7 @@ const Home = () => {
         <PriceChart coindata={top20Coins} />
       </div>
 
-      <div className="mt-8">
+      <div className="mt-8 max-w-7xl mx-auto">
         <ChartButtons
           handleSelectedUnit={handleSelectedUnit}
           selectedUnit={selectedUnit}
