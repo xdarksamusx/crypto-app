@@ -10,6 +10,9 @@ interface CoinCardProps {
 
 const CoinCard: React.FC<CoinCardProps> = ({ coin }) => {
   const currency = useAppSelector((state) => state.currency.currency);
+  const currencySymbol = useAppSelector(
+    (state) => state.currency.currencySymbol
+  );
 
   if (!coin.data) {
     return null;

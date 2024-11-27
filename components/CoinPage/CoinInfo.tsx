@@ -122,9 +122,9 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
   }
   return (
     <>
-      <div className="flex gap-x-10 border-b-2 border-red-500">
+      <div className="flex gap-x-10 border-b-2 border-gray-100">
         <div className="  w-full flex   ">
-          <div className=" flex  flex-col gap-y-6 gap-x-2.5 bg-blue-500 w-96 py-8 px-7">
+          <div className=" flex  flex-col gap-y-6 gap-x-2.5 bg-gray-100 w-96 py-8 px-7">
             <div className="flex gap-x-2.5">
               <div className="image">
                 <img src={pageData.image?.small || ""} alt="coin-image" />{" "}
@@ -149,7 +149,7 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
               <span> {market_data?.high_24h?.usd || "N/A"}</span>
             </div>
 
-            <div className="border-b-2 border-red-500 ">
+            <div className="border-b-2 border-gray-100 ">
               <div className="mb-2">
                 Cap rank: {pageData.market_cap_rank || "N/A"}
               </div>
@@ -165,7 +165,7 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
                       {" "}
                       <div className="flex items-center ">
                         {" "}
-                        <div className="  fill-green-300 h-4 text-center flex justify-center items-stretch">
+                        <div className="  fill-gray-100 h-4 text-center flex justify-center items-stretch">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#000000"
@@ -195,7 +195,7 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
                       {" "}
                       <div className="flex items-center ">
                         {" "}
-                        <div className=" fill-green-300 h-4 text-center flex justify-center items-end">
+                        <div className=" fill-gray-100 h-4 text-center flex justify-center items-end">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#000000"
@@ -225,7 +225,7 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
       </div>
       ‹
       <div className=" flex flex-wrap mt-8   ">
-        <div className="flex flex-col  py-4    gap-y-3  bg-blue-600   w-2/5  ">
+        <div className="flex flex-col  py-4    gap-y-3  bg-gray-100   w-2/5  ">
           {pageData && (
             <CoinTokenInfoCard
               value1={totalVolumeInEN}
@@ -237,7 +237,7 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
             />
           )}
         </div>
-        <div className="flex flex-col py-4 px-2 ml-8  gap-y-3 bg-blue-600 w-2/5 ">
+        <div className="flex flex-col py-4 px-2 ml-8  gap-y-3 bg-gray-100 w-2/5 ">
           {pageData && (
             <CoinTokenInfoCard
               value1={maxSupply}
@@ -247,7 +247,7 @@ const CoinInfo: React.FC<CoinInfoProps> = ({
             />
           )}
         </div>
-        <div className="flex flex-col  py-4  my-4 gap-y-3   bg-blue-600   w-2/5  ">
+        <div className="flex flex-col  py-4  my-4 gap-y-3   bg-gray-100   w-2/5  ">
           {pageData && (
             <CoinTokenInfoCard
               value1={fullyDilutedValuationEN}

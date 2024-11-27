@@ -1,27 +1,21 @@
 export interface Portfolio {
+  name: string;
   amountBought: number;
   date: string;
-  name: string;
-
-  data: {
-    market_data: {
-      current_price: {
-        usd: number;
-      };
-      price_change_24h_in_currency: {
-        usd: number;
-      };
-      market_cap: {
-        usd: number;
-      };
-      total_volume: {
-        usd: number;
-      };
-      circulating_supply: number;
-      max_supply: number;
+  market_data?: {
+    current_price: {
+      usd: number;
     };
-    image: {
-      small: string;
+    price_change_24h_in_currency: {
+      usd: number;
     };
-  } | null;
+    market_cap: {
+      usd: number;
+    };
+    total_volume: {
+      usd: number;
+    };
+    circulating_supply: number;
+    max_supply: number;
+  }; // Add this if `market_data` is required
 }

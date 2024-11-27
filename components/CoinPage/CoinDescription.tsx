@@ -15,13 +15,15 @@ interface CoinDescriptionProps {
 
 const CoinDescription: React.FC<CoinDescriptionProps> = ({ pageData }) => {
   return (
-    <div>
-      <div>{pageData.description?.en || "Description not available"}</div>
+    <div className="bg-gray-100 flex flex-col justify-between py-5 px-5 ">
+      <div className="">
+        {pageData.description?.en || "Description not available"}
+      </div>
       <div className="flex gap-2 py-2">
         {pageData.links?.blockchain_site
           ?.filter((url) => url && url !== "")
           .map((url) => (
-            <div className="flex bg-green-300 py-1 px-1" key={url}>
+            <div className="flex bg-gray-200 py-1" key={url}>
               {url} <CopyIcon />{" "}
             </div>
           )) || <div>No blockchain site available</div>}

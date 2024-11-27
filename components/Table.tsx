@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Star from "../icons/Star";
 import LineChart from "./7DayChart";
 import { capitalizeFirstLetter } from "../app/utils/apiData";
@@ -24,7 +24,6 @@ function Table({ coins }) {
         <table className="min-w-full border-gray-200 border-collapse">
           <thead className="border-t-2 border-b-2 text-xs">
             <tr>
-              {/* Headers for the table */}
               <th className="px-6 py-1 border-b border-gray-200 text-left text-sm uppercase font-medium">
                 <div className="flex items-end justify-start">
                   <span className="flex items-end">

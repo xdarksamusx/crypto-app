@@ -4,6 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { createPortal } from "react-dom";
 import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
+import { formatPercentage } from "@utils/calculations";
 
 import { CoinData } from "../app/utils/interfaces"; // import { convertCurrency } from "@utils/CurrencyConversions";
 
@@ -60,10 +61,10 @@ const CustomRightArrow: React.FC<CustomArrowProps> = ({ onClick }) => {
 
 export const Carousels: React.FC = () => {
   const coins = useAppSelector((state) => state.selectedCoin.coins);
-  // console.log("coins", coins);
   const currency = useAppSelector((state) => state.currency.currency);
-  const previousCurrency = useAppSelector(
-    (state) => state.currency.previousCurrency
+
+  const currencySymbol = useAppSelector(
+    (state) => state.currency.currencySymbol
   );
 
   const selectedCoin = useAppSelector(
@@ -111,16 +112,21 @@ export const Carousels: React.FC = () => {
               <div className="flex">
                 <p className="mr-2">
                   {" "}
-                  <span>{currency}</span>
+                  <span>
+                    {currencySymbol}
+                    {coin.current_price}
+                  </span>
                 </p>
                 <p
                   className={`${
-                    coin.dailyColor === "red"
-                      ? "text-red-500"
-                      : "text-green-500"
+                    coin.market_cap_change_percentage_24h > 0
+                      ? "text-green-500"
+                      : "text-red-500"
                   }`}
                 >
-                  {coin.market_cap_change_percentage_24h.toFixed(2)}%
+                  {coin.market_cap_change_percentage_24h > 0 ? "▲" : "▼"}
+
+                  {formatPercentage(coin.market_cap_change_percentage_24h)}
                 </p>
               </div>
             </div>
