@@ -14,25 +14,19 @@ const CoinCard: React.FC<CoinCardProps> = ({ coin }) => {
     (state) => state.currency.currencySymbol
   );
 
-  if (!coin.data) {
-    return null;
-  }
-
   const {
     amountBought = 0,
     name = "",
     date = "",
-    data: {
-      image = { small: "", large: "", thumb: "" },
-      market_data = {
-        current_price: { usd: 0 },
-        price_change_24h_in_currency: { usd: 0 },
-        market_cap: { usd: 0 },
-        total_volume: { usd: 0 },
-        circulating_supply: 0,
-        max_supply: 0,
-      },
-    } = {},
+    image = { small: "", large: "", thumb: "" },
+    market_data = {
+      current_price: { usd: 0 },
+      price_change_24h_in_currency: { usd: 0 },
+      market_cap: { usd: 0 },
+      total_volume: { usd: 0 },
+      circulating_supply: 0,
+      max_supply: 0,
+    },
   } = coin;
 
   return (
