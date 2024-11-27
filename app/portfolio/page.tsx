@@ -16,7 +16,9 @@ export default function Portfolio() {
 
   const portfolio = useAppSelector((state) => state.portfolio.portfolio);
 
-  useEffect(() => {}, [portfolio]);
+  useEffect(() => {
+    console.log("portfolio so far", portfolio);
+  }, [portfolio]);
 
   useEffect(() => {
     setIsClient(true);
@@ -39,7 +41,7 @@ export default function Portfolio() {
         {" "}
         <p>Your statistics</p>
         <div className=" flex gap-3">
-          <button className="px-4 py-1 bg-blue-400">Greed & Fear Index</button>
+          <button className="px-4 py-1 bg-gray-100">Greed & Fear Index</button>
           <button
             className="px-4 py-1 bg-blue-400 "
             onClick={() => {

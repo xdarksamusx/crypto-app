@@ -2,6 +2,7 @@ export interface Portfolio {
   name: string;
   amountBought: number;
   date: string;
+  image: string;
   market_data?: {
     current_price: {
       usd: number;
@@ -17,5 +18,5 @@ export interface Portfolio {
     };
     circulating_supply: number;
     max_supply: number;
-  }; // Add this if `market_data` is required
+  };
 }
