@@ -16,6 +16,8 @@ import {
 } from "../redux/features/currencySelection";
 import Link from "next/link";
 
+import Login from "./Login";
+
 interface CoinOption {
   id: string;
   name: string;
@@ -47,13 +49,6 @@ interface NavigationProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-// setSelectedOption={setSelectedOption}
-// options={allCoins}
-// label="name"
-// id="id"
-// selectedVal={value}
-// handleChange={(val: string) => setValue(val)}
-
 function Navigation() {
   const currencyArray = ["$", "€", "£", "₿", "Ξ"];
   const [settingsDropdownVisible, setSettingsDropdownVisible] = useState(false);
@@ -63,6 +58,7 @@ function Navigation() {
   const [value, setValue] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<CoinOption | null>(null);
   const [allCoins, setAllCoins] = useState<any>(null);
+  const [showLogin, setShowLogin] = useState(false);
 
   const currency = useAppSelector((state) => state.currency.currency);
 
@@ -84,6 +80,10 @@ function Navigation() {
 
   const handleDropDownMenu = () => {
     setAccountDropdownVisible(false);
+  };
+
+  const handleShowLogin = () => {
+    setShowLogin(true);
   };
 
   const handleCurrencySelection = (currencySymbol: string) => {
@@ -137,7 +137,7 @@ function Navigation() {
           <div className="static  w-28 focus:outline-none   ">
             {" "}
             <button
-              className=" border-2   bg-slate-200 transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
+              className=" border-2 mx-0  bg-slate-200 transform transition-transform duration-300 ease-in-out flex items-center  justify-center focus:outline-none  h-6 w-8 hover:scale-125 "
               onClick={() => {
                 handdleThemeChange();
                 handleChangeImage();
@@ -153,6 +153,23 @@ function Navigation() {
                 </div>
               )}
             </button>
+          </div>
+          <div className=" flex  ">
+            <p
+              onClick={() => handleShowLogin()}
+              className="px-0 py-0 mx-0 my-0 
+            "
+            >
+              Sign in
+            </p>
+            {showLogin && (
+              <div className="">
+                {" "}
+                <Login showLogin={showLogin} setShowLogin={setShowLogin} />{" "}
+              </div>
+            )}
+            <p className="px-0 py-0 mx-0 my-0">/</p>
+            <p className="px-0 py-0 mx-0 my-0">Sign up</p>
           </div>
           <div>
             <button

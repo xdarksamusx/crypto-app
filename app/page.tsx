@@ -25,6 +25,8 @@ const Home = () => {
   const coinData = useAppSelector((state) => state.currency.data);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastVisible, setLastVisible] = useState(null);
+  const [showLogin, setShowLogin] = useState(false);
+
   const dispatch = useAppDispatch();
   const dispatchCurrencyData = useAppDispatch();
   // const coins = useAppSelector((state) => state.coins.coins);
