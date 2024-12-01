@@ -17,6 +17,7 @@ import {
 import Link from "next/link";
 
 import Login from "./Login";
+import SignUp from "./SignUp";
 
 interface CoinOption {
   id: string;
@@ -59,6 +60,7 @@ function Navigation() {
   const [selectedOption, setSelectedOption] = useState<CoinOption | null>(null);
   const [allCoins, setAllCoins] = useState<any>(null);
   const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
 
   const currency = useAppSelector((state) => state.currency.currency);
 
@@ -86,10 +88,14 @@ function Navigation() {
     setShowLogin(true);
   };
 
+  const handleShowRegister = () => {
+    setShowRegister(true);
+  };
+
   const handleCurrencySelection = (currencySymbol: string) => {
-    const currencyMap = {
+    const currencyMap: Record<string, string> = {
       $: "usd",
-      "€": "eur",
+      "€": "euro",
       "£": "gbp",
       "₿": "btc",
       Ξ: "eth",
@@ -169,7 +175,20 @@ function Navigation() {
               </div>
             )}
             <p className="px-0 py-0 mx-0 my-0">/</p>
-            <p className="px-0 py-0 mx-0 my-0">Sign up</p>
+            <p
+              onClick={() => handleShowRegister()}
+              className="px-0 py-0 mx-0 my-0"
+            >
+              Sign up
+            </p>
+            {showRegister && (
+              <div>
+                <SignUp
+                  showRegister={showRegister}
+                  setShowRegister={setShowRegister}
+                />
+              </div>
+            )}
           </div>
           <div>
             <button

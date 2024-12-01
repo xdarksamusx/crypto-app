@@ -24,6 +24,8 @@ import { createLabels } from "@app/utils/selectedChartPeriod";
 const VolumeChart: React.FC = () => {
   const [volumeChart, setVolumeChart] = useState([]);
   const [chart, setChart] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+
   const coinData = useAppSelector((state) => state.currency.data);
 
   const top20coins = coinData.slice(0, 20);
@@ -44,7 +46,10 @@ const VolumeChart: React.FC = () => {
   const volumeData: [] = createVolumeChart(coin, unit);
 
   useEffect(() => {
-    if (!coin || !currency) return;
+    if (!coin || !currency) {
+      console.warn("Missing coin or currency data.");
+      return;
+    }
 
     const fetchData = async () => {
       try {
@@ -60,14 +65,18 @@ const VolumeChart: React.FC = () => {
 
         const newVolumeData = computeVolumeCharts(data, unit);
 
-        setChart(data);
+        setChart(data); // Assuming `setChart` stores the entire fetched data
       } catch (error) {
-        console.error("Error fetching data:", {
-          message: error.message,
-          stack: error.stack,
-          coin,
-          currency,
-        });
+        if (error instanceof Error) {
+          console.error("Error fetching data:", {
+            message: error.message,
+            stack: error.stack,
+            coin,
+            currency,
+          });
+        } else {
+          console.error("Unknown error occurred:", error);
+        }
       }
     };
 

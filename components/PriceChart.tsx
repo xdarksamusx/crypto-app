@@ -22,9 +22,17 @@ import { ChartOptions, ChartData } from "chart.js";
 import { setCurrencyData } from "../redux/features/currencySelection";
 import { createLabels } from "@app/utils/selectedChartPeriod";
 
+interface Error {
+  message: string;
+  stack: string;
+  coin: string;
+  currency: string;
+}
+
 const PriceChart: React.FC = () => {
   const [priceChart, setPriceChart] = useState([]);
   const [chart, setChart] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const coinData = useAppSelector((state) => state.currency.data);
 
   const top20coins = coinData.slice(0, 20);
@@ -47,6 +55,11 @@ const PriceChart: React.FC = () => {
     if (!coin || !currency) return;
 
     const fetchData = async () => {
+      if (!coin || !currency) {
+        console.error("Coin or currency is missing");
+        return;
+      }
+
       try {
         const response = await fetch(
           `https://xdarksamusx.github.io/chart-files/charts/${currency.toLowerCase()}-charts/${coin.name.toLowerCase()}.json`
@@ -62,12 +75,18 @@ const PriceChart: React.FC = () => {
 
         setChart(data);
       } catch (error) {
-        console.error("Error fetching data:", {
-          message: error.message,
-          stack: error.stack,
-          coin,
-          currency,
-        });
+        if (error instanceof Error) {
+          console.error("Error fetching data:", {
+            message: error.message,
+            stack: error.stack,
+            coin,
+            currency,
+          });
+          setError(error.message);
+        } else {
+          console.error("Unknown error occurred:", error);
+          setError("An unknown error occurred");
+        }
       }
     };
 

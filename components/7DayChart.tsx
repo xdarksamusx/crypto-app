@@ -11,7 +11,7 @@ import { CategoryScale } from "chart.js";
 Chart.register(CategoryScale);
 
 interface LineChartProps {
-  chart: number[]; // Directly accept an array
+  chart: number[];
 }
 const monthsArray: string[] = [
   "July-2023",
@@ -24,11 +24,10 @@ const monthsArray: string[] = [
   "February-2024",
   "March-2024, April-2024, May-2024, June-2024, July-2024",
 ];
-// const isServer = typeof window === "undefined";
 
 const labels = monthsArray;
 
-function LineChart(chart: ChartData) {
+function LineChart(chart: any) {
   const data = {
     labels: labels,
 

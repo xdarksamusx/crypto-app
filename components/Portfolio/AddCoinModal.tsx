@@ -43,7 +43,10 @@ const AddCoinModal: React.FC<AddCoinModalProps> = ({
   allCoins,
 }) => {
   const fetchData = async () => {
-    console.log("selected option", selectedOption);
+    if (!selectedOption) {
+      console.error("No coin selected.");
+      return null;
+    }
     const data =
       await fetch(`https://api.coingecko.com/api/v3/coins/${selectedOption.id.toLowerCase()}
       `);
@@ -94,21 +97,6 @@ const AddCoinModal: React.FC<AddCoinModalProps> = ({
   const handleModal = () => {
     setShowModal(false);
   };
-
-  // console.log("sel;ected", selectedOption);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data =
-  //       await fetch(`https://api.coingecko.com/api/v3/coins/${selectedOption}
-  //     `);
-
-  //     const coinData = data.json();
-  //     console.log("coin data for coin", coinData);
-  //     setCoinData(coinData);
-  //   };
-  //   fetchData();
-  // }, [selectedOption]);
 
   return (
     <>

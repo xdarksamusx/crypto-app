@@ -34,7 +34,11 @@ const CoinCard: React.FC<CoinCardProps> = ({ coin }) => {
       <div className="flex items-center flex-col justify-center w-1/4">
         <div className="image">
           {image?.small ? (
-            <img className="w-[100px] h-[100px]" src={image.small} alt={name} />
+            <img
+              className="w-[100px] h-[100px]"
+              src={image?.small}
+              alt={name}
+            />
           ) : (
             <p>No Image Available</p>
           )}

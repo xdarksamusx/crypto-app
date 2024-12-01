@@ -1,34 +1,41 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+interface UserInfo {
+  id: string;
+  username: string;
+  email: string;
+  token?: string;
+}
+
 interface AuthState {
   loading: boolean;
-  userInfo: Record<string, any>;
-  userToken: string | null;
+  userInfo: UserInfo | null;
   error: string | null;
   success: boolean;
 }
 
 const initialState: AuthState = {
   loading: false,
-  userInfo: {},
-  userToken: null,
+
   error: null,
   success: false,
+  userInfo: null,
 };
 
 export const login = createAsyncThunk(
   "auth/login",
   async (credentials: { username: string; password: string }, thunkAPI) => {
     try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(credentials),
-      });
-      if (!response.ok) {
+      const response = await fetch(
+        `http://localhost:3001/users?email=${credentials.username}&password=${credentials.password}`
+      );
+      const data = await response.json();
+
+      if (data.length === 0) {
         throw new Error("Invalid credentials");
       }
-      return await response.json();
+
+      return data[0];
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -38,7 +45,14 @@ export const login = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logout(state) {
+      (state.loading = false),
+        (state.error = null),
+        (state.success = false),
+        (state.userInfo = null);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
@@ -48,16 +62,19 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
-        state.userInfo = action.payload.userInfo;
-        state.userToken = action.payload.token;
+        state.userInfo = action.payload;
         state.success = true;
+        console.log("Login successful:", action.payload);
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
         state.success = false;
+        console.error("Login failed:", action.payload);
       });
   },
 });
+
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

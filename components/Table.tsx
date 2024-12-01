@@ -12,8 +12,13 @@ import { useAppSelector } from "../redux/hooks";
 import { numberWithCommas } from "../app/utils/moreComputations";
 import { absoluteValue } from "@utils/calculations";
 import { formatPercentage } from "@utils/calculations";
+import { TableCoinData } from "@utils/interfaces";
 
-function Table({ coins }) {
+interface TableProps {
+  coins: TableCoinData[]; // Expect coins to be an array of TableCoinData
+}
+
+const Table: React.FC<TableProps> = ({ coins }) => {
   const coinData = useAppSelector((state) => state.currency.data);
 
   const currency = useAppSelector((state) => state.currency.currencySymbol);
@@ -231,7 +236,7 @@ function Table({ coins }) {
       </div>
     </div>
   );
-}
+};
 
 export default Table;
 

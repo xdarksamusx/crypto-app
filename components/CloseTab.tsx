@@ -1,15 +1,21 @@
-const CloseTab: React.FC = ({ showLogin, setShowLogin }) => {
-  const handleCloseModal = () => {
-    setShowLogin(false);
-  };
+interface CloseTabProps {
+  onClose: () => void;
+  label?: string;
+  className?: string;
+}
 
+const CloseTab: React.FC<CloseTabProps> = ({
+  onClose,
+  label = "Close",
+  className = "",
+}) => {
   //
 
   return (
     <>
       <svg
         className="w-4 h-4"
-        onClick={() => handleCloseModal()}
+        onClick={onClose}
         xmlns="http://www.w3.org/2000/svg"
         id="Bold"
         viewBox="0 0 24 24"
