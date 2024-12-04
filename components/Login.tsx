@@ -3,7 +3,7 @@ import CloseTab from "./CloseTab";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../redux/hooks";
 import { login } from "../redux/features/authenticationSlice";
-import type { RootState } from "../redux/store"; // Import RootState type
+import type { RootState } from "../redux/store";
 
 const Login: React.FC<{
   showLogin: boolean;
@@ -21,7 +21,6 @@ const Login: React.FC<{
     e.preventDefault();
 
     try {
-      // Dispatch login and unwrap the result
       const result = await dispatch(
         login({
           username: email,
@@ -85,7 +84,7 @@ const Login: React.FC<{
                 <button
                   type="submit"
                   className="px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-500"
-                  disabled={loading} // Disable button if loading
+                  disabled={loading}
                 >
                   {loading ? "Logging in..." : "Login"}
                 </button>

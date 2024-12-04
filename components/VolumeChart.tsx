@@ -65,7 +65,7 @@ const VolumeChart: React.FC = () => {
 
         const newVolumeData = computeVolumeCharts(data, unit);
 
-        setChart(data); // Assuming `setChart` stores the entire fetched data
+        setChart(data);
       } catch (error) {
         if (error instanceof Error) {
           console.error("Error fetching data:", {
