@@ -31,7 +31,8 @@
     ".next/types/**/*.ts",
     "components/**/*",
     "custom.d.ts",
-    "firebase/transferData.js"
+    "firebase/transferData.js",
+    "utils/fetchCoinData.js"
   ],
   "exclude": ["node_modules"]
 }

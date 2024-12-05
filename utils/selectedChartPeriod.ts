@@ -16,37 +16,39 @@ export const computeVolumeCharts = function (chart: any, unit: string) {
   switch (unit) {
     case "7D":
       volumeChart = ninetyDayData.total_volumes.slice(0, 100);
-      total_Volumes_Array = volumeChart.map((volume) => volume[1]);
+      total_Volumes_Array = volumeChart.map((volume: any) => volume[1]);
 
       return total_Volumes_Array;
 
     case "14D":
       volumeChart = ninetyDayData.total_volumes.slice(0, 200);
-      total_Volumes_Array = volumeChart.map((volume) => volume[1]);
+      total_Volumes_Array = volumeChart.map((volume: any) => volume[1]);
 
       return total_Volumes_Array;
 
     case "1M":
       volumeChart = ninetyDayData.total_volumes.slice(0, 800);
-      total_Volumes_Array = volumeChart.map((volume) => volume[1]);
+      total_Volumes_Array = volumeChart.map((volume: any) => volume[1]);
 
       return total_Volumes_Array;
 
     case "3M":
       volumeChart = ninetyDayData.total_volumes;
-      total_Volumes_Array = volumeChart.map((volume) => volume[1]);
+      total_Volumes_Array = volumeChart.map((volume: any) => volume[1]);
 
       return ninetyDayData;
 
     case "1Y":
       volumeChart = yearlyData.total_volumes;
-      total_Volumes_Array = volumeChart.map((volume) => volume[1]);
+      total_Volumes_Array = volumeChart.map((volume: any) => volume[1]);
 
       return total_Volumes_Array;
     case "5Y":
 
     default:
-      total_Volumes_Array = dailyData.total_volumes.map((volume) => volume[1]);
+      total_Volumes_Array = dailyData.total_volumes.map(
+        (volume: any) => volume[1]
+      );
 
       return total_Volumes_Array;
   }
@@ -60,37 +62,37 @@ export const computePriceCharts = function (chart: any, unit: string) {
   switch (unit) {
     case "7D":
       priceChart = ninetyDayData.prices.slice(0, 100);
-      totalPriceArray = priceChart.map((price) => price[1]);
+      totalPriceArray = priceChart.map((price: any) => price[1]);
 
       return totalPriceArray;
 
     case "14D":
       priceChart = ninetyDayData.prices.slice(0, 200);
-      totalPriceArray = priceChart.map((price) => price[1]);
+      totalPriceArray = priceChart.map((price: any) => price[1]);
 
       return totalPriceArray;
 
     case "1M":
       priceChart = ninetyDayData.prices.slice(0, 800);
-      totalPriceArray = priceChart.map((price) => price[1]);
+      totalPriceArray = priceChart.map((price: any) => price[1]);
 
       return totalPriceArray;
 
     case "3M":
       priceChart = ninetyDayData.prices;
-      totalPriceArray = priceChart.map((price) => price[1]);
+      totalPriceArray = priceChart.map((price: any) => price[1]);
 
       return totalPriceArray;
 
     case "1Y":
       priceChart = yearlyData.prices;
-      totalPriceArray = priceChart.map((price) => price[1]);
+      totalPriceArray = priceChart.map((price: any) => price[1]);
 
       return totalPriceArray;
     case "5Y":
 
     default:
-      totalPriceArray = dailyData.prices.map((price) => price[1]);
+      totalPriceArray = dailyData.prices.map((price: any) => price[1]);
 
       return totalPriceArray;
   }

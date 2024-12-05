@@ -24,9 +24,6 @@ function Header() {
   const coins = useAppSelector((state) => state.coins.coins);
 
   const currency = useAppSelector((state) => state.currency.currency);
-  const previousCurrency = useAppSelector(
-    (state) => state.currency.previousCurrency
-  );
 
   useEffect(() => {
     const fetchData = async () => {

@@ -19,15 +19,18 @@ import ChartButtons from "../components/ChartButtons";
 
 import { updateColors } from "../redux/features/sortSlice";
 import { selectUnit } from "../redux/features/coinSelectionSlice";
+import { TableCoinData } from "@utils/interfaces";
+import { transformCoinData } from "@utils/fetchCoinData";
 
 const Home = () => {
-  const [coins, setCoins] = useState([]);
+  const [coins, setCoins] = useState<TableCoinData[]>([]);
   const coinData = useAppSelector((state) => state.currency.data);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastVisible, setLastVisible] = useState(null);
+  const [showLogin, setShowLogin] = useState(false);
+
   const dispatch = useAppDispatch();
   const dispatchCurrencyData = useAppDispatch();
-  // const coins = useAppSelector((state) => state.coins.coins);
   const status = useAppSelector((state) => state.coins.status);
   const dispatchSortingColors = useAppDispatch();
   const fetchOnce = useRef(false);
@@ -55,20 +58,21 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchCoinData(currency);
-      setCoins(data);
+      const rawData = await fetchCoinData(currency);
+
+      const transformedData = rawData.map((data) => transformCoinData(data));
+
+      setCoins(transformedData);
     };
 
     fetchData();
   }, [currency]);
 
-  // Handle sorting colors
   useEffect(() => {
     dispatchSortingColors(updateColors());
     setIsClient(true);
   }, [dispatch]);
 
-  // Render nothing on the server-side
   if (!isClient) {
     return null;
   }
@@ -79,8 +83,8 @@ const Home = () => {
         <Carousels />
       </div>
       <div className="mt-8 flex max-w-7xl mx-auto justify-around items-center">
-        <VolumeChart coindata={top20Coins} />
-        <PriceChart coindata={top20Coins} />
+        <VolumeChart />
+        <PriceChart />
       </div>
 
       <div className="mt-8 max-w-7xl mx-auto">

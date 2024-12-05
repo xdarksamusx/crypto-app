@@ -3,10 +3,10 @@ export const absoluteValue = (a: number) => {
 };
 
 export const formatPercentage = (value: number | null): string => {
-  if (value === null || value === undefined) return "0.00%"; // Handle null or undefined cases
+  if (value === null || value === undefined) return "0.00%";
 
-  const absValue = Math.abs(value); // Take absolute value
-  return Number.isInteger(absValue) // Check if it's an integer
-    ? `${absValue.toFixed(2)}%` // Add '.00' for integers
-    : `${absValue.toFixed(2)}%`; // Keep two decimals for floats
+  const absValue = Math.abs(value);
+  return Number.isInteger(absValue)
+    ? `${absValue.toFixed(2)}%`
+    : `${absValue.toFixed(2)}%`;
 };

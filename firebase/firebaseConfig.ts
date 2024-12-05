@@ -8,8 +8,6 @@ import {
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 
-// Your Firebase configuration
-
 require("dotenv").config();
 
 const firebaseConfig = {
@@ -22,14 +20,8 @@ const firebaseConfig = {
   measurementId: "G-1VJBRDX9PY",
 };
 
-// Initialize Firebase
-
-// Export your Firestore instance if needed
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firestore with offline persistence
 const db = initializeFirestore(app, {
   localCache: persistentLocalCache(), // Enables IndexedDB persistence by default
 });

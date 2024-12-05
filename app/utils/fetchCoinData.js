@@ -1,6 +1,5 @@
-// src/utils/fetchCoinData.js
 import { collection, getDocs } from "firebase/firestore";
-import db from "../firebaseConfig"; // Adjust the path to your firebaseConfig file
+import db from "../../firebase/firebaseConfig";
 
 const fetchCoinData = async (currency) => {
   try {

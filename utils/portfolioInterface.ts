@@ -2,7 +2,11 @@ export interface Portfolio {
   name: string;
   amountBought: number;
   date: string;
-  image: string;
+  image: {
+    small: string | null;
+    large: string | null;
+    thumb: string | null;
+  };
   market_data?: {
     current_price: {
       usd: number;

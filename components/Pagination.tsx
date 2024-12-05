@@ -12,9 +12,8 @@ const Pagination: React.FC<PaginationProps> = ({
   onPageChange,
 }) => {
   const pageNumbers: number[] = [];
-  const maxPageButtons = 5; // Show 5 page numbers at a time
+  const maxPageButtons = 5;
 
-  // Calculate which page numbers to show
   if (totalPages <= maxPageButtons) {
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(i);
@@ -24,8 +23,8 @@ const Pagination: React.FC<PaginationProps> = ({
     const endPage = Math.min(totalPages, currentPage + 2);
 
     if (startPage > 1) {
-      pageNumbers.push(1); // Always show the first page
-      if (startPage > 2) pageNumbers.push(-1); // Ellipsis indicator
+      pageNumbers.push(1);
+      if (startPage > 2) pageNumbers.push(-1);
     }
 
     for (let i = startPage; i <= endPage; i++) {
@@ -33,8 +32,8 @@ const Pagination: React.FC<PaginationProps> = ({
     }
 
     if (endPage < totalPages - 1) {
-      pageNumbers.push(-1); // Ellipsis indicator
-      pageNumbers.push(totalPages); // Always show the last page
+      pageNumbers.push(-1);
+      pageNumbers.push(totalPages);
     }
   }
 
@@ -57,12 +56,12 @@ const Pagination: React.FC<PaginationProps> = ({
   return (
     <div className="pagination-container text-center mt-4 flex justify-center items-center space-x-2">
       <button onClick={handlePrevPage} disabled={currentPage === 1}>
-        &lt; {/* Left arrow */}
+        &lt;
       </button>
       {pageNumbers.map((number, index) => (
         <React.Fragment key={index}>
           {number === -1 ? (
-            <span>...</span> // Ellipsis for skipped pages
+            <span>...</span>
           ) : (
             <button
               onClick={() => handlePageClick(number)}
@@ -74,7 +73,7 @@ const Pagination: React.FC<PaginationProps> = ({
         </React.Fragment>
       ))}
       <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-        &gt; {/* Right arrow */}
+        &gt;
       </button>
     </div>
   );
