@@ -10,14 +10,21 @@ const SignUp: React.FC<{
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmitForm = () => {
     setPassword("");
     setEmail("");
   };
 
   const handleCloseModal = () => {
     setShowRegister(false);
+  };
+
+  const handlPassword = (e: any) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const handlConfirmPassword = (e: any) => {
+    setConfirmPassword(e.target.value);
   };
 
   return (
@@ -34,7 +41,7 @@ const SignUp: React.FC<{
             </div>
 
             <form
-              onSubmit={(e) => handleSubmitForm(e)}
+              onSubmit={handleSubmitForm}
               className="flex flex-col space-y-4"
               action=""
             >
@@ -60,7 +67,7 @@ const SignUp: React.FC<{
                   id="password"
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => handlPassword(e)}
                 />
               </div>
 
@@ -73,7 +80,7 @@ const SignUp: React.FC<{
                   id="confirmPassword"
                   type="confirmPassword"
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={(e) => handlConfirmPassword(e)}
                 />
               </div>
 

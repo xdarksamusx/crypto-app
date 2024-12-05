@@ -162,7 +162,7 @@ function Navigation() {
           </div>
           <div className=" flex  ">
             <p
-              onClick={() => handleShowLogin()}
+              onClick={handleShowLogin}
               className="px-0 py-0 mx-0 my-0 
             "
             >

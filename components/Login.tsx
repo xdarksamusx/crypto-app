@@ -17,9 +17,7 @@ const Login: React.FC<{
     (state: RootState) => state.authentication
   );
 
-  const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleSubmitForm = async () => {
     try {
       const result = await dispatch(
         login({
@@ -51,7 +49,7 @@ const Login: React.FC<{
             </div>
 
             <form
-              onSubmit={(e) => handleSubmitForm(e)}
+              onSubmit={handleSubmitForm}
               className="flex flex-col space-y-4"
             >
               <div>
