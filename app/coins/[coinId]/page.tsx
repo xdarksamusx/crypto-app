@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import CoinInfo from "@components/CoinPage/CoinInfo";
+import CoinInfo from "../../../components/CoinPage/CoinInfo";
+
 import axios from "axios";
 
 interface PageData {

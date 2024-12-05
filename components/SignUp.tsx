@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CloseTab from "./CloseTab";
+import React from "react";
 
 const SignUp: React.FC<{
   showRegister: boolean;
