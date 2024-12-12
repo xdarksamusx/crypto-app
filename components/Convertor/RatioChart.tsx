@@ -22,6 +22,8 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 interface SelectedUnit {
   selectedUnit: string;
   boxSwap: boolean;
+  bitcoinChart: any;
+  ethereumChart: any;
 }
 
 const RatioChart: React.FC<SelectedUnit> = ({
@@ -37,15 +39,6 @@ const RatioChart: React.FC<SelectedUnit> = ({
     const calculatedRatios = boxSwap
       ? calculateEthereumRatios(bitcoinChart, ethereumChart)
       : calculateBitcoinRatios(bitcoinChart, ethereumChart);
-
-    // console.log(
-    //   "calculated bitcoin ratio",
-    //   calculateBitcoinRatios(bitcoinChart, ethereumChart)
-    // );
-    console.log(
-      "calculated ethereum ratio",
-      calculateEthereumRatios(bitcoinChart, ethereumChart)
-    );
 
     setRatios(calculatedRatios);
   }, [boxSwap, bitcoinChart, ethereumChart, selectedUnit]);

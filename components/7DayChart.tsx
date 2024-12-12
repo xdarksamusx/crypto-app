@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { CoinData } from "../app/utils/interfaces";
+import { CoinData } from "../utils/interfaces";
 import { initialState } from "../redux/features/marketSlice";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";

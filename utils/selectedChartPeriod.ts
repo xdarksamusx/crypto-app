@@ -6,11 +6,10 @@ import {
   getWeekLabels,
   getYearLabels,
   getDayLabels,
-} from "../utils/labels";
+} from "./labels";
 
 export const computeVolumeCharts = function (chart: any, unit: string) {
   let volumeChart, total_Volumes_Array;
-  console.log("the  chart", chart);
 
   const { dailyData, ninetyDayData, yearlyData } = chart;
 

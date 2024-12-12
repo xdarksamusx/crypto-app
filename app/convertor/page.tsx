@@ -6,35 +6,12 @@ import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import ChartButtons from "../../components/ChartButtons";
 import RatioChart from "../../components/Convertor/RatioChart";
 import { selectUnit } from "../../redux/features/coinSelectionSlice";
-import { useMemo } from "react";
 import DoubleArrows from "../../components/Convertor/DoubleArrows";
 import Box from "../../components/Convertor/Boxes";
 import { convertCurrency } from "../../utils/conversions";
 import { useEffect } from "react";
 import Link from "next/link";
-import { TableCoinData } from "../../utils/interfaces";
-import fetchCoinData from "../utils/fetchCoinData";
-import { transformCoinData } from "../../utils/fetchCoinData";
-interface Prices {
-  dailyPrices: number[];
-  weeklyPrices: number[];
-  fourteenDayPrices: number[];
-  monthlyPrices: number[];
-  ninetyDayPrices: number[];
-  yearlyPrices: number[];
-}
-
-interface MarketData {
-  current_price: {
-    usd: number;
-  };
-}
-
-interface CoinImage {
-  thumb: string;
-  small: string;
-  large: string;
-}
+import { TableCoinData } from "../utils/interfaces";
 
 interface CoinData {
   id: string;
@@ -167,20 +144,20 @@ export default function Convertor() {
 
   return (
     <>
-      <div className="    flex  items-center mt-5 ">
+      <div className="  max-w-7xl mx-auto  flex  items-center mt-8 ">
         <div
-          className={`max-w-7xl mx-auto cursor-pointer flex items-center w-[125px] h-[46px] px-4 ${
+          className={` cursor-pointer flex items-center w-[125px] h-[46px] px-4 ${
             activePage === "coins" ? "bg-blue-500 text-white" : "bg-gray-200"
-          } mt-5`}
+          }`}
           onClick={() => handleActivePage("coins")}
         >
           <Link href="/">Coins</Link>
         </div>
 
         <div
-          className={`cursor-pointer flex items-center w-[125px] h-[46px] px-4 ${
+          className={`   cursor-pointer flex items-center w-[125px] h-[46px] px-4 ${
             activePage === "convertor"
-              ? "bg-blue-500 text-white"
+              ? "bg-blue-700 text-white"
               : "bg-gray-200"
           }`}
           onClick={() => handleActivePage("convertor")}
@@ -193,19 +170,9 @@ export default function Convertor() {
       <div className="flex flex-col">
         <div className=" flex gap-5 ">
           {boxSwap ? (
-            <Box
-              data={btcData}
-              // chart={bitcoinChart}
-              input={btcInput}
-              setInput={handleBtcInput}
-            />
+            <Box data={btcData} input={btcInput} setInput={handleBtcInput} />
           ) : (
-            <Box
-              data={ethData}
-              // chart={ethereumChart}
-              input={ethInput}
-              setInput={handleEthInput}
-            />
+            <Box data={ethData} input={ethInput} setInput={handleEthInput} />
           )}
           <div className="flex items-center justify-center">
             <DoubleArrows handleCurrencySwap={handleCurrencySwap} />

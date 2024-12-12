@@ -26,8 +26,6 @@ interface BoxProps {
 }
 
 const Box: React.FC<BoxProps> = ({ data, input, setInput }) => {
-  console.log("dataaafsdfs", data);
-
   return (
     <>
       <div className="px-9 py-3 w-[650px] h-[200px]  bg-slate-300">
@@ -39,7 +37,9 @@ const Box: React.FC<BoxProps> = ({ data, input, setInput }) => {
             <span className="flex items-center justify-center">
               <img className="w-5 h-5" src={data?.image?.small} alt="" />
             </span>{" "}
-            <p>{/* {data.id} ({data.symbol}) */}</p>{" "}
+            <p>
+              {data.id} ({data.symbol})
+            </p>{" "}
             <span className="flex items-center justify-center"></span>
           </div>
           <div className="amount">
@@ -48,7 +48,7 @@ const Box: React.FC<BoxProps> = ({ data, input, setInput }) => {
         </div>
 
         <p className="mt-5">
-          {/* 1 {data.symbol.toUpperCase()} = {data.market_data.current_price.usd} */}
+          1 {data.symbol.toUpperCase()} = {data.market_data.current_price.usd}
         </p>
       </div>
     </>

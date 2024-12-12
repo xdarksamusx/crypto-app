@@ -1,12 +1,13 @@
 import { CoinData } from "./interfaces";
 
+interface NestedPrice {
+  prices: number[];
+}
+
 interface Prices {
-  dailyPrices: number[];
-  weeklyPrices: number[];
-  fourteenDayPrices: number[];
-  monthlyPrices: number[];
-  ninetyDayPrices: number[];
-  yearlyPrices: number[];
+  dailyData: NestedPrice;
+  ninetyDayData: NestedPrice;
+  yearlyData: NestedPrice;
 }
 
 export const calculateEthereumRatios = (
@@ -54,16 +55,11 @@ const calculateEthereumDailyRatios = (
 
   const { prices: ethereumPriceArray } = ethereumPrices;
 
-  console.log("cjecking bitcoin array", bitcoinPriceArray);
-  console.log("cjecking ethereum array", ethereumPriceArray);
-
   const ratios = bitcoinPriceArray.map((bitcoinPriceData, index) => {
     const bitcoinPrice = bitcoinPriceData[1];
     const ethereumPrice = ethereumPriceArray[index][1];
     return ethereumPrice / bitcoinPrice;
   });
-
-  console.log("checking for NAN", ratios);
 
   return ratios;
 };
@@ -72,10 +68,10 @@ const calculateEthereumWeeklyRatios = (
   bitcoinData: Prices,
   ethereumData: Prices
 ) => {
-  const { ninetyDayData: { prices: bitcoinPriceArray } = {} } =
-    bitcoinData || {};
-  const { ninetyDayData: { prices: ethereumPriceArray } = {} } =
-    ethereumData || {};
+  const { ninetyDayData: { prices: bitcoinPriceArray } = { prices: [] } } =
+    bitcoinData;
+  const { ninetyDayData: { prices: ethereumPriceArray } = { prices: [] } } =
+    ethereumData;
 
   const slicedBitcoinArray = bitcoinPriceArray.slice(0, 200);
   const slicedEthereumArray = ethereumPriceArray.slice(0, 200);
@@ -91,10 +87,10 @@ const calculateEthereumFourteenDayRatios = (
   bitcoinData: Prices,
   ethereumData: Prices
 ) => {
-  const { ninetyDayData: { prices: bitcoinPriceArray } = {} } =
-    bitcoinData || {};
-  const { ninetyDayData: { prices: ethereumPriceArray } = {} } =
-    ethereumData || {};
+  const { ninetyDayData: { prices: bitcoinPriceArray } = { prices: [] } } =
+    bitcoinData;
+  const { ninetyDayData: { prices: ethereumPriceArray } = { prices: [] } } =
+    ethereumData;
 
   const slicedBitcoinArray = bitcoinPriceArray.slice(0, 400);
   const slicedEthereumArray = ethereumPriceArray.slice(0, 400);
@@ -110,11 +106,10 @@ const calculateEthereumMonthlyRatios = (
   bitcoinData: Prices,
   ethereumData: Prices
 ) => {
-  const { ninetyDayData: { prices: bitcoinPriceArray } = {} } =
-    bitcoinData || {};
-  const { ninetyDayData: { prices: ethereumPriceArray } = {} } =
-    ethereumData || {};
-
+  const { ninetyDayData: { prices: bitcoinPriceArray } = { prices: [] } } =
+    bitcoinData;
+  const { ninetyDayData: { prices: ethereumPriceArray } = { prices: [] } } =
+    ethereumData;
   const slicedBitcoinArray = bitcoinPriceArray.slice(0, 800);
   const slicedEthereumArray = ethereumPriceArray.slice(0, 800);
   const ratios = slicedBitcoinArray.map((bitcoinPriceData, index) => {
@@ -153,9 +148,6 @@ const calculateEthereumYearlyRatios = (
 
   const { prices: bitcoinPriceArray } = bitcoinPrices;
   const { prices: ethereumPriceArray } = ethereumPrices;
-
-  console.log("bitcoin yearly data", bitcoinData);
-  console.log("bitcoin  yearly prices", bitcoinPrices);
 
   const ratios = bitcoinPriceArray.map((bitcoinPriceData, index) => {
     const bitcoinPrice = bitcoinPriceData[1];
@@ -221,10 +213,10 @@ const calculateBitcoinWeeklyRatios = (
   bitcoinData: Prices,
   ethereumData: Prices
 ) => {
-  const { ninetyDayData: { prices: bitcoinPriceArray } = {} } =
-    bitcoinData || {};
-  const { ninetyDayData: { prices: ethereumPriceArray } = {} } =
-    ethereumData || {};
+  const { ninetyDayData: { prices: bitcoinPriceArray } = { prices: [] } } =
+    bitcoinData;
+  const { ninetyDayData: { prices: ethereumPriceArray } = { prices: [] } } =
+    ethereumData;
 
   const slicedBitcoinArray = bitcoinPriceArray.slice(0, 200);
   const slicedEthereumArray = ethereumPriceArray.slice(0, 200);
@@ -240,10 +232,10 @@ const calculateBitcoinFourteenDayRatios = (
   bitcoinData: Prices,
   ethereumData: Prices
 ) => {
-  const { ninetyDayData: { prices: bitcoinPriceArray } = {} } =
-    bitcoinData || {};
-  const { ninetyDayData: { prices: ethereumPriceArray } = {} } =
-    ethereumData || {};
+  const { ninetyDayData: { prices: bitcoinPriceArray } = { prices: [] } } =
+    bitcoinData;
+  const { ninetyDayData: { prices: ethereumPriceArray } = { prices: [] } } =
+    ethereumData;
 
   const slicedBitcoinArray = bitcoinPriceArray.slice(0, 400);
   const slicedEthereumArray = ethereumPriceArray.slice(0, 400);
@@ -259,10 +251,10 @@ const calculateBitcoinMonthlyRatios = (
   bitcoinData: Prices,
   ethereumData: Prices
 ) => {
-  const { ninetyDayData: { prices: bitcoinPriceArray } = {} } =
-    bitcoinData || {};
-  const { ninetyDayData: { prices: ethereumPriceArray } = {} } =
-    ethereumData || {};
+  const { ninetyDayData: { prices: bitcoinPriceArray } = { prices: [] } } =
+    bitcoinData;
+  const { ninetyDayData: { prices: ethereumPriceArray } = { prices: [] } } =
+    ethereumData;
 
   const slicedBitcoinArray = bitcoinPriceArray.slice(0, 700);
   const slicedEthereumArray = ethereumPriceArray.slice(0, 700);

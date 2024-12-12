@@ -3,13 +3,13 @@
 import React, { useEffect } from "react";
 import Star from "../icons/Star";
 import LineChart from "./7DayChart";
-import { capitalizeFirstLetter } from "../app/utils/apiData";
+import { capitalizeFirstLetter } from "../utils/apiData";
 import SortButton from "./SortButton";
 import SortDownArrow from "../icons/SortDownArrow";
 import SortUpArrow from "../icons/SortUpArrow";
 import Link from "next/link";
 import { useAppSelector } from "../redux/hooks";
-import { numberWithCommas } from "../app/utils/moreComputations";
+import { numberWithCommas } from "@app/utils/moreComputations";
 import { formatPercentage } from "../utils/calculations";
 import { TableCoinData } from "../utils/interfaces";
 
