@@ -24,6 +24,9 @@ function Header() {
   const coins = useAppSelector((state) => state.coins.coins);
 
   const currency = useAppSelector((state) => state.currency.currency);
+  const currencySymbol = useAppSelector(
+    (state) => state.currency.currencySymbol
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,12 +74,12 @@ function Header() {
           <span>Exchanges: {exchanges}</span>
           <span>
             {" "}
-            Total marketcap: {currency}
+            Total marketcap: {currencySymbol}
             {(totalMarketCap / 1e12).toFixed(2)} trillion{" "}
           </span>
           <span>
             {" "}
-            Total 24 hr volume: {currency}
+            Total 24 hr volume: {currencySymbol}
             {(totalVolume / 1e9).toFixed(2)} billion
           </span>
           <span>Bitcoin dominance: {(btcDominance * 100).toFixed(2)} %</span>

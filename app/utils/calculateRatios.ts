@@ -46,6 +46,9 @@ const calculateEthereumDailyRatios = (
   bitcoinData: Prices,
   ethereumData: Prices
 ) => {
+  console.log("bitcoin data", bitcoinData),
+    console.log("ethereum data", ethereumData);
+
   const { dailyPrices: bitcoinPrices } = bitcoinData;
   const { dailyPrices: ethereumPrices } = ethereumData;
   const ratios = bitcoinPrices.map(

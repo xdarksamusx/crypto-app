@@ -9,7 +9,7 @@ import Table from "../components/Table";
 import Carousels from "../components/Carousel";
 import Pagination from "../components/Pagination";
 import VolumeChart from "../components/VolumeChart";
-import PriceChart from "@components/PriceChart";
+import PriceChart from "../components/PriceChart";
 import {
   setCurrency,
   setCurrencyData,
@@ -19,11 +19,12 @@ import ChartButtons from "../components/ChartButtons";
 
 import { updateColors } from "../redux/features/sortSlice";
 import { selectUnit } from "../redux/features/coinSelectionSlice";
-import { TableCoinData } from "@utils/interfaces";
-import { transformCoinData } from "@utils/fetchCoinData";
-
+import { TableCoinData } from "../utils/interfaces";
+import { transformCoinData } from "../utils/fetchCoinData";
+import Link from "next/link";
 const Home = () => {
   const [coins, setCoins] = useState<TableCoinData[]>([]);
+  const [activePage, setActivePage] = useState("coins");
   const coinData = useAppSelector((state) => state.currency.data);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastVisible, setLastVisible] = useState(null);
@@ -56,6 +57,10 @@ const Home = () => {
 
   const top20Coins = coins.slice(0, 20);
 
+  const handleActivePage = (page: string) => {
+    setActivePage(page);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const rawData = await fetchCoinData(currency);
@@ -79,10 +84,33 @@ const Home = () => {
 
   return (
     <div>
+      <div className="  max-w-7xl mx-auto  flex  items-center mt-8 ">
+        <div
+          className={` cursor-pointer flex items-center w-[125px] h-[46px] px-4 ${
+            activePage === "coins" ? "bg-blue-500 text-white" : "bg-gray-200"
+          }`}
+          onClick={() => handleActivePage("coins")}
+        >
+          <Link href="/">Coins</Link>
+        </div>
+
+        <div
+          className={`   cursor-pointer flex items-center w-[125px] h-[46px] px-4 ${
+            activePage === "convertor"
+              ? "bg-blue-700 text-white"
+              : "bg-gray-200"
+          }`}
+          onClick={() => handleActivePage("convertor")}
+        >
+          {" "}
+          <Link href="/convertor">Convertor</Link>
+        </div>
+      </div>
+
       <div className="max-w-full mx-auto">
         <Carousels />
       </div>
-      <div className="mt-8 flex max-w-7xl mx-auto justify-around items-center">
+      <div className=" flex max-w-7xl mx-auto justify-around items-center">
         <VolumeChart />
         <PriceChart />
       </div>
@@ -93,7 +121,9 @@ const Home = () => {
           selectedUnit={selectedUnit}
         />
       </div>
-      <Table coins={currentCoins} />
+      <div className="">
+        <Table coins={currentCoins} />
+      </div>
 
       <Pagination
         currentPage={currentPage}

@@ -6,10 +6,11 @@ import {
   getWeekLabels,
   getYearLabels,
   getDayLabels,
-} from "@utils/labels";
+} from "../utils/labels";
 
 export const computeVolumeCharts = function (chart: any, unit: string) {
   let volumeChart, total_Volumes_Array;
+  console.log("the  chart", chart);
 
   const { dailyData, ninetyDayData, yearlyData } = chart;
 
@@ -36,7 +37,7 @@ export const computeVolumeCharts = function (chart: any, unit: string) {
       volumeChart = ninetyDayData.total_volumes;
       total_Volumes_Array = volumeChart.map((volume: any) => volume[1]);
 
-      return ninetyDayData;
+      return total_Volumes_Array;
 
     case "1Y":
       volumeChart = yearlyData.total_volumes;
@@ -154,7 +155,7 @@ export const createLabels = (unit: string) => {
 };
 
 export const getIntervalLabels = (dataLength: number, numLabels: number) => {
-  const labels = [];
+  const labels: string[] = [];
   const interval = Math.floor(dataLength / numLabels);
 
   for (let i = 0; i < numLabels; i++) {
