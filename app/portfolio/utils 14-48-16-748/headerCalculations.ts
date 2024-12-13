@@ -31,8 +31,6 @@ export const calculateEthereumDominance = (
   coinArray: CoinData[],
   totalMarketCap: number
 ) => {
-  console.log(" header eth market cap", coinArray);
-
   const ethCoinMarketCap = coinArray[1].market_cap;
   const ethCoinDominance = ethCoinMarketCap / totalMarketCap;
   return ethCoinDominance;

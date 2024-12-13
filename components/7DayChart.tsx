@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { CoinData } from "../app/utils/interfaces";
+import { CoinData } from "../utils/interfaces";
 import { initialState } from "../redux/features/marketSlice";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
@@ -27,22 +27,26 @@ const monthsArray: string[] = [
 
 const labels = monthsArray;
 
-function LineChart(chart: any) {
+function LineChart({ chart, coin }) {
   const data = {
     labels: labels,
 
     datasets: [
       {
         label: "data",
-        backgroundColor: "blue",
-        borderColor: "blue",
-        data: chart.chart.price,
+        backgroundColor: `${
+          coin.price_change_percentage_7d_in_currency > 0 ? "green" : "red"
+        }`,
+        borderColor: `${
+          coin.price_change_percentage_7d_in_currency > 0 ? "green" : "red"
+        }`,
+        data: chart.price,
       },
     ],
   };
 
   return (
-    <div className="flex  items-center  w-36  h-20">
+    <div className="flex  items-center  w-36  h-20 ">
       <Line
         data={data}
         options={{
@@ -67,6 +71,8 @@ function LineChart(chart: any) {
               radius: 0,
             },
           },
+          responsive: true,
+          maintainAspectRatio: true,
         }}
       />
     </div>

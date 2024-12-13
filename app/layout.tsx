@@ -6,8 +6,8 @@ import React from "react";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import StoreProvider from "./StoreProvider";
-import Header from "@components/Header";
-import Navigation from "@components/Navigation";
+import Header from "../components/Header";
+import Navigation from "../components/Navigation";
 import "./globals.css";
 import { useAppDispatch } from "../redux/hooks";
 import { toogleTheme } from "../redux/features/themesSlice";
@@ -32,12 +32,10 @@ export default function RootLayout({
         <Provider store={store}>
           {" "}
           <Header />
-          <Navigation />
-          <nav>
-            <Link href="/">Home</Link>
-            <Link href="/portfolio">Portfolio</Link>
-            <Link href="/convertor">Convertor</Link>
-          </nav>
+          <div className="">
+            <Navigation />
+          </div>
+          <nav></nav>
           {children}
         </Provider>
       </body>

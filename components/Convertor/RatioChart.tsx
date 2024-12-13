@@ -3,39 +3,45 @@
 import React, { useEffect, useState } from "react";
 
 import { useMemo } from "react";
+
 import {
   calculateEthereumRatios,
   calculateBitcoinRatios,
   computeRatioValue,
-} from "@utils/calculateRatios";
+} from "../../utils/calculateRatios";
+
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
 ChartJS.register(...registerables);
 
-import { createLabels } from "@utils/selectedChartPeriod";
-import { selectRatio } from "@utils/selectedChartPeriod";
+import { createLabels } from "../../utils/selectedChartPeriod";
+import { selectRatio } from "../../utils/selectedChartPeriod";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 interface SelectedUnit {
   selectedUnit: string;
   boxSwap: boolean;
+  bitcoinChart: any;
+  ethereumChart: any;
 }
 
-const RatioChart: React.FC<SelectedUnit> = ({ selectedUnit, boxSwap }) => {
+const RatioChart: React.FC<SelectedUnit> = ({
+  selectedUnit,
+  boxSwap,
+  bitcoinChart,
+  ethereumChart,
+}) => {
   const coins = useAppSelector((state) => state.coins.coins);
   const [ratios, setRatios] = useState<any>({});
 
-  const bitcoinData = coins[0];
-  const ethereumData = coins[1];
-
   useEffect(() => {
     const calculatedRatios = boxSwap
-      ? calculateEthereumRatios(bitcoinData, ethereumData)
-      : calculateBitcoinRatios(bitcoinData, ethereumData);
+      ? calculateEthereumRatios(bitcoinChart, ethereumChart)
+      : calculateBitcoinRatios(bitcoinChart, ethereumChart);
 
     setRatios(calculatedRatios);
-  }, [boxSwap, bitcoinData, ethereumData]);
+  }, [boxSwap, bitcoinChart, ethereumChart, selectedUnit]);
 
   const selectedRatioData = selectRatio(selectedUnit, ratios) || [];
 

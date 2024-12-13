@@ -9,7 +9,7 @@ import {
   calculateEthereumDominance,
   calculateTotalMarketCap,
   calculateTotalVolume,
-} from "../app/utils/headerCalculations";
+} from "../utils/headerCalculations";
 
 function Header() {
   const [headerState, setHeaderState] = useState({
@@ -24,6 +24,9 @@ function Header() {
   const coins = useAppSelector((state) => state.coins.coins);
 
   const currency = useAppSelector((state) => state.currency.currency);
+  const currencySymbol = useAppSelector(
+    (state) => state.currency.currencySymbol
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,20 +70,16 @@ function Header() {
     <div className="w-full  text-xs font-medium">
       <div className="max-w-7xl mx-auto flex justify-between py-4 px-4 sm:px-6 lg:px-8 space-x-4">
         <h5 className="flex items-center space-x-4">
-          <span>Coins: {totalCoins}</span>
+          <span>Coins: 15000</span>
           <span>Exchanges: {exchanges}</span>
+          <span> Total marketcap: {currencySymbol}3 trillion </span>
           <span>
             {" "}
-            Total marketcap: {currency}
-            {(totalMarketCap / 1e12).toFixed(2)} trillion{" "}
+            Total 24 hr volume: {currencySymbol}
+            300 billion
           </span>
-          <span>
-            {" "}
-            Total 24 hr volume: {currency}
-            {(totalVolume / 1e9).toFixed(2)} billion
-          </span>
-          <span>Bitcoin dominance: {(btcDominance * 100).toFixed(2)} %</span>
-          <span>Ethereum dominance: {(ethDominance * 100).toFixed(2)}%</span>
+          <span>Bitcoin dominance: 60%</span>
+          <span>Ethereum dominance: 40%</span>
         </h5>
       </div>
     </div>

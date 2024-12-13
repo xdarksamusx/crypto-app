@@ -1,24 +1,24 @@
-import { CoinData, CoinState } from "../../app/utils/interfaces";
+import { CoinData, CoinState } from "../../utils/interfaces";
 
-import { getInitialCoinState } from "../../app/utils/apiData";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { getInitialCoinState } from "../../utils/apiData";
+import { createAsyncThunk, PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface SelectedCoinState extends CoinState {
-  selectedCoin: CoinData | null;
+  selectedCoin: string;
   selectedUnit: string;
 }
 const initialCoins = getInitialCoinState();
 
-const initialSelectedCoin = initialCoins.find(
-  (coin) => coin.id === "bitcoin"
-) as CoinData | null;
+// const initialSelectedCoin = initialCoins.find(
+//   (coin) => coin.id === "bitcoin"
+// ) as CoinData | null;
 
 const initialState: SelectedCoinState = {
   coins: initialCoins,
   status: "idle",
   error: null,
   sortKey: "market_cap",
-  selectedCoin: initialSelectedCoin,
+  selectedCoin: "bitcoin",
   selectedUnit: "1D",
 };
 
@@ -26,7 +26,7 @@ const coinSelectionSlice = createSlice({
   name: "selectedCoin",
   initialState,
   reducers: {
-    selectCoin: (state, action: PayloadAction<CoinData>) => {
+    selectCoin: (state, action: PayloadAction<string>) => {
       state.selectedCoin = action.payload;
     },
     selectUnit: (state, action: PayloadAction<string>) => {

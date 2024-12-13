@@ -3,19 +3,18 @@
 import React, { useEffect } from "react";
 import Star from "../icons/Star";
 import LineChart from "./7DayChart";
-import { capitalizeFirstLetter } from "../app/utils/apiData";
+import { capitalizeFirstLetter } from "../utils/apiData";
 import SortButton from "./SortButton";
 import SortDownArrow from "../icons/SortDownArrow";
 import SortUpArrow from "../icons/SortUpArrow";
 import Link from "next/link";
 import { useAppSelector } from "../redux/hooks";
-import { numberWithCommas } from "../app/utils/moreComputations";
-import { absoluteValue } from "@utils/calculations";
-import { formatPercentage } from "@utils/calculations";
-import { TableCoinData } from "@utils/interfaces";
+import { numberWithCommas } from "@app/utils/moreComputations";
+import { formatPercentage } from "../utils/calculations";
+import { TableCoinData } from "../utils/interfaces";
 
 interface TableProps {
-  coins: TableCoinData[]; // Expect coins to be an array of TableCoinData
+  coins: TableCoinData[];
 }
 
 const Table: React.FC<TableProps> = ({ coins }) => {
@@ -24,9 +23,9 @@ const Table: React.FC<TableProps> = ({ coins }) => {
   const currency = useAppSelector((state) => state.currency.currencySymbol);
 
   return (
-    <div className="max-w-7xl mx-auto mt-12">
-      <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-        <table className="min-w-full border-gray-200 border-collapse">
+    <div className="max-w-7xl mx-auto mt-12  ">
+      <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg  ">
+        <table className="min-w-full border-gray-200 border-collapse ">
           <thead className="border-t-2 border-b-2 text-xs">
             <tr>
               <th className="px-6 py-1 border-b border-gray-200 text-left text-sm uppercase font-medium">
@@ -116,12 +115,12 @@ const Table: React.FC<TableProps> = ({ coins }) => {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="">
             {coins.map((coin: any) => {
               const coinName = capitalizeFirstLetter(coin.id);
 
               return (
-                <tr key={coin.id}>
+                <tr className="" key={coin.id}>
                   <td className="px-6 border-b border-gray-200 text-sm">
                     <div className="flex items-center justify-center">
                       <Star />
@@ -225,8 +224,8 @@ const Table: React.FC<TableProps> = ({ coins }) => {
                     </span>
                   </td>
 
-                  <td className="px-6 border-b border-gray-200 text-sm">
-                    <LineChart chart={coin.sparkline_in_7d} />
+                  <td className=" border-b border-gray-200 text-sm ">
+                    <LineChart chart={coin.sparkline_in_7d} coin={coin} />
                   </td>
                 </tr>
               );

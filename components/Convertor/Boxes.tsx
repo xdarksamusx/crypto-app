@@ -1,8 +1,23 @@
 "use  client";
 
-import { CoinData } from "@utils/interfaces";
 import { useState } from "react";
-import { convertCurrency } from "@utils/conversions";
+import React from "react";
+
+interface CoinData {
+  id: string;
+  name: string;
+  symbol: string;
+  market_data: {
+    current_price: {
+      usd: number;
+    };
+  };
+  image: {
+    thumb: string;
+    small: string;
+    large: string;
+  };
+}
 
 interface BoxProps {
   data: CoinData;
@@ -20,7 +35,7 @@ const Box: React.FC<BoxProps> = ({ data, input, setInput }) => {
           <div className="flex">
             {" "}
             <span className="flex items-center justify-center">
-              <img className="w-5 h-5" src={data.image} alt="" />
+              <img className="w-5 h-5" src={data?.image?.small} alt="" />
             </span>{" "}
             <p>
               {data.id} ({data.symbol})
@@ -33,7 +48,7 @@ const Box: React.FC<BoxProps> = ({ data, input, setInput }) => {
         </div>
 
         <p className="mt-5">
-          1 {data.symbol.toUpperCase()} = {data.current_price}
+          1 {data.symbol.toUpperCase()} = {data.market_data.current_price.usd}
         </p>
       </div>
     </>

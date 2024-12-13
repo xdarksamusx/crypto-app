@@ -18,6 +18,8 @@ import Link from "next/link";
 
 import Login from "./Login";
 import SignUp from "./SignUp";
+import { HomeIcon } from "./Home";
+import { PortfolioIcon } from "./PortfolioIcon";
 
 interface CoinOption {
   id: string;
@@ -125,7 +127,30 @@ function Navigation() {
     <div className="w-full border-b  shadow-sm  border-t relative">
       <div className="   max-w-7xl mx-auto flex justify-between items-center py-4  ">
         <div className="flex items-center">
-          <span className="text-xl font-bold">LOGO</span>
+          <span className="flex">
+            <span className="flex px-12">
+              <span className="text-xl font-bold px-5">LOGO</span>
+              <div className=" flex  ">
+                <span className=" flex items-center  ">
+                  <HomeIcon />
+                </span>
+                <span className="px-3 flex items-center">
+                  {" "}
+                  <Link href="/">Home</Link>
+                </span>
+              </div>
+            </span>
+            <span className="flex ">
+              <div className=" flex ">
+                <span className="px-3 flex items-center">
+                  <PortfolioIcon />{" "}
+                </span>
+                <span className="flex items-center">
+                  <Link href="/portfolio">Portfolio</Link>
+                </span>
+              </div>
+            </span>
+          </span>
         </div>
         <div className="flex h-5  space-x-8  ">
           <div className="">
@@ -163,7 +188,7 @@ function Navigation() {
           <div className=" flex  ">
             <p
               onClick={handleShowLogin}
-              className="px-0 py-0 mx-0 my-0 
+              className="px-0 py-0 mx-0 my-0 cursor-pointer 
             "
             >
               Sign in
@@ -177,7 +202,7 @@ function Navigation() {
             <p className="px-0 py-0 mx-0 my-0">/</p>
             <p
               onClick={() => handleShowRegister()}
-              className="px-0 py-0 mx-0 my-0"
+              className="px-0 py-0 mx-0 my-0 cursor-pointer"
             >
               Sign up
             </p>

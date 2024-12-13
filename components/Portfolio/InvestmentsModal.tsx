@@ -1,6 +1,8 @@
 import CloseCircle from "./Closemark";
 import { useState, useEffect } from "react";
 import SearchableDropdown from "./SearchableDropDown";
+import React from "react";
+import { ChartIcon } from "./ChartIcon";
 
 interface InvestmentsCalculator {
   setShowInvestments: (value: boolean) => void;
@@ -112,15 +114,15 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
   return (
     <>
       <div className="relative mx-auto ">
-        <div className="fixed inset-0 bg-gray-200 bg-opacity-60  backdrop-blur-xs z-0"></div>
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-60  backdrop-blur-xs z-0"></div>
 
-        <div className=" flex flex-col justify-evenly w-2/3 h-[700px] bg-green-500  inset-x-0  absolute translate-x-[1/5] mt-5    px-12 py-2 mx-auto ">
+        <div className=" flex flex-col justify-evenly w-2/3 h-[700px] bg-gray-100  inset-x-0  absolute translate-x-[1/5] mt-5    px-12 py-2 mx-auto ">
           <div className=" flex justify-between">
             <h4>Investments Calculator</h4>
             <CloseCircle handleModal={handleModal} />
           </div>
           <div className="flex justify-between">
-            <div className="your coin">Your coin (ABC)</div>
+            <div className="bg-gray-300 px-3 py-2">Your coin (ABC)</div>
             <SearchableDropdown
               setSelectedOption={setSelectedOption}
               options={allCoins}
@@ -132,10 +134,12 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
           </div>
 
           <div className="flex justify-between">
-            <div className="bg-red-300  px-2 h-15 justify-center items-center flex">
-              chart icon
+            <div className="bg-gray-300  px-2 h-15 justify-center items-center flex">
+              <div>
+                <ChartIcon />
+              </div>
             </div>
-            <div className="bg-red-300 px-2 h-15 justify-center items-center flex">
+            <div className="bg-gray-300 px-2 h-15 justify-center items-center flex">
               {" "}
               <input
                 onChange={(e) => handlePreviousDateInput(e)}
@@ -144,7 +148,7 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
                 type="datetime-local"
               />
             </div>
-            <div className="bg-red-300 px-2 h-15 justify-center items-center flex">
+            <div className="bg-gray-300 px-2 h-15 justify-center items-center flex">
               {" "}
               <input
                 onChange={(e) => handleRecentDateInput(e)}
@@ -153,7 +157,7 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
                 type="datetime-local"
               />
             </div>
-            <div className="bg-red-300 px-2 h-15 justify-center items-center flex">
+            <div className="bg-gray-300 px-2 h-15 justify-center items-center flex">
               chart icon
             </div>
           </div>
@@ -164,7 +168,7 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
               className={`px-3 py-1 w-1/2 ${
                 selectedButton === "valueCostAveraging"
                   ? "bg-violet-300"
-                  : "bg-red-300"
+                  : "bg-gray-300"
               } `}
             >
               Value cost averaging
@@ -174,15 +178,15 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
               className={`px-3 py-1 w-1/2 ${
                 selectedButton === "dollarCostAveraging"
                   ? "bg-violet-300"
-                  : "bg-red-300"
+                  : "bg-gray-300"
               } `}
             >
               Dollar cost averaging
             </button>
           </div>
 
-          <ul className="w-full">
-            <li className="flex justify-between">
+          <ul className="w-full bg-gray-300 py-3 px-9 rounded-md gap-y-2 ">
+            <li className="flex justify-between mt-3 ">
               <div>
                 {" "}
                 Contribution interval, days <span>?</span>
@@ -195,7 +199,7 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
                 type="text"
               />
             </li>
-            <li className="flex justify-between">
+            <li className="flex justify-between mt-3">
               <div>
                 {" "}
                 Initial Investment, $ <span>?</span>
@@ -211,7 +215,7 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
               />
             </li>
             {selectedButton === "valueCostAveraging" ? (
-              <li className="flex justify-between">
+              <li className="flex justify-between mt-3">
                 <div>
                   {" "}
                   Grow rate per interval, % <span>?</span>
@@ -225,7 +229,7 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
                 />
               </li>
             ) : (
-              <li className="flex justify-between">
+              <li className="flex justify-between mt-3">
                 <div>
                   {" "}
                   Funds added per interval, % <span>?</span>
@@ -241,7 +245,7 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
               </li>
             )}
 
-            <li className="flex justify-between">
+            <li className="flex justify-between mt-3">
               <div>
                 Total amount spent oi investments <span>?</span>
               </div>{" "}
@@ -269,14 +273,14 @@ const InvestmentsCalculator: React.FC<InvestmentsCalculator> = ({
           {selectedButton === "valueCostAveraging" ? (
             <div
               onClick={() => handleValueCalculation()}
-              className="flex items-center justify-center py-1 bg-red-300"
+              className="flex items-center justify-center py-1 bg-yellow-300"
             >
               Calculate New (VCA)
             </div>
           ) : (
             <div
               onClick={() => handleDollarValueCalculation()}
-              className="flex items-center justify-center py-1 bg-red-300"
+              className="flex items-center justify-center py-1 bg-yellow-300"
             >
               Calculate New (FCA)
             </div>

@@ -5,7 +5,8 @@ import { useState, useEffect } from "react";
 import SearchableDropdown from "./SearchableDropDown";
 import { addCoin, deleteCoin } from "../../redux/features/portfolioSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { Portfolio } from "@utils/portfolioInterface";
+import { Portfolio } from "../../utils/portfolioInterface";
+import React from "react";
 interface AddCoinModalProps {
   setShowModal: (value: boolean) => void;
   allCoins: any[];
@@ -101,9 +102,9 @@ const AddCoinModal: React.FC<AddCoinModalProps> = ({
   return (
     <>
       <div className="relative mx-auto ">
-        <div className="absolute inset-0 bg-gray-100 bg-opacity-60  backdrop-blur-xs z-0  "></div>
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-60  backdrop-blur-xs z-0"></div>
 
-        <div className="bg-gray-100  bg-opacity-90  inset-x-0   w-1/2  py-7 absolute translate-x-1/5  mt-5 z-50 mx-auto ">
+        <div className="bg-gray-100    inset-x-0   w-1/2  py-7 absolute translate-x-1/5  mt-5 z-50 mx-auto ">
           <div className=" px-8 flex  mb-6 justify-between">
             <p>Select Coins</p>
             <div className="close-button">
