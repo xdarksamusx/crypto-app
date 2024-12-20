@@ -11,7 +11,7 @@ import Box from "../../components/Convertor/Boxes";
 import { convertCurrency } from "../../utils/conversions";
 import { useEffect } from "react";
 import Link from "next/link";
-import { TableCoinData } from "../utils/interfaces";
+import { TableCoinData } from "@utils/interfaces";
 
 interface CoinData {
   id: string;
