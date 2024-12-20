@@ -4,10 +4,10 @@ import {
   delay,
   storage,
   getInitialCoinState,
-} from "../../app/utils/apiData";
+} from "../../utils/apiData";
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CoinState } from "../../app/utils/interfaces";
+import { CoinState } from "../../utils/interfaces";
 import axios from "axios";
 
 export const fetchTop20Coins = createAsyncThunk(

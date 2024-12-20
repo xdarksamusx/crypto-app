@@ -3,8 +3,7 @@ import axios from "axios";
 
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { createVolumeChart } from "@app/utils/selectedChartPeriod";
-import { computePriceCharts } from "@utils/selectedChartPeriod";
+import { computePriceCharts } from "../utils/selectedChartPeriod";
 import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
 import { Line } from "react-chartjs-2";
 import {
@@ -20,7 +19,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import { ChartOptions, ChartData } from "chart.js";
 import { setCurrencyData } from "../redux/features/currencySelection";
-import { createLabels } from "@app/utils/selectedChartPeriod";
+import { createLabels } from "../utils/selectedChartPeriod";
 
 interface Error {
   message: string;
@@ -62,7 +61,7 @@ const PriceChart: React.FC = () => {
 
       try {
         const response = await fetch(
-          `https://xdarksamusx.github.io/chart-files/charts/${currency.toLowerCase()}-charts/${coin.name.toLowerCase()}.json`
+          `https://xdarksamusx.github.io/chart-files/charts/${currency.toLowerCase()}-charts/${coin.toLowerCase()}.json`
         );
 
         if (!response.ok) {

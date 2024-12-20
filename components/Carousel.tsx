@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
 import { formatPercentage } from "@utils/calculations";
 
-import { CoinData } from "../app/utils/interfaces"; // import { convertCurrency } from "@utils/CurrencyConversions";
+import { CoinData } from "../utils/interfaces"; // import { convertCurrency } from "@utils/CurrencyConversions";
 
 const responsive = {
   superLargeDesktop: {
