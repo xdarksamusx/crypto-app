@@ -1,18 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { CoinData } from "../utils/interfaces";
-import { initialState } from "../redux/features/marketSlice";
-import Chart from "chart.js/auto";
+
+import React from "react";
 import { Line } from "react-chartjs-2";
+import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 
 Chart.register(CategoryScale);
 
 interface LineChartProps {
-  chart: number[];
+  chart: { price: number[] };
+  coin: { price_change_percentage_7d_in_currency: number };
 }
+
 const monthsArray: string[] = [
   "July-2023",
   "August-2023",
@@ -22,31 +21,32 @@ const monthsArray: string[] = [
   "December-2023",
   "January-2024",
   "February-2024",
-  "March-2024, April-2024, May-2024, June-2024, July-2024",
+  "March-2024",
+  "April-2024",
+  "May-2024",
+  "June-2024",
+  "July-2024",
 ];
 
 const labels = monthsArray;
 
-function LineChart({ chart, coin }) {
+const LineChart: React.FC<LineChartProps> = ({ chart, coin }) => {
   const data = {
     labels: labels,
-
     datasets: [
       {
         label: "data",
-        backgroundColor: `${
-          coin.price_change_percentage_7d_in_currency > 0 ? "green" : "red"
-        }`,
-        borderColor: `${
-          coin.price_change_percentage_7d_in_currency > 0 ? "green" : "red"
-        }`,
+        backgroundColor:
+          coin.price_change_percentage_7d_in_currency > 0 ? "green" : "red",
+        borderColor:
+          coin.price_change_percentage_7d_in_currency > 0 ? "green" : "red",
         data: chart.price,
       },
     ],
   };
 
   return (
-    <div className="flex  items-center  w-36  h-20 ">
+    <div className="flex items-center w-36 h-20">
       <Line
         data={data}
         options={{
@@ -77,6 +77,6 @@ function LineChart({ chart, coin }) {
       />
     </div>
   );
-}
+};
 
 export default LineChart;
