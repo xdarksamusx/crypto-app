@@ -108,7 +108,7 @@ const Home = () => {
       </div>
 
       <div className="max-w-full mx-auto">
-        <Carousels />
+        <Carousels top20Coins={top20Coins} />
       </div>
       <div className=" flex max-w-7xl mx-auto justify-around items-center">
         <VolumeChart />
