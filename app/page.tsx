@@ -22,6 +22,8 @@ import { selectUnit } from "../redux/features/coinSelectionSlice";
 import { TableCoinData } from "../utils/interfaces";
 import { transformCoinData } from "../utils/fetchCoinData";
 import Link from "next/link";
+import { CoinData } from "./utils/interfaces";
+
 const Home = () => {
   const [coins, setCoins] = useState<TableCoinData[]>([]);
   const [activePage, setActivePage] = useState("coins");
