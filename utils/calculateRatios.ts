@@ -18,28 +18,27 @@ export const calculateEthereumRatios = (
   bitcoinData: Prices,
   ethereumData: Prices
 ) => {
-  const dailyRatios = calculateEthereumDailyRatios(
+  const dailyRatios = calculateRatios(
     bitcoinData.bitcoinData.dailyData,
     ethereumData.ethereumData.dailyData
   );
-  const weeklyRatios = calculateEthereumWeeklyRatios(
-    bitcoinData.bitcoinData.weeklyData,
-    ethereumData.ethereumData.weeklyData
+  const weeklyRatios = calculateRatios(
+    bitcoinData.bitcoinData.weeklyData.slice(0, 200),
+    ethereumData.ethereumData.weeklyData.slice(0, 200)
   );
-  const monthlyRatios = calculateEthereumMonthlyRatios(
-    bitcoinData.bitcoinData.monthlyData,
-    ethereumData.ethereumData.monthlyData
+  const monthlyRatios = calculateRatios(
+    bitcoinData.bitcoinData.monthlyData.slice(0, 800),
+    ethereumData.ethereumData.monthlyData.slice(0, 800)
   );
-  const ninetyDayRatios = calculateEthereumNinetyDayRatios(
+  const ninetyDayRatios = calculateRatios(
     bitcoinData.bitcoinData.ninetyDayData,
     ethereumData.ethereumData.ninetyDayData
   );
-  const fourteenDayRatios = calculateEthereumFourteenDayRatios(
-    bitcoinData.bitcoinData.fourteenDayData,
-    ethereumData.ethereumData.fourteenDayData
+  const fourteenDayRatios = calculateRatios(
+    bitcoinData.bitcoinData.fourteenDayData.slice(0, 400),
+    ethereumData.ethereumData.fourteenDayData.slice(0, 400)
   );
-
-  const yearlyRatios = calculateEthereumYearlyRatios(
+  const yearlyRatios = calculateRatios(
     bitcoinData.bitcoinData.yearlyData,
     ethereumData.ethereumData.yearlyData
   );
@@ -54,45 +53,55 @@ export const calculateEthereumRatios = (
   };
 };
 
-const calculateRatios = (
-  bitcoinPrices: [number, number][],
-  ethereumPrices: [number, number][]
+export const calculateBitcoinRatios = (
+  bitcoinData: Prices,
+  ethereumData: Prices
 ) => {
-  return bitcoinPrices.map(([timestamp, bitcoinPrice], index) => {
-    const [, ethereumPrice] = ethereumPrices[index];
-    return ethereumPrice / bitcoinPrice;
-  });
+  const dailyRatios = calculateRatios(
+    ethereumData.ethereumData.dailyData,
+    bitcoinData.bitcoinData.dailyData
+  );
+  const weeklyRatios = calculateRatios(
+    ethereumData.ethereumData.weeklyData.slice(0, 200),
+    bitcoinData.bitcoinData.weeklyData.slice(0, 200)
+  );
+  const monthlyRatios = calculateRatios(
+    ethereumData.ethereumData.monthlyData.slice(0, 800),
+    bitcoinData.bitcoinData.monthlyData.slice(0, 800)
+  );
+  const ninetyDayRatios = calculateRatios(
+    ethereumData.ethereumData.ninetyDayData,
+    bitcoinData.bitcoinData.ninetyDayData
+  );
+  const fourteenDayRatios = calculateRatios(
+    ethereumData.ethereumData.fourteenDayData.slice(0, 400),
+    bitcoinData.bitcoinData.fourteenDayData.slice(0, 400)
+  );
+  const yearlyRatios = calculateRatios(
+    ethereumData.ethereumData.yearlyData,
+    bitcoinData.bitcoinData.yearlyData
+  );
+
+  return {
+    dailyRatios,
+    weeklyRatios,
+    fourteenDayRatios,
+    monthlyRatios,
+    ninetyDayRatios,
+    yearlyRatios,
+  };
 };
 
-const calculateEthereumDailyRatios = (
-  bitcoinPrices: [number, number][],
-  ethereumPrices: [number, number][]
-) => calculateRatios(bitcoinPrices, ethereumPrices);
-
-const calculateEthereumWeeklyRatios = (
-  bitcoinPrices: [number, number][],
-  ethereumPrices: [number, number][]
-) => calculateRatios(bitcoinPrices.slice(0, 200), ethereumPrices.slice(0, 200));
-
-const calculateEthereumFourteenDayRatios = (
-  bitcoinPrices: [number, number][],
-  ethereumPrices: [number, number][]
-) => calculateRatios(bitcoinPrices.slice(0, 400), ethereumPrices.slice(0, 400));
-
-const calculateEthereumMonthlyRatios = (
-  bitcoinPrices: [number, number][],
-  ethereumPrices: [number, number][]
-) => calculateRatios(bitcoinPrices.slice(0, 800), ethereumPrices.slice(0, 800));
-
-const calculateEthereumNinetyDayRatios = (
-  bitcoinPrices: [number, number][],
-  ethereumPrices: [number, number][]
-) => calculateRatios(bitcoinPrices, ethereumPrices);
-
-const calculateEthereumYearlyRatios = (
-  bitcoinPrices: [number, number][],
-  ethereumPrices: [number, number][]
-) => calculateRatios(bitcoinPrices, ethereumPrices);
+const calculateRatios = (
+  data1: [number, number][],
+  data2: [number, number][]
+) => {
+  const minLength = Math.min(data1.length, data2.length);
+  return data1.slice(0, minLength).map(([timestamp, price1], index) => {
+    const [, price2] = data2[index];
+    return price2 / price1;
+  });
+};
 
 export const computeRatioValue = (selectedUnit: string, array: number[]) => {
   const numericArray = array.filter(
