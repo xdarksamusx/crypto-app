@@ -5,8 +5,13 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { createPortal } from "react-dom";
 import { selectCoin, selectUnit } from "../redux/features/coinSelectionSlice";
 import { formatPercentage } from "@utils/calculations";
+import { TableCoinData } from "../utils/interfaces";
 
 import { CoinData } from "../utils/interfaces"; // import { convertCurrency } from "@utils/CurrencyConversions";
+
+interface CarouselProps {
+  top20Coins: TableCoinData[];
+}
 
 const responsive = {
   superLargeDesktop: {
@@ -59,8 +64,9 @@ const CustomRightArrow: React.FC<CustomArrowProps> = ({ onClick }) => {
   );
 };
 
-export const Carousels: React.FC = () => {
+export const Carousels: React.FC<CarouselProps> = ({ top20Coins }) => {
   const coins = useAppSelector((state) => state.selectedCoin.coins);
+  console.log("top coins", top20Coins);
   const currency = useAppSelector((state) => state.currency.currency);
 
   const currencySymbol = useAppSelector(
@@ -71,6 +77,8 @@ export const Carousels: React.FC = () => {
     (state) => state.selectedCoin.selectedCoin
   );
 
+  console.log("viewing type of slected coin", selectedCoin);
+
   const selectedUnit = useAppSelector(
     (state) => state.selectedCoin.selectedUnit
   );
@@ -79,7 +87,8 @@ export const Carousels: React.FC = () => {
   const handleOnClick = () => {};
 
   const handleSelectedCoin = (coin: CoinData) => {
-    dispatch(selectCoin(coin));
+    console.log("handel selected", coin);
+    dispatch(selectCoin(coin.name.toLowerCase()));
   };
 
   useEffect(() => {
@@ -96,11 +105,11 @@ export const Carousels: React.FC = () => {
         customLeftArrow={<CustomLeftArrow onClick={handleOnClick} />}
         customRightArrow={<CustomRightArrow onClick={handleOnClick} />}
       >
-        {coins.map((coin) => (
+        {top20Coins.map((coin: any) => (
           <div
             key={coin.id}
             className={` bg-${
-              coin.id === selectedCoin?.id ? "bg-gray-500" : "none"
+              coin.id === selectedCoin ? "bg-gray-500" : "none"
             }  flex border border-blue-100 px-3 justify-center items-center py-4  hover:bg-slate-700  hover:text-white/80 `}
             onClick={() => handleSelectedCoin(coin)}
           >
