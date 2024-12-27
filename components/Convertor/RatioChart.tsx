@@ -41,6 +41,7 @@ const RatioChart: React.FC<SelectedUnit> = ({
       : calculateBitcoinRatios(bitcoinChart, ethereumChart);
 
     setRatios(calculatedRatios);
+    console.log("calculated  ratios", calculatedRatios);
   }, [boxSwap, bitcoinChart, ethereumChart, selectedUnit]);
 
   const selectedRatioData = selectRatio(selectedUnit, ratios) || [];
@@ -55,6 +56,8 @@ const RatioChart: React.FC<SelectedUnit> = ({
   }
 
   const computedRatio = computeRatioValue(selectedUnit, selectedRatioData);
+
+  // console.log("ratio   data", selectedRatioData);
 
   const data = {
     labels: extendedLabels,
