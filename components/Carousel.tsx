@@ -66,7 +66,6 @@ const CustomRightArrow: React.FC<CustomArrowProps> = ({ onClick }) => {
 
 export const Carousels: React.FC<CarouselProps> = ({ top20Coins }) => {
   const coins = useAppSelector((state) => state.selectedCoin.coins);
-  console.log("top coins", top20Coins);
   const currency = useAppSelector((state) => state.currency.currency);
 
   const currencySymbol = useAppSelector(
@@ -77,8 +76,6 @@ export const Carousels: React.FC<CarouselProps> = ({ top20Coins }) => {
     (state) => state.selectedCoin.selectedCoin
   );
 
-  console.log("viewing type of slected coin", selectedCoin);
-
   const selectedUnit = useAppSelector(
     (state) => state.selectedCoin.selectedUnit
   );
@@ -87,7 +84,6 @@ export const Carousels: React.FC<CarouselProps> = ({ top20Coins }) => {
   const handleOnClick = () => {};
 
   const handleSelectedCoin = (coin: CoinData) => {
-    console.log("handel selected", coin);
     dispatch(selectCoin(coin.name.toLowerCase()));
   };
 
