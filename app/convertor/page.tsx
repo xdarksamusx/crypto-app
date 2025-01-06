@@ -84,7 +84,6 @@ export default function Convertor() {
           `https://xdarksamusx.github.io/chart-files/charts/usd-charts/ethereum.json`
         );
         const ethereumData = await ethereumResponse.json();
-        console.log("ethereym data", ethereumData);
         const ethereumChartData = await ethereumChartResponse.json();
 
         setEthData(ethereumData);
