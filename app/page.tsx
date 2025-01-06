@@ -109,10 +109,10 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="max-w-full mx-auto">
+      <div className="max-w-full mx-auto mt-2 ">
         <Carousels top20Coins={top20Coins} />
       </div>
-      <div className=" flex max-w-7xl mx-auto justify-around items-center">
+      <div className=" flex max-w-7xl mx-auto justify-around items-center mt-8">
         <VolumeChart />
         <PriceChart />
       </div>
